@@ -1,19 +1,31 @@
 {
-  "routes": [
+  "headers": [
     {
-      "src": "/favicon.ico",
-      "headers": { "Cache-Control": "public, max-age=3600" },
-      "continue": true
+      "source": "/favicon.ico",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
     },
     {
-      "src": "/videos/(.*)",
-      "headers": { "Cache-Control": "public, max-age=31556952, immutable" },
-      "continue": true
+      "source": "/vid/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31556952, immutable"
+        }
+      ]
     },
     {
-      "src": "/img/(.*)",
-      "headers": { "Cache-Control": "public, max-age=31556952, immutable" },
-      "continue": true
+      "source": "/img/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31556952, immutable"
+        }
+      ]
     }
   ]
 }
