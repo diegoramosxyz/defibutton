@@ -15,6 +15,10 @@ module.exports = {
             key: 'Cross-Origin-Opener-Policy',
             value: 'same-origin',
           },
+          {
+            key: 'Cache-Control',
+            value: 'max-age=31536000',
+          },
         ],
       },
     ]
