@@ -1,9 +1,12 @@
 import React, { createContext, useReducer } from 'react'
-import { GlobalContextType, State } from '../interfaces/data-types'
+import { GlobalContextType, State } from 'interfaces/data-types'
 import AppReducer from './AppReducer'
 
 const initialState: State = {
   modal: '_OFF_',
+  protocols: [],
+  selectedProtocol: {},
+  sorted: "DESC",
 }
 
 // The global context becomes a single source of truth
