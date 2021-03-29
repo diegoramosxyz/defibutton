@@ -7,6 +7,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "chart.js": "^2.9.4",
     "gray-matter": "^4.0.2",
     "next": "latest",
     "next-i18next": "^8.1.2",
