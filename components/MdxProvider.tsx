@@ -48,10 +48,13 @@ const blockquote = ({ ...props }) => (
 const hr = () => <hr className="my-3" />
 const del = ({ ...props }) => <s className="opacity-75" {...props} />
 const a = ({ href, ...props }: { href: string }) => (
-  <Link href={href} >
-    <a {...props} className="underline"
+  <Link href={href}>
+    <a
+      {...props}
+      className="underline"
       target="_blank"
-      rel="noopener noreferrer" />
+      rel="noopener noreferrer"
+    />
   </Link>
 )
 
@@ -104,22 +107,25 @@ const Callout = ({ ...props }) => (
   </mark>
 )
 
-const Photo = ({
+function Photo({
   src,
   alt,
-  width,
   height,
 }: {
   src: string
   alt: string
-  width: number
   height: number
-}) => (
-  <figure className="my-5">
-    <Image src={src} alt={alt} width={width} height={height} />
-    <figcaption className="text-center opacity-75">{alt}</figcaption>
-  </figure>
-)
+}) {
+  const h = `${height}px`
+  return (
+    <figure>
+      <div className="relative mx-auto" style={{ height: h }}>
+        <Image src={src} alt={alt} layout="fill" objectFit="contain" />
+      </div>
+      <figcaption className="text-center opacity-75">{alt}</figcaption>
+    </figure>
+  )
+}
 
 // prettier-ignore
 export const components = {
