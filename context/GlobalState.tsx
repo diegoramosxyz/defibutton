@@ -6,7 +6,10 @@ const initialState: State = {
   modal: '_OFF_',
   protocols: [],
   selectedProtocol: {},
-  sorted: "DESC",
+  selectedCategory: [],
+  displayProtocols: [],
+  searchResults: [],
+  sorted: 'DESC',
 }
 
 // The global context becomes a single source of truth

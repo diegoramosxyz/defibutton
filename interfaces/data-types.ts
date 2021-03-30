@@ -28,11 +28,20 @@ export interface Protocol {
 export type State = {
   modal: '_SIDEBAR_' | '_OFF_'
   protocols: Protocol[]
+  displayProtocols: Protocol[]
+  selectedCategory: Protocol[]
+  searchResults: Protocol[]
   selectedProtocol: Protocol | {}
   sorted: 'ASC' | 'DESC'
 }
 
 export type Actions = {
-  type: 'MODAL' | 'SORT_TVL' | 'LOAD_DATA' | 'SELECT_PROTOCOL'
+  type:
+    | 'MODAL'
+    | 'SORT_TVL'
+    | 'LOAD_DATA'
+    | 'SELECT_PROTOCOL'
+    | 'SELECT_TVL_CATEGORY'
+    | 'SEARCH_TVL'
   payload?: any
 }
