@@ -1,32 +1,60 @@
+import { ProtocolTvl } from "interfaces/data-types"
 import Head from "next/head"
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
+import useSWR from "swr"
+import fetcher from "utils/fetcher"
+import Chart from 'components/tvl/Chart2'
 
-export default function Symbol() {
-  const [protocol, setProtocol] = useState({})
+export default function Symbol({ protocol }: { protocol: ProtocolTvl }) {
   const router = useRouter()
-
-
-  // LOAD INITIAL DATA
-  useEffect(() => {
-    async function data() {
-      const res = await fetch(`https://api.defillama.com/protocol/${router.query.name}`)
-      const data = await res.json()
-      setProtocol(data)
-    }
-    data()
-  }, [])
+  const link = `https://api.defillama.com/protocol/${router.query.name}`
+  const { data } = useSWR(link, fetcher, { initialData: protocol })
 
   return (
     <>
-      <Head>
-        <title>{router.query.symbol}</title>
-      </Head>
-      <p className="text-center text-2xl bold">{router.query.name}</p>
-      <pre>
-        <code>{JSON.stringify(protocol, null, 2)}</code>
-      </pre>
+      {data ? <>
+        <Head>
+          <title>{data.symbol}</title>
+        </Head>
+        <p className="text-center text-2xl bold my-3">{data.name}</p>
+        <Chart tvl={data.tvl} />
+        <article className="grid">
+          <section>Address: {data.address}</section>
+          <section>Ticker: {data.symbol}</section>
+          <section>URL: {data.url}</section>
+          <section>Description: {data.description}</section>
+          <section>Chain: {data.chain}</section>
+          <section>Category: {data.category}</section>
+          {data.logo && <img src={data.logo} width="50px"></img>}
+        </article>
+      </> : <div>No Data</div>}
     </>
   )
+}
+
+export async function getStaticPaths() {
+  const res = await fetch('https://api.defillama.com/protocols')
+  const protocols = await res.json()
+
+  const paths = protocols.map(({ name }: { name: string }) => ({
+    params: { name },
+  }))
+
+  return { paths, fallback: true }
+}
+
+export async function getStaticProps({ params }: { params: { name: string } }) {
+  const res = await fetch(`https://api.defillama.com/protocol/${params.name}`)
+  const protocol = await res.json()
+
+  // if (!protocol) {
+  //   return {
+  //     notFound: true,
+  //   }
+  // }
+
+  return {
+    props: { protocol },
+  }
 }
 

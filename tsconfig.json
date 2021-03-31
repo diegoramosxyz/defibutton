@@ -16,6 +16,12 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/posts/[slug].ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/posts/[slug].ts",
+    "utils/fetcher.js"
+  ],
   "exclude": ["node_modules"]
 }

@@ -21,7 +21,7 @@ export default function PostLayout({
       <Head>
         <title>{head}</title>
       </Head>
-      <div className="min-h-screen text-lg px-2 sm:px-4 lg:px-0 pb-14">
+      <div className="min-h-screen px-2 sm:px-4 lg:px-0 pb-14">
         <nav className="flex items-center justify-between mb-3 px-4 py-2.5 w-full border-t sm:border-b sm:border-t-0 border-trueGray-200 dark:border-trueGray-800 bg-trueGray-50 text-trueGray-800 dark:bg-trueGray-900 dark:text-trueGray-200">
           <p className="text-xl font-bold">DeFi Button</p>
           <div className="w-36">

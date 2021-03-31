@@ -25,6 +25,28 @@ export interface Protocol {
   change_7d: number
 }
 
+export interface ProtocolTvl {
+  id: string
+  name: string
+  address: string
+  symbol: string
+  url: string
+  description: string
+  chain: string
+  logo: string | null
+  audits: string
+  audit_note: string | null
+  gecko_id: string | null
+  cmcId: string
+  category: string
+  chains: string[]
+  tvl: {
+    date: number
+    dailyVolumeUSD: string
+    totalLiquidityUSD: string
+  }[]
+}
+
 export type State = {
   modal: '_SIDEBAR_' | '_OFF_'
   protocols: Protocol[]
