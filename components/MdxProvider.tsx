@@ -122,7 +122,9 @@ function Photo({
       <div className="relative mx-auto" style={{ height: h }}>
         <Image src={src} alt={alt} layout="fill" objectFit="contain" />
       </div>
-      <figcaption className="text-center opacity-75">{alt}</figcaption>
+      <figcaption className="text-center opacity-75 mt-2 mb-4">
+        {alt}
+      </figcaption>
     </figure>
   )
 }

@@ -3,7 +3,8 @@ export type PostMetadata = {
   description: string
   author: string
   lastEdit?: string
-  coingeckoId: string
+  gecko_id: string
+  llama_id: string
   tags: string[]
   ticker?: string
 }

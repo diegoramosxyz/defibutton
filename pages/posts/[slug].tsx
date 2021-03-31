@@ -12,15 +12,18 @@ import { getPriceAnd24hr } from 'utils/coins'
 import TickerPrice from 'components/TickerPrice'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
+import { ProtocolTvl } from 'interfaces/data-types'
 
 export default function PostPage({
   source,
   metadata,
   posts,
+  protocolTvl,
 }: {
   source: MdxRemote.Source
   metadata: PostMetadata
   posts: any
+  protocolTvl: ProtocolTvl
 }) {
   const { t } = useTranslation('index')
   const router = useRouter()
@@ -32,19 +35,19 @@ export default function PostPage({
     }
     const [tickerData, setTickerData] = useState(initialTickerData)
     const [loading, setLoading] = useState(true)
-    const { description, title, lastEdit, ticker, coingeckoId } = metadata
+    const { description, title, lastEdit, ticker, gecko_id } = metadata
 
     useEffect(() => {
       setLoading(true)
       async function loadData() {
-        if (ticker && coingeckoId) {
-          const data = await getPriceAnd24hr(coingeckoId, ticker)
+        if (ticker && gecko_id) {
+          const data = await getPriceAnd24hr(gecko_id, ticker)
           setTickerData(data)
         }
       }
       loadData()
       setLoading(false)
-    }, [coingeckoId])
+    }, [gecko_id])
 
     const date =
       (lastEdit &&
@@ -68,7 +71,7 @@ export default function PostPage({
                 src={`/ticker/${ticker?.toLocaleLowerCase()}.svg`}
                 alt={title}
               />
-              <span className="ml-2">{title}</span>
+              <p className="ml-2">{title}</p>
             </h1>
           ) : (
             <h1 className="flex items-center text-4xl pb-3 pt-2 lg:pt-5 font-bold">
@@ -76,10 +79,13 @@ export default function PostPage({
             </h1>
           )}
           {/* {description && <p>{description}</p>} */}
-          {coingeckoId && loading && <TickerPrice price={initialTickerData} />}
-          {coingeckoId && !loading && <TickerPrice price={tickerData} />}
+          {gecko_id && loading && <TickerPrice price={initialTickerData} />}
+          {gecko_id && !loading && <TickerPrice price={tickerData} />}
         </header>
         {content}
+        <pre>
+          <code>{JSON.stringify(protocolTvl, null, 2)}</code>
+        </pre>
         {lastEdit && (
           <section className="mt-4 flex gap-3 opacity-75 text-sm">
             <time dateTime={lastEdit}>
@@ -101,11 +107,17 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const MdxContext = await getMdxContent(params?.slug, locale)
   const posts = getPostsMetadata(locale)
 
+  const res = await fetch(
+    `https://api.defillama.com/protocol/${MdxContext.metadata.llama_id}`
+  )
+  const protocolTvl: ProtocolTvl = await res.json()
+
   return {
     props: {
       posts,
       ...MdxContext,
       ...translations,
+      protocolTvl,
     },
   }
 }
