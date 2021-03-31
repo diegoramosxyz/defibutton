@@ -33,14 +33,14 @@ export default function Symbol({ protocol }: { protocol: ProtocolTvl }) {
 }
 
 export async function getStaticPaths() {
-  const res = await fetch('https://api.defillama.com/protocols')
-  const protocols = await res.json()
+  // const res = await fetch('https://api.defillama.com/protocols')
+  // const protocols = await res.json()
 
-  const paths = protocols.map(({ name }: { name: string }) => ({
-    params: { name },
-  }))
+  // const paths = protocols.map(({ name }: { name: string }) => ({
+  //   params: { name },
+  // }))
 
-  return { paths, fallback: true }
+  return { paths: [{ params: { name: 'WBTC' } }], fallback: true }
 }
 
 export async function getStaticProps({ params }: { params: { name: string } }) {
