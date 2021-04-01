@@ -19,10 +19,12 @@
   "license": "MIT",
   "devDependencies": {
     "@tailwindcss/jit": "^0.1.5",
+    "@types/mongodb": "^3.6.11",
     "@types/node": "^14.14.35",
     "@types/react": "^17.0.3",
     "autoprefixer": "^10.2.5",
     "chart.js": "^2.9.4",
+    "mongodb": "^3.6.5",
     "postcss": "^8.2.8",
     "react-chartjs-2": "^2.11.1",
     "tailwindcss": "^2.0.4",

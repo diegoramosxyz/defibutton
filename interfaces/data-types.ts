@@ -67,3 +67,21 @@ export type Actions = {
     | 'SEARCH_TVL'
   payload?: any
 }
+
+export type Coin = {
+  slug: string
+  name: string
+  geckoId: string
+  llamaId?: string
+  category: string // Category within DeFi
+  symbol: string
+  blockchain: string
+  website?: string
+  genesisDate?: string
+  contracts: {
+    ethereum?: string
+    binanceSmartChain?: string
+  }
+  tags: string[]
+  section: string // Section in the landing page and sidebar
+}
