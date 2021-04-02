@@ -61,9 +61,9 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     'index',
     'sidebar',
   ])
-  const MdxContext = await getMdxContent(params?.slug, 'posts', locale || 'en')
-  const postsMeta = getPostsMetadata('posts', locale || 'en')
-  const coinsMeta = getPostsMetadata('coins', locale || 'en')
+  const MdxContext = await getMdxContent(params?.slug, 'blog', locale || 'en')
+  const postsMeta = getPostsMetadata('blog', locale || 'en')
+  const coinsMeta = getPostsMetadata('coin', locale || 'en')
 
   const allMeta = [...postsMeta, ...coinsMeta]
 
@@ -77,7 +77,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const paths = locales?.map((locale) => getSlugs('posts', locale)).flat() || []
+  const paths = locales?.map((locale) => getSlugs('blog', locale)).flat() || []
   return {
     paths,
     fallback: true,

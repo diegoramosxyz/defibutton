@@ -103,11 +103,11 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     'index',
     'sidebar',
   ])
-  const MdxContext = await getMdxContent(params?.slug, 'coins', locale || 'en')
+  const MdxContext = await getMdxContent(params?.slug, 'coin', locale || 'en')
 
   // Get metadata for navigation
-  const meta1 = getPostsMetadata('posts', locale || 'en')
-  const meta2 = getPostsMetadata('coins', locale || 'en')
+  const meta1 = getPostsMetadata('blog', locale || 'en')
+  const meta2 = getPostsMetadata('coin', locale || 'en')
   const posts = [...meta1, ...meta2]
 
   // Retrieve data from MongoDB
@@ -132,7 +132,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 }
 
 export const getStaticPaths = async ({ locales }: { locales: string[] }) => {
-  const paths = locales?.map((locale) => getSlugs('coins', locale)).flat()
+  const paths = locales?.map((locale) => getSlugs('coin', locale)).flat()
   return {
     paths,
     fallback: true,

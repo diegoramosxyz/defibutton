@@ -28,8 +28,8 @@ export default function Index({ allMeta }: { allMeta: PostMetaPath[] }) {
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const postsMeta = getPostsMetadata('posts', locale || 'en')
-  const coinsMeta = getPostsMetadata('coins', locale || 'en')
+  const postsMeta = getPostsMetadata('blog', locale || 'en')
+  const coinsMeta = getPostsMetadata('coin', locale || 'en')
 
   const allMeta = [...postsMeta, ...coinsMeta]
 

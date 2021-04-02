@@ -4,7 +4,7 @@ import matter from 'gray-matter'
 import renderToString from 'next-mdx-remote/render-to-string'
 import { components } from 'components/MdxProvider'
 
-type folders = 'posts' | 'coins'
+type folders = 'blog' | 'coin'
 
 // return the metadata of the posts to create navigation and file relations using tags
 export function getPostsMetadata(folder: folders, locale: string) {
@@ -19,7 +19,7 @@ export function getPostsMetadata(folder: folders, locale: string) {
 
     return {
       ...data, // The type is PostMetaPath
-      filePath,
+      fileSlug: filePath.replace(/\.mdx?$/, ''),
       folder,
     }
   })

@@ -7,8 +7,8 @@ export type PostMetadata = {
 }
 
 export interface PostMetaPath extends PostMetadata {
-  filePath: string
-  folder: 'posts' | 'coins'
+  fileSlug: string
+  folder: 'blog' | 'coin'
 }
 
 export type CoingeckoPrice = {

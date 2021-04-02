@@ -20,7 +20,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/posts/[slug].ts",
+    "pages/blog/[slug].ts",
     "utils/fetcher.js",
     "utils/mongodb.js"
   ],
