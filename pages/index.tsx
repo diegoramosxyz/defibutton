@@ -4,9 +4,9 @@ import { getPostsMetadata } from 'utils/mdxUtils'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import ContentSection from 'components/ContentSection'
 import { useTranslation } from 'next-i18next'
+import { PostMetaPath } from 'interfaces'
 
-// TODO: ADD TYPE
-export default function Index({ posts }: { posts: any }) {
+export default function Index({ allMeta }: { allMeta: PostMetaPath[] }) {
   const { t } = useTranslation('index')
   return (
     <Layout head="DeFi Button">
@@ -17,8 +17,9 @@ export default function Index({ posts }: { posts: any }) {
         <ContentSection
           tags={['fundamentals', 'defi', 'tutorials', 'tips', 'extra']}
           sidebar={false}
-          posts={posts}
+          posts={allMeta}
         />
+        {/* <pre><code>{JSON.stringify(allMeta, null, 2)}</code></pre> */}
       </section>
       <section className="opacity-80 text-sm text-center mb-5">
         {t('warning')}
@@ -28,11 +29,14 @@ export default function Index({ posts }: { posts: any }) {
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const posts = getPostsMetadata(locale)
+  const postsMeta = getPostsMetadata('posts', locale || 'en')
+  const coinsMeta = getPostsMetadata('coins', locale || 'en')
 
+  const allMeta = [...postsMeta, ...coinsMeta]
+  console.log({ allMeta })
   return {
     props: {
-      posts,
+      allMeta,
       ...(await serverSideTranslations(locale || 'en', ['index'])),
     },
   }

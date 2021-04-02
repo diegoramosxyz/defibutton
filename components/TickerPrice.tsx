@@ -2,14 +2,14 @@ export default function TickerPrice({ price }: {
   price: {
     usd: number,
     usd_24h_change: number
-    ticker: string
+    symbol: string
   },
 }) {
-  const { usd, usd_24h_change, ticker } = price
+  const { usd, usd_24h_change, symbol } = price
 
   return (
     <article className="font-bold font-mono">
-      {ticker}: $
+      {symbol}: $
       {usd.toLocaleString('en-US', {
         style: 'decimal',
       })}{' '}

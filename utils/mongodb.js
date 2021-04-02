@@ -1,3 +1,5 @@
+// https://github.com/vercel/next.js/blob/canary/examples/with-mongodb/util/mongodb.js
+
 import { MongoClient } from 'mongodb'
 
 const { MONGODB_URI, MONGODB_DB } = process.env

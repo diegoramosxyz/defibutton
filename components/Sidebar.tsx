@@ -3,9 +3,9 @@ import SelectLanguage from './SelectLanguage'
 import { GlobalContext } from 'context/GlobalState'
 import { FaDiscord, FaTwitter } from 'react-icons/fa'
 import ContentSection from './ContentSection'
+import { PostMetaPath } from 'interfaces'
 
-// TODO: ADD TYPE
-export default function Sidebar({ posts }: { posts: any }) {
+export default function Sidebar({ posts }: { posts: PostMetaPath[] }) {
   const { state } = useContext(GlobalContext)
   const [width, setWidth] = React.useState(0)
 

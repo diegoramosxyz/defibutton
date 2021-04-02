@@ -3,6 +3,7 @@ import Sidebar from './Sidebar'
 import React from 'react'
 import Head from 'next/head'
 import { GlobalContext } from 'context/GlobalState'
+import { PostMetaPath } from 'interfaces'
 
 export default function PostLayout({
   children,
@@ -11,7 +12,7 @@ export default function PostLayout({
 }: {
   children: React.ReactNode
   head: string
-  posts: any
+  posts: PostMetaPath[]
 }) {
   const { dispatch } = React.useContext(GlobalContext)
   // reset modal state
