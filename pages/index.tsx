@@ -2,7 +2,7 @@ import { GetStaticProps } from 'next'
 import Layout from 'components/Layout'
 import { getPostsMetadata } from 'utils/mdxUtils'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import ContentSection from 'components/ContentSection'
+import TableOfContents from 'components/TableOfContents'
 import { useTranslation } from 'next-i18next'
 import { PostMetaPath } from 'interfaces'
 
@@ -14,8 +14,7 @@ export default function Index({ allMeta }: { allMeta: PostMetaPath[] }) {
         {t('intro')}
       </section>
       <section className="grid gap-4 mb-5">
-        <ContentSection
-          tags={['fundamentals', 'defi', 'tutorials', 'tips', 'extra']}
+        <TableOfContents
           sidebar={false}
           posts={allMeta}
         />

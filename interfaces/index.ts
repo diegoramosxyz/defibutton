@@ -4,11 +4,11 @@ export type PostMetadata = {
   author?: string
   tags: string[]
   lastEdit?: string
-  symbol?: string // Used to fetch logos
 }
 
 export interface PostMetaPath extends PostMetadata {
   filePath: string
+  folder: 'posts' | 'coins'
 }
 
 export type CoingeckoPrice = {

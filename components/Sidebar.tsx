@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import SelectLanguage from './SelectLanguage'
 import { GlobalContext } from 'context/GlobalState'
 import { FaDiscord, FaTwitter } from 'react-icons/fa'
-import ContentSection from './ContentSection'
+import ContentSection from './TableOfContents'
 import { PostMetaPath } from 'interfaces'
 
 export default function Sidebar({ posts }: { posts: PostMetaPath[] }) {
@@ -56,7 +56,6 @@ export default function Sidebar({ posts }: { posts: PostMetaPath[] }) {
           </div>
           <div className="grid gap-1 mb-5 px-2">
             <ContentSection
-              tags={['fundamentals', 'defi', 'tutorials', 'tips', 'extra']}
               sidebar
               posts={posts}
             />

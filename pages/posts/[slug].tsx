@@ -13,11 +13,11 @@ import { useRouter } from 'next/router'
 export default function PostPage({
   source,
   metadata,
-  posts,
+  allMeta,
 }: {
   source: MdxRemote.Source
   metadata: PostMetadata
-  posts: PostMetaPath[]
+  allMeta: PostMetaPath[]
 }) {
   const { t } = useTranslation('index')
   const router = useRouter()
@@ -36,7 +36,7 @@ export default function PostPage({
     const content = hydrate(source, { components })
 
     return (
-      <PostLayout head={`${title} - DeFi Button`} posts={posts}>
+      <PostLayout head={`${title} - DeFi Button`} posts={allMeta}>
         <header className="my-3">
           <h1 className="flex items-center text-4xl pb-3 pt-2 lg:pt-5 font-bold">
             {title}
@@ -62,11 +62,14 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     'sidebar',
   ])
   const MdxContext = await getMdxContent(params?.slug, 'posts', locale || 'en')
-  const posts = getPostsMetadata('posts', locale || 'en')
+  const postsMeta = getPostsMetadata('posts', locale || 'en')
+  const coinsMeta = getPostsMetadata('coins', locale || 'en')
+
+  const allMeta = [...postsMeta, ...coinsMeta]
 
   return {
     props: {
-      posts,
+      allMeta,
       ...MdxContext,
       ...translations,
     },

@@ -20,6 +20,7 @@ export function getPostsMetadata(folder: folders, locale: string) {
     return {
       ...data, // The type is PostMetaPath
       filePath,
+      folder,
     }
   })
 }

@@ -4,12 +4,12 @@ import { useTranslation } from 'next-i18next'
 import React from 'react'
 import { PostMetaPath } from 'interfaces'
 
-export default function ContentSection({
-  tags,
+const tableOfContents = ['fundamentals', 'defi', 'tutorials', 'tips', 'extra']
+
+export default function TableOfContents({
   posts,
   sidebar,
 }: {
-  tags: PostMetaPath['tags']
   posts: PostMetaPath[]
   sidebar: boolean
 }) {
@@ -25,7 +25,7 @@ export default function ContentSection({
 
   return (
     <>
-      {tags.map((tag) => {
+      {tableOfContents.map((tag) => {
         const metadata = filterByTag(posts, tag)
         return (
           <div key={tag}>
@@ -34,11 +34,11 @@ export default function ContentSection({
             </h1>
             <section className={`grid ${!sidebar && 'gap-2 sm:gap-3 sm:grid-cols-2 lg:grid-cols-3'}`}>
               {metadata.map((post) => {
-                const { symbol, description, title } = post
+                const { description, title, folder, filePath } = post
                 return (
                   <Link
-                    key={post.filePath}
-                    href={`/${symbol ? 'coins' : 'posts'}/${post.filePath.replace(/\.mdx?$/, '')}`}
+                    key={filePath}
+                    href={`/${folder}/${filePath.replace(/\.mdx?$/, '')}`}
                   >
                     <a
                       className={`block transition h-full rounded-sm border-trueGray-200 dark:border-trueGray-800 focus:ring focus:ring-lightBlue-300 dark:focus:ring-lightBlue-800 focus:outline-none focus:border-lightBlue-300 dark:focus:border-lightBlue-800 hover:border-lightBlue-300 dark:hover:border-lightBlue-800 ${sidebar
@@ -46,12 +46,12 @@ export default function ContentSection({
                         : 'border px-4 py-3'
                         }`}
                     >
-                      {symbol ? (
+                      {folder === 'coins' ? (
                         <header className="flex gap-1 items-center font-semibold">
                           <Image
                             width={20}
                             height={20}
-                            src={`/ticker/${symbol.toLowerCase()}.svg`}
+                            src={`/logo/${filePath.replace(/\.mdx?$/, '')}.svg`}
                             alt={title}
                           />
                           <span className="ml-1">{title}</span>

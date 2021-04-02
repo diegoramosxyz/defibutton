@@ -39,16 +39,14 @@ export default function PostPage({
     }
     const [tickerData, setTickerData] = useState(initialTickerData)
     const [loading, setLoading] = useState(true)
-    const { title, lastEdit, symbol } = metadata
-    const { geckoId } = coin
+    const { title, lastEdit } = metadata
+    const { geckoId, symbol, slug } = coin
 
     useEffect(() => {
       setLoading(true)
       async function loadData() {
-        if (symbol) {
-          const data = await getPriceAnd24hr(geckoId)
-          setTickerData({ ...data, symbol })
-        }
+        const data = await getPriceAnd24hr(geckoId)
+        setTickerData({ ...data, symbol })
       }
       loadData()
       setLoading(false)
@@ -66,13 +64,14 @@ export default function PostPage({
     const content = hydrate(source, { components })
 
     return (
+      // TODO: MOVE THIS TO ANOTHER COMPONENT
       <PostLayout head={`${title} - DeFi Button`} posts={posts}>
         <header className="my-3">
           <h1 className="flex items-center text-4xl pb-3 pt-2 lg:pt-5 font-bold">
             <Image
               width={35}
               height={35}
-              src={`/ticker/${symbol?.toLocaleLowerCase()}.svg`}
+              src={`/logo/${slug?.toLocaleLowerCase()}.svg`}
               alt={title}
             />
             <p className="ml-2">{title}</p>
@@ -112,6 +111,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const posts = [...meta1, ...meta2]
 
   // Retrieve data from MongoDB
+  // THE SLUG FROM THE FILE SYSTEM MUST MATCH THE DATABASE SLUG 
+  // /coins/en/bitcoin.mdx in file system, slug: 'bitcoin' in DB
   const coin = await db.collection('coins').findOne({ slug: params?.slug })
 
   // const res = await fetch(
