@@ -33,7 +33,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const coinsMeta = getPostsMetadata('coins', locale || 'en')
 
   const allMeta = [...postsMeta, ...coinsMeta]
-  console.log({ allMeta })
+
   return {
     props: {
       allMeta,
