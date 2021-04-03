@@ -2,7 +2,6 @@ import Nav from './Navbar'
 import Sidebar from './Sidebar'
 import React from 'react'
 import Head from 'next/head'
-import { GlobalContext } from 'context/GlobalState'
 import { PostMetaPath } from 'interfaces'
 
 export default function PostLayout({
@@ -14,11 +13,6 @@ export default function PostLayout({
   head: string
   posts: PostMetaPath[]
 }) {
-  const { dispatch } = React.useContext(GlobalContext)
-  // reset modal state
-  React.useEffect(() => {
-    dispatch({ type: 'MODAL', payload: '_OFF_' })
-  }, [])
   return (
     <>
       <Head>

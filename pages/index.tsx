@@ -10,15 +10,9 @@ export default function Index({ allMeta }: { allMeta: PostMetaPath[] }) {
   const { t } = useTranslation('index')
   return (
     <Layout head="DeFi Button">
-      <section className="text-center font-medium mb-4">
-        {t('intro')}
-      </section>
+      <section className="text-center font-medium mb-4">{t('intro')}</section>
       <section className="grid gap-4 mb-5">
-        <TableOfContents
-          sidebar={false}
-          posts={allMeta}
-        />
-        {/* <pre><code>{JSON.stringify(allMeta, null, 2)}</code></pre> */}
+        <TableOfContents sidebar={false} posts={allMeta} />
       </section>
       <section className="opacity-80 text-sm text-center mb-5">
         {t('warning')}

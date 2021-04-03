@@ -21,7 +21,7 @@ export default function PostPage({
   metadata,
   posts,
   // protocolTvl,
-  coin
+  coin,
 }: {
   source: MdxRemote.Source
   metadata: PostMetadata
@@ -111,7 +111,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const posts = [...meta1, ...meta2]
 
   // Retrieve data from MongoDB
-  // THE SLUG FROM THE FILE SYSTEM MUST MATCH THE DATABASE SLUG 
+  // THE SLUG FROM THE FILE SYSTEM MUST MATCH THE DATABASE SLUG
   // /coins/en/bitcoin.mdx in file system, slug: 'bitcoin' in DB
   const coin = await db.collection('coins').findOne({ slug: params?.slug })
 
@@ -126,7 +126,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       ...MdxContext,
       ...translations,
       // protocolTvl,
-      coin: JSON.parse(JSON.stringify(coin))
+      coin: JSON.parse(JSON.stringify(coin)),
     },
   }
 }
@@ -138,7 +138,6 @@ export const getStaticPaths = async ({ locales }: { locales: string[] }) => {
     fallback: true,
   }
 }
-
 
 // import { Coin } from 'interfaces/data-types'
 // import { connectToDatabase } from 'utils/mongodb'

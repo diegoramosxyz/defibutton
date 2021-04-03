@@ -5,7 +5,7 @@ export default function Nav() {
   return (
     <nav className="z-10 px-4 py-2.5 lg:hidden fixed bottom-0 w-full border-t-2 border-trueGray-200 dark:border-trueGray-800 bg-trueGray-50 text-trueGray-800 dark:bg-trueGray-900 dark:text-trueGray-200">
       <section className="flex items-center justify-between">
-        {/* <input
+        {/* <input 
           type="search"
           name="search"
           aria-label="search"
