@@ -18,6 +18,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@headlessui/react": "^0.3.2",
     "@tailwindcss/jit": "^0.1.5",
     "@types/mongodb": "^3.6.11",
     "@types/node": "^14.14.35",

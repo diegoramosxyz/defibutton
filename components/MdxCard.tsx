@@ -6,8 +6,8 @@ export default function MdxCard({
   folder,
   fileSlug,
   title,
-  sidebar,
   description,
+  sidebar,
 }: {
   folder: PostMetaPath['folder']
   fileSlug: PostMetaPath['fileSlug']

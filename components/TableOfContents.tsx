@@ -28,20 +28,22 @@ export default function TableOfContents({
         // Put all the keys of the table of contents in an array
         const sections = Object.keys(obj)
         return (
-          <React.Fragment key={JSON.stringify(obj)}>
+          <React.Fragment key={JSON.stringify(sections)}>
             {sections.map((section) => {
               // Map through all the sections and use the section key string as title
               return (
                 <React.Fragment key={section}>
-                  <Link href={`/tag/${section}`}>
-                    <a
-                      className={`text-xl font-bold hover:underline ${
-                        sidebar ? 'mb-1 mt-2' : 'uppercase'
-                      }`}
-                    >
-                      {t(section)}
-                    </a>
-                  </Link>
+                  <div>
+                    <Link href={`/tag/${section}`}>
+                      <a
+                        className={`text-xl font-bold hover:underline ${
+                          sidebar ? 'mb-1 mt-2' : 'uppercase'
+                        }`}
+                      >
+                        {t(section)}
+                      </a>
+                    </Link>
+                  </div>
                   <section
                     className={`grid ${
                       !sidebar && 'gap-2 sm:gap-3 sm:grid-cols-2 lg:grid-cols-3'
