@@ -9,7 +9,7 @@ export default function SelectLanguage() {
       <Menu>
         {({ open }) => (
           <>
-            <Menu.Button className="p-1.5 transition ring-2 ring-trueGray-800 hover:ring-lightBlue-800 rounded-md focus:outline-none">
+            <Menu.Button className="p-1.5 transition ring-2 ring-trueGray-200 dark:ring-trueGray-800 hover:ring-lightBlue-800 hover:ring-lightBlue-200 focus:ring-lightBlue-200 rounded-md focus:outline-none">
               <HiOutlineTranslate className="w-5 h-5" />
             </Menu.Button>
             <Transition
@@ -23,7 +23,7 @@ export default function SelectLanguage() {
             >
               <Menu.Items
                 static
-                className="bg-trueGray-50 right-0 dark:bg-trueGray-900 z-10 absolute mt-2 origin-top-right rounded-md overflow-hidden shadow-lg outline-none ring-2 ring-trueGray-800"
+                className="bg-trueGray-50 right-0 dark:bg-trueGray-900 z-10 absolute mt-2 origin-top-right rounded-md overflow-hidden shadow-lg outline-none ring-2 ring-trueGray-200 dark:ring-trueGray-800"
               >
                 <LanguageOptions router={router} />
               </Menu.Items>
@@ -44,8 +44,10 @@ function LanguageOptions({ router }: { router: NextRouter }) {
     <>
       {langs.map(({ locale, lang }) => (
         <button
-          className={`w-full py-1.5 px-3 hover:bg-trueGray-700 focus:outline-none transition ${
-            router.locale === locale && 'bg-trueGray-800 font-bold'
+          disabled={router.locale === locale}
+          className={`w-full py-1.5 px-3 hover:bg-trueGray-100 hover:underline dark:hover:bg-trueGray-700 focus:outline-none transition ${
+            router.locale === locale &&
+            'hover:no-underline font-bold cursor-not-allowed'
           }`}
           onClick={() => router.push(router.asPath, router.asPath, { locale })}
         >
