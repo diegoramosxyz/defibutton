@@ -57,10 +57,6 @@ export default function PostPage({
 }
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const translations = await serverSideTranslations(locale || 'en', [
-    'index',
-    'sidebar',
-  ])
   const MdxContext = await getMdxContent(params?.slug, 'blog', locale || 'en')
   const postsMeta = getPostsMetadata('blog', locale || 'en')
   const coinsMeta = getPostsMetadata('coin', locale || 'en')
@@ -71,7 +67,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     props: {
       allMeta,
       ...MdxContext,
-      ...translations,
+      ...(await serverSideTranslations(locale || 'en', ['index', 'tags'])),
     },
   }
 }

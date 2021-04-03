@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   return {
     props: {
       allMeta,
-      ...(await serverSideTranslations(locale || 'en', ['index'])),
+      ...(await serverSideTranslations(locale || 'en', ['index', 'tags'])),
     },
   }
 }

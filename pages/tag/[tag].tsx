@@ -6,6 +6,7 @@ import { PostMetaPath } from 'interfaces'
 import Layout from 'components/Layout'
 import React from 'react'
 import MdxCard from 'components/MdxCard'
+import { useTranslation } from 'react-i18next'
 
 export default function Tag({
   filteredPosts,
@@ -14,12 +15,13 @@ export default function Tag({
   filteredPosts: PostMetaPath[]
   tag: string
 }) {
+  const { t } = useTranslation('tags')
   return (
     <Layout head="Tag - DeFi Button">
       {filteredPosts ? (
         <>
           <header>
-            <h1 className="text-xl font-semibold mb-3 capitalize">{tag}</h1>
+            <h1 className="text-xl font-semibold mb-3 capitalize">{t(tag)}</h1>
           </header>
           <section className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 mb-5">
             {filteredPosts.map(({ title, description, fileSlug, folder }) => (
@@ -56,7 +58,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     props: {
       tag: params?.tag,
       filteredPosts,
-      ...(await serverSideTranslations(locale || 'en', ['index'])),
+      ...(await serverSideTranslations(locale || 'en', ['tags'])),
     },
   }
 }

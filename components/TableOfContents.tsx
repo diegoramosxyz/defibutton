@@ -12,7 +12,7 @@ export default function TableOfContents({
   posts: PostMetaPath[]
   sidebar: boolean
 }) {
-  const { t } = useTranslation('index')
+  const { t } = useTranslation('tags')
 
   // Input an arrays with the metadata for each post and return
   // an array of the same type filtered by the selected path
