@@ -1,9 +1,9 @@
 {
-  "fundamentals": "Fundamentals",
+  "fundamental": "Fundamental",
   "defi": "DeFi",
-  "protocols": "Protocols",
-  "strategies": "Strategies",
-  "tutorials": "Tutorials",
-  "tips": "Tips",
+  "protocol": "Protocol",
+  "strategy": "Strategy",
+  "tutorial": "Tutorial",
+  "tip": "Tip",
   "extra": "Misc."
 }

@@ -13,8 +13,10 @@ import { useRouter } from 'next/router'
 export default function PostPage({
   source,
   metadata,
+  mtime,
   allMeta,
 }: {
+  mtime: string
   source: MdxRemote.Source
   metadata: PostMetadata
   allMeta: PostMetaPath[]
@@ -22,34 +24,18 @@ export default function PostPage({
   const { t } = useTranslation('index')
   const router = useRouter()
   if (source) {
-    const { title, lastEdit } = metadata
-
-    const date =
-      (lastEdit &&
-        new Date(`${lastEdit}T00:00:00`).toLocaleDateString(router.locale, {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        })) ||
-      null
+    const { title } = metadata
 
     const content = hydrate(source, { components })
 
     return (
-      <PostLayout head={`${title} - DeFi Button`} posts={allMeta}>
+      <PostLayout posts={allMeta} meta={{ ...metadata, mtime }}>
         <header className="my-3">
           <h1 className="flex items-center text-4xl pb-3 pt-2 lg:pt-5 font-bold">
             {title}
           </h1>
         </header>
         {content}
-        {lastEdit && (
-          <section className="mt-4 flex gap-3 opacity-75 text-sm">
-            <time dateTime={lastEdit}>
-              {t('lastEdit')}: {date}
-            </time>
-          </section>
-        )}
       </PostLayout>
     )
   }

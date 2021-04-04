@@ -10,8 +10,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Image from 'next/image'
 import { getPriceAnd24hr } from 'utils/coins'
 import TickerPrice from 'components/TickerPrice'
-import { useTranslation } from 'next-i18next'
-import { useRouter } from 'next/router'
 import { ProtocolTvl } from 'interfaces/data-types'
 import { Coin } from 'interfaces/data-types'
 import { connectToDatabase } from 'utils/mongodb'
@@ -22,15 +20,15 @@ export default function PostPage({
   posts,
   // protocolTvl,
   coin,
+  mtime,
 }: {
+  mtime: string
   source: MdxRemote.Source
   metadata: PostMetadata
   posts: PostMetaPath[]
   // protocolTvl: ProtocolTvl
   coin: Coin
 }) {
-  const { t } = useTranslation('index')
-  const router = useRouter()
   if (source) {
     const initialTickerData = {
       usd: 0,
@@ -39,7 +37,7 @@ export default function PostPage({
     }
     const [tickerData, setTickerData] = useState(initialTickerData)
     const [loading, setLoading] = useState(true)
-    const { title, lastEdit } = metadata
+    const { title } = metadata
     const { geckoId, symbol, slug } = coin
 
     useEffect(() => {
@@ -52,20 +50,10 @@ export default function PostPage({
       setLoading(false)
     }, [geckoId])
 
-    const date =
-      (lastEdit &&
-        new Date(`${lastEdit}T00:00:00`).toLocaleDateString(router.locale, {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        })) ||
-      null
-
     const content = hydrate(source, { components })
 
     return (
-      // TODO: MOVE THIS TO ANOTHER COMPONENT
-      <PostLayout head={`${title} - DeFi Button`} posts={posts}>
+      <PostLayout posts={posts} meta={{ ...metadata, mtime }}>
         <header className="my-3">
           <h1 className="flex items-center text-4xl pb-3 pt-2 lg:pt-5 font-bold">
             <Image
@@ -76,21 +64,11 @@ export default function PostPage({
             />
             <p className="ml-2">{title}</p>
           </h1>
-          {/* {description && <p>{description}</p>} */}
-          {geckoId && loading && <TickerPrice price={initialTickerData} />}
-          {geckoId && !loading && <TickerPrice price={tickerData} />}
+          {geckoId && (
+            <TickerPrice price={loading ? initialTickerData : tickerData} />
+          )}
         </header>
         {content}
-        {/* <pre>
-          <code>{JSON.stringify(protocolTvl, null, 2)}</code>
-        </pre> */}
-        {lastEdit && (
-          <section className="mt-4 flex gap-3 opacity-75 text-sm">
-            <time dateTime={lastEdit}>
-              {t('lastEdit')}: {date}
-            </time>
-          </section>
-        )}
       </PostLayout>
     )
   }

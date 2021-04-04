@@ -110,18 +110,17 @@ const Callout = ({ ...props }) => (
 function Photo({
   src,
   alt,
-  height,
+  h,
+  w,
 }: {
   src: string
   alt: string
-  height: number
+  h: number
+  w: number
 }) {
-  const h = `${height}px`
   return (
     <figure>
-      <div className="relative mx-auto" style={{ height: h }}>
-        <Image src={src} alt={alt} layout="fill" objectFit="contain" />
-      </div>
+      <Image src={src} alt={alt} layout="responsive" height={h} width={w} />
       <figcaption className="text-center opacity-75 mt-2 mb-4">
         {alt}
       </figcaption>

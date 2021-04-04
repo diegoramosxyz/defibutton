@@ -14,6 +14,11 @@ export function getPostsMetadata(folder: folders, locale: string) {
       path.join(path.join(process.cwd(), `${folder}/${locale}`), filePath)
     )
 
+    // Read when the file was last modified
+    const { mtime } = fs.statSync(
+      path.join(path.join(process.cwd(), `${folder}/${locale}`), filePath)
+    )
+
     // extract metadata using frontmatter
     const { data } = matter(source)
 
@@ -21,6 +26,7 @@ export function getPostsMetadata(folder: folders, locale: string) {
       ...data, // The type is PostMetaPath
       fileSlug: filePath.replace(/\.mdx?$/, ''),
       folder,
+      mtime: `${mtime}`,
     }
   })
 }
@@ -37,6 +43,7 @@ export async function getMdxContent(
       path.join(process.cwd(), `${folder}/${locale}/`),
       `${slug}.mdx`
     )
+    const { mtime } = fs.statSync(postFilePath)
 
     // read the file and return a Buffer using Node.js
     const source = fs.readFileSync(postFilePath)
@@ -53,6 +60,7 @@ export async function getMdxContent(
     return {
       source: mdxSource,
       metadata,
+      mtime: `${mtime}`,
     }
   }
 }

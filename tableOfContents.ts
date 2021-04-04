@@ -1,8 +1,8 @@
 const tableOfContents: { [key: string]: string[] }[] = [
-  { fundamentals: ['/blog/banks', '/coin/bitcoin', '/coin/ethereum'] },
+  { fundamental: ['/blog/banks', '/coin/bitcoin', '/coin/ethereum'] },
   { defi: ['/blog/defi', '/blog/dex', '/blog/smart-contract'] },
-  { tutorials: ['/blog/cefi-to-defi', '/blog/metamask'] },
-  { tips: ['/blog/safety'] },
+  { tutorial: ['/blog/cefi-to-defi', '/blog/metamask'] },
+  { tip: ['/blog/safety'] },
   { extra: ['/blog/glossary', '/blog/faq', '/blog/trust'] },
 ]
 

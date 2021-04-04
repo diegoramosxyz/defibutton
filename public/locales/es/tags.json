@@ -1,9 +1,9 @@
 {
-  "fundamentals": "Fundamentos",
+  "fundamental": "Fundamento",
   "defi": "DeFi",
-  "protocols": "Protocolos",
-  "strategies": "Estrategias",
-  "tutorials": "Tutoriales",
-  "tips": "Recomendaciones",
+  "protocol": "Protocolo",
+  "strategy": "Estrategia",
+  "tutorial": "Tutorial",
+  "tip": "Recomendación",
   "extra": "Otros"
 }
