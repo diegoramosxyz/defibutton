@@ -7,29 +7,23 @@ import { getSlugs, getMdxContent, getPostsMetadata } from 'utils/mdxUtils'
 import { PostMetadata, PostMetaPath } from 'interfaces/index'
 import { components } from 'components/MdxProvider'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { useTranslation } from 'next-i18next'
-import { useRouter } from 'next/router'
 
 export default function PostPage({
   source,
   metadata,
-  mtime,
   allMeta,
 }: {
-  mtime: string
   source: MdxRemote.Source
   metadata: PostMetadata
   allMeta: PostMetaPath[]
 }) {
-  const { t } = useTranslation('index')
-  const router = useRouter()
   if (source) {
     const { title } = metadata
 
     const content = hydrate(source, { components })
 
     return (
-      <PostLayout posts={allMeta} meta={{ ...metadata, mtime }}>
+      <PostLayout posts={allMeta} meta={metadata}>
         <header className="my-3">
           <h1 className="flex items-center text-4xl pb-3 pt-2 lg:pt-5 font-bold">
             {title}

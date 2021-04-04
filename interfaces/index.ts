@@ -3,12 +3,12 @@ export type PostMetadata = {
   description: string
   author?: string
   tags: string[]
-  mtime: string
 }
 
 export interface PostMetaPath extends PostMetadata {
   fileSlug: string
   folder: 'blog' | 'coin'
+  tags: string[]
 }
 
 export type CoingeckoPrice = {

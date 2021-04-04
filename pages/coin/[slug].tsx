@@ -20,9 +20,7 @@ export default function PostPage({
   posts,
   // protocolTvl,
   coin,
-  mtime,
 }: {
-  mtime: string
   source: MdxRemote.Source
   metadata: PostMetadata
   posts: PostMetaPath[]
@@ -53,7 +51,7 @@ export default function PostPage({
     const content = hydrate(source, { components })
 
     return (
-      <PostLayout posts={posts} meta={{ ...metadata, mtime }}>
+      <PostLayout posts={posts} meta={metadata}>
         <header className="my-3">
           <h1 className="flex items-center text-4xl pb-3 pt-2 lg:pt-5 font-bold">
             <Image

@@ -3,7 +3,7 @@ import Sidebar from './Sidebar'
 import React from 'react'
 import Head from 'next/head'
 import { PostMetadata, PostMetaPath } from 'interfaces'
-import LastEdit from './LastEdit'
+// import LastEdit from './LastEdit'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 
@@ -17,7 +17,7 @@ export default function PostLayout({
   meta: PostMetadata
 }) {
   const { t } = useTranslation(['index', 'tags'])
-  const { mtime, tags, title } = meta
+  const { title, tags } = meta
   return (
     <>
       <Head>
@@ -29,7 +29,7 @@ export default function PostLayout({
         <main className="px-2 xl:px-0 max-w-screen-md mx-auto">
           {children}
           <section className="flex justify-between items-center text-sm align-center opacity-75">
-            <LastEdit translation={t('lastEdit')} mtime={mtime} />
+            {/* <LastEdit translation={t('lastEdit')} mtime={mtime} /> */}
             <div className="flex space-x-3">
               {tags.map((tag) => (
                 <Link key={tag} href={`/tag/${tag}`}>

@@ -3,6 +3,8 @@ import path from 'path'
 import matter from 'gray-matter'
 import renderToString from 'next-mdx-remote/render-to-string'
 import { components } from 'components/MdxProvider'
+import blogTags from 'blog/tags'
+import coinTags from 'coin/tags'
 
 type folders = 'blog' | 'coin'
 
@@ -14,19 +16,16 @@ export function getPostsMetadata(folder: folders, locale: string) {
       path.join(path.join(process.cwd(), `${folder}/${locale}`), filePath)
     )
 
-    // Read when the file was last modified
-    const { mtime } = fs.statSync(
-      path.join(path.join(process.cwd(), `${folder}/${locale}`), filePath)
-    )
+    const fileSlug = filePath.replace(/\.mdx?$/, '')
 
     // extract metadata using frontmatter
     const { data } = matter(source)
 
     return {
       ...data, // The type is PostMetaPath
-      fileSlug: filePath.replace(/\.mdx?$/, ''),
+      fileSlug,
       folder,
-      mtime: `${mtime}`,
+      tags: folder === 'blog' ? blogTags[fileSlug] : coinTags[fileSlug],
     }
   })
 }
@@ -43,7 +42,6 @@ export async function getMdxContent(
       path.join(process.cwd(), `${folder}/${locale}/`),
       `${slug}.mdx`
     )
-    const { mtime } = fs.statSync(postFilePath)
 
     // read the file and return a Buffer using Node.js
     const source = fs.readFileSync(postFilePath)
@@ -59,8 +57,10 @@ export async function getMdxContent(
 
     return {
       source: mdxSource,
-      metadata,
-      mtime: `${mtime}`,
+      metadata: {
+        ...metadata,
+        tags: folder === 'blog' ? blogTags[slug] : coinTags[slug],
+      },
     }
   }
 }

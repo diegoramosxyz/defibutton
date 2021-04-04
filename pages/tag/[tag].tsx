@@ -49,15 +49,12 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
   const allMeta = [...postsMeta, ...coinsMeta]
 
-  // Only return the posts that contain the tag in the url -> /tag/[tag]
-  const filteredPosts = allMeta.filter(
-    (post: any) => !!post.tags.find((item: string) => item === params?.tag)
-  )
+  // TODO: LOGIC TO READ THE TAGS FILE FOR EACH FOLDER
 
   return {
     props: {
       tag: params?.tag,
-      filteredPosts,
+      filteredPosts: [],
       ...(await serverSideTranslations(locale || 'en', ['tags'])),
     },
   }
