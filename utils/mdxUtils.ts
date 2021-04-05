@@ -5,6 +5,8 @@ import renderToString from 'next-mdx-remote/render-to-string'
 import { components } from 'components/MdxProvider'
 import blogTags from 'blog/tags'
 import coinTags from 'coin/tags'
+import { exec } from 'child_process'
+import { Readable } from 'stream'
 
 type folders = 'blog' | 'coin'
 
@@ -36,6 +38,16 @@ export async function getMdxContent(
   folder: folders,
   locale: string
 ) {
+  // https://stackoverflow.com/a/49428486
+  function streamToString(stream: Readable | null) {
+    const chunks: any = []
+    return new Promise((resolve, reject) => {
+      stream?.on('data', (chunk) => chunks.push(Buffer.from(chunk)))
+      stream?.on('error', (err) => reject(err))
+      stream?.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')))
+    })
+  }
+
   if (typeof slug !== 'undefined' && !Array.isArray(slug)) {
     // return path to file as a string coins/en/file1.mdx or posts/es/archivo1.mdx, etc.
     const postFilePath = path.join(
@@ -55,10 +67,22 @@ export async function getMdxContent(
       scope: metadata,
     })
 
+    const { stdout } = exec(
+      // get the last modified date of the documents using git logs. printf removes new lines
+      `printf $(git log -1 --date=iso8601-strict --format="%ad" -- "$(pwd)/${folder}/${locale}/${slug}.mdx")`,
+      (error) => {
+        if (error) {
+          console.error(`exec error: ${error}`)
+          return
+        }
+      }
+    )
+
     return {
       source: mdxSource,
       metadata: {
         ...metadata,
+        lastModified: await streamToString(stdout),
         tags: folder === 'blog' ? blogTags[slug] : coinTags[slug],
       },
     }

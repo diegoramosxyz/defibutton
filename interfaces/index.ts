@@ -3,6 +3,7 @@ export type PostMetadata = {
   description: string
   author?: string
   tags: string[]
+  lastModified: string
 }
 
 export interface PostMetaPath extends PostMetadata {

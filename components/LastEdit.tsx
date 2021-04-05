@@ -4,15 +4,15 @@ import { useRouter } from 'next/router'
 // https://serverfault.com/questions/401437/how-to-retrieve-the-last-modification-date-of-all-files-in-a-git-repository
 
 export default function LastEdit({
-  mtime,
+  lastModified,
   translation,
 }: {
-  mtime: string
+  lastModified: string
   translation: string
 }) {
   const { locale } = useRouter()
 
-  const date = new Date(mtime).toLocaleDateString(locale, {
+  const date = new Date(lastModified).toLocaleDateString(locale, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
