@@ -17,11 +17,9 @@ const h1 = ({ ...props }) => (
 const h2 = ({ children, ...props }: { children: React.ReactText }) => {
   const slug = slugify(children.toString())
   return (
-    <a href={`#${slug}`}>
-      <h2 id={slug} className="text-2xl font-semibold pt-5 mb-4" {...props}>
-        {children}
-      </h2>
-    </a>
+    <h2 id={slug} className="text-2xl font-semibold pt-5 mb-4" {...props}>
+      <a href={`#${slug}`}>{children}</a>
+    </h2>
   )
 }
 const h3 = ({ ...props }) => (

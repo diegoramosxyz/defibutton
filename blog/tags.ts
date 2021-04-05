@@ -13,7 +13,7 @@ const tags: { [key: string]: Tag[] } = {
   index: [],
   invest: ['strategy'],
   lend: ['strategy'],
-  metamask: ['tutorial', 'wallet'],
+  metamask: ['tutorial', 'wallet', 'safety'],
   safety: ['tip', 'safety'],
   'smart-contract': ['defi', 'smart-contract'],
   spend: ['strategy'],

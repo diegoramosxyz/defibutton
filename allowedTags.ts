@@ -1,6 +1,7 @@
 const tags = [
   'amm',
   'bitcoin',
+  'blockchain',
   'cefi',
   'defi',
   'dex',
@@ -8,6 +9,7 @@ const tags = [
   'extra',
   'fundamental',
   'lending',
+  'protocol',
   'safety',
   'smart-contract',
   'strategy',

@@ -28,7 +28,7 @@ export default function PostLayout({
       <div className="min-h-screen text-lg px-2 sm:px-4 pb-14 xl:px-0 lg:pl-64 xl:pl-0">
         <main className="px-2 xl:px-0 max-w-screen-md mx-auto">
           {children}
-          <section className="flex justify-between items-center text-sm align-center opacity-75">
+          <section className="flex justify-between items-center text-sm align-center opacity-75 my-5">
             <LastEdit translation={t('lastEdit')} lastModified={lastModified} />
             <div className="flex space-x-3">
               {tags.map((tag) => (
