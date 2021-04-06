@@ -1,40 +1,19 @@
 import { GetStaticProps } from 'next'
-import { exec } from 'child_process'
+import { getTags } from 'utils/db'
 
-export default function test({ stdout }: { stdout: any }) {
+export default function test({ tags }: { tags: any }) {
   return (
     <pre>
-      <code>{JSON.stringify(stdout, null, 2)}</code>
+      <code>{JSON.stringify(tags, null, 2)}</code>
     </pre>
   )
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const test = '/coin/es/bitcoin.mdx'
-  const { stdout } = exec(
-    // get the last modified date of the documents using git logs. printf removes new lines
-    `printf $(git log -1 --date=iso8601-strict --format="%ad" -- "$(pwd)${test}")`,
-    (error) => {
-      if (error) {
-        console.error(`exec error: ${error}`)
-        return
-      }
-    }
-  )
-
-  // https://stackoverflow.com/a/49428486
-  function streamToString(stream: typeof stdout) {
-    const chunks: any = []
-    return new Promise((resolve, reject) => {
-      stream?.on('data', (chunk) => chunks.push(Buffer.from(chunk)))
-      stream?.on('error', (err) => reject(err))
-      stream?.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')))
-    })
-  }
-
+  console.log(await getTags())
   return {
     props: {
-      stdout: await streamToString(stdout),
+      tags: JSON.parse(JSON.stringify(await getTags())),
     },
   }
 }

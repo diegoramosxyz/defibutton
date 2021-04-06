@@ -83,5 +83,9 @@ export type Coin = {
     binanceSmartChain?: string
   }
   tags: string[]
-  section: string // Section in the landing page and sidebar
+}
+
+export type Doc = {
+  slug: string
+  tags: string[]
 }

@@ -7,8 +7,6 @@ import Layout from 'components/Layout'
 import React from 'react'
 import MdxCard from 'components/MdxCard'
 import { useTranslation } from 'react-i18next'
-import blogTags from 'blog/tags'
-import coinTags from 'coin/tags'
 
 export default function Tag({
   filteredPosts,
@@ -48,21 +46,10 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
   const allMeta = [...postsMeta, ...coinsMeta]
 
-  // blogTags.map(({}) => )
-
-  const test = allMeta.map(({ fileSlug, folder }) => {
-    if (fileSlug === params?.tag) {
-      return {
-        slug: `/${folder}/${fileSlug}`,
-        tags: !!blogTags[fileSlug] ? blogTags[fileSlug] : [],
-      }
-    }
-  })
-
   return {
     props: {
       tag: params?.tag,
-      filteredPosts: test,
+      filteredPosts: [],
       ...(await serverSideTranslations(locale || 'en', ['tags'])),
     },
   }

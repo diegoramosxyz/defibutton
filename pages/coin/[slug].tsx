@@ -74,7 +74,7 @@ export default function PostPage({
 }
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const { db } = await connectToDatabase()
+  const mongoConnection = await connectToDatabase()
 
   const MdxContext = await getMdxContent(params?.slug, 'coin', locale || 'en')
 
@@ -86,7 +86,9 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   // Retrieve data from MongoDB
   // THE SLUG FROM THE FILE SYSTEM MUST MATCH THE DATABASE SLUG
   // /coins/en/bitcoin.mdx in file system, slug: 'bitcoin' in DB
-  const coin = await db.collection('coins').findOne({ slug: params?.slug })
+  const coin = await mongoConnection?.db
+    .collection('coins')
+    .findOne({ slug: params?.slug })
 
   // const res = await fetch(
   //   `https://api.defillama.com/protocol/${MdxContext?.metadata.llama_id}`

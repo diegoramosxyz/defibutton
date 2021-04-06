@@ -22,7 +22,7 @@
     "**/*.tsx",
     "pages/blog/[slug].ts",
     "utils/fetcher.js",
-    "utils/mongodb.js"
+    "utils/mongodb.ts"
   ],
   "exclude": ["node_modules"]
 }

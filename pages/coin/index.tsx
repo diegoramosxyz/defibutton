@@ -9,9 +9,9 @@ export default function index({ coins }: { coins: [] }) {
 }
 
 export async function getStaticProps() {
-  const { db } = await connectToDatabase()
+  const mongoConnection = await connectToDatabase()
 
-  const coins = await db.collection('coins').find({}).toArray()
+  const coins = await mongoConnection?.db.collection('coins').find({}).toArray()
 
   return {
     props: {
