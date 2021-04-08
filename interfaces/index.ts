@@ -7,7 +7,7 @@ export type PostMetadata = {
 }
 
 export interface PostMetaPath extends PostMetadata {
-  fileSlug: string
+  slug: string
   folder: 'blog' | 'coin'
   tags: string[]
 }

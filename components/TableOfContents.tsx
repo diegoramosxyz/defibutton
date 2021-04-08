@@ -18,7 +18,7 @@ export default function TableOfContents({
   // an array of the same type filtered by the selected path
   function getOnePostMetadata(posts: PostMetaPath[], path: string) {
     return posts.filter(
-      ({ fileSlug, folder }) => `/${folder}/${fileSlug}` === path
+      ({ slug: fileSlug, folder }) => `/${folder}/${fileSlug}` === path
     )[0]
   }
 
@@ -55,7 +55,7 @@ export default function TableOfContents({
                         description,
                         title,
                         folder,
-                        fileSlug,
+                        slug: fileSlug,
                       } = getOnePostMetadata(posts, url)
                       return (
                         <MdxCard
@@ -63,7 +63,7 @@ export default function TableOfContents({
                           title={title}
                           description={description}
                           folder={folder}
-                          fileSlug={fileSlug}
+                          slug={fileSlug}
                           sidebar={sidebar}
                         ></MdxCard>
                       )

@@ -1,6 +1,3 @@
-// import { Tag } from 'allowedTags'
-
-// const tableOfContents: { [key in Tag]?: string[] }[] = [
 const tableOfContents: { [key: string]: string[] }[] = [
   { fundamental: ['/blog/banks', '/coin/bitcoin', '/coin/ethereum'] },
   { defi: ['/blog/defi', '/blog/dex', '/blog/smart-contract'] },

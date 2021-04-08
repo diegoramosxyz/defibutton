@@ -12,21 +12,20 @@ import { getPriceAnd24hr } from 'utils/coins'
 import TickerPrice from 'components/TickerPrice'
 import { ProtocolTvl } from 'interfaces/data-types'
 import { Coin } from 'interfaces/data-types'
-import { connectToDatabase } from 'utils/mongodb'
-import { getSlugsFromDb } from 'utils/db'
+import { getMetadataBySlug, getSlugsFromDb } from 'utils/db'
 
 export default function PostPage({
   source,
   metadata,
   posts,
   // protocolTvl,
-  coin,
+  dbMeta,
 }: {
   source: MdxRemote.Source
   metadata: PostMetadata
   posts: PostMetaPath[]
   // protocolTvl: ProtocolTvl
-  coin: Coin
+  dbMeta: Coin
 }) {
   if (source) {
     const initialTickerData = {
@@ -37,7 +36,7 @@ export default function PostPage({
     const [tickerData, setTickerData] = useState(initialTickerData)
     const [loading, setLoading] = useState(true)
     const { title } = metadata
-    const { geckoId, symbol, slug } = coin
+    const { geckoId, symbol, slug, tags } = dbMeta
 
     useEffect(() => {
       setLoading(true)
@@ -52,7 +51,7 @@ export default function PostPage({
     const content = hydrate(source, { components })
 
     return (
-      <PostLayout posts={posts} meta={metadata}>
+      <PostLayout posts={posts} meta={{ ...metadata, tags }}>
         <header className="my-3">
           <h1 className="flex items-center text-4xl pb-3 pt-2 lg:pt-5 font-bold">
             <Image
@@ -75,21 +74,16 @@ export default function PostPage({
 }
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const mongoConnection = await connectToDatabase()
-
+  // Get the content for the post
   const MdxContext = await getMdxContent(params?.slug, 'coin', locale || 'en')
 
-  // Get metadata for navigation
+  // Get the metadata for the sidebar
   const meta1 = getPostsMetadata('blog', locale || 'en')
   const meta2 = getPostsMetadata('coin', locale || 'en')
   const posts = [...meta1, ...meta2]
 
-  // Retrieve data from MongoDB
-  // THE SLUG FROM THE FILE SYSTEM MUST MATCH THE DATABASE SLUG
-  // /coins/en/bitcoin.mdx in file system, slug: 'bitcoin' in DB
-  const coin = await mongoConnection?.db
-    .collection('coins')
-    .findOne({ slug: params?.slug })
+  // Get the metadata for the slug
+  const dbMeta = await getMetadataBySlug('coins', params?.slug)
 
   // const res = await fetch(
   //   `https://api.defillama.com/protocol/${MdxContext?.metadata.llama_id}`
@@ -102,13 +96,16 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       ...MdxContext,
       ...(await serverSideTranslations(locale || 'en', ['index', 'tags'])),
       // protocolTvl,
-      coin: JSON.parse(JSON.stringify(coin)),
+      dbMeta: JSON.parse(JSON.stringify(dbMeta)),
     },
   }
 }
 
 export const getStaticPaths = async ({ locales }: { locales: string[] }) => {
+  // Get an array of slugs (strings) from the database
   const slugs = (await getSlugsFromDb('coins')) || []
+
+  // Format the paths array to satisfy Next.js requirements
   const paths = locales
     .map((locale) => slugs.map((slug) => ({ params: { slug }, locale })))
     .flat()

@@ -16,17 +16,37 @@ export function getPostsMetadata(folder: folders, locale: string) {
       path.join(path.join(process.cwd(), `${folder}/${locale}`), filePath)
     )
 
-    const fileSlug = filePath.replace(/\.mdx?$/, '')
+    const slug = filePath.replace(/\.mdx?$/, '')
 
     // extract metadata using frontmatter
     const { data } = matter(source)
 
     return {
       ...data, // The type is PostMetaPath
-      fileSlug,
+      slug,
       folder,
     }
   })
+}
+
+// return the metadata of the posts to create navigation and file relations using tags
+export function getOnePostMetadata(
+  slug: string,
+  folder: folders,
+  locale: string
+) {
+  // read the content of a file coins/en/file1.mdx or posts/es/archivo1.mdx, etc
+  const source = fs.readFileSync(
+    path.join(path.join(process.cwd(), `${folder}/${locale}`), `${slug}.mdx`)
+  )
+
+  // extract metadata using frontmatter
+  const { data } = source && matter(source)
+
+  return {
+    ...data, // The type is PostMetaPath
+    folder,
+  }
 }
 
 // Get the HTML for an MDX file
