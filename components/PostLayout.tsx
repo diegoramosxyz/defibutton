@@ -17,7 +17,7 @@ export default function PostLayout({
   meta: PostMetadata
 }) {
   const { t } = useTranslation(['index', 'tags'])
-  const { title, tags, lastModified } = meta
+  const { title, lastModified } = meta
   return (
     <>
       <Head>
@@ -31,11 +31,11 @@ export default function PostLayout({
           <section className="flex justify-between items-center text-sm align-center opacity-75 my-5">
             <LastEdit translation={t('lastEdit')} lastModified={lastModified} />
             <div className="flex space-x-3">
-              {tags.map((tag) => (
+              {/* {tags.map((tag) => (
                 <Link key={tag} href={`/tag/${tag}`}>
                   <a>#{t(tag)}</a>
                 </Link>
-              ))}
+              ))} */}
             </div>
           </section>
         </main>

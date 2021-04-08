@@ -3,8 +3,6 @@ import path from 'path'
 import matter from 'gray-matter'
 import renderToString from 'next-mdx-remote/render-to-string'
 import { components } from 'components/MdxProvider'
-import blogTags from 'blog/tags'
-import coinTags from 'coin/tags'
 import { exec } from 'child_process'
 import { Readable } from 'stream'
 
@@ -27,7 +25,6 @@ export function getPostsMetadata(folder: folders, locale: string) {
       ...data, // The type is PostMetaPath
       fileSlug,
       folder,
-      tags: folder === 'blog' ? blogTags[fileSlug] : coinTags[fileSlug],
     }
   })
 }
@@ -83,7 +80,6 @@ export async function getMdxContent(
       metadata: {
         ...metadata,
         lastModified: await streamToString(stdout),
-        tags: folder === 'blog' ? blogTags[slug] : coinTags[slug],
       },
     }
   }

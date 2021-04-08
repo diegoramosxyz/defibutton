@@ -7,6 +7,7 @@ import { getSlugs, getMdxContent, getPostsMetadata } from 'utils/mdxUtils'
 import { PostMetadata, PostMetaPath } from 'interfaces/index'
 import { components } from 'components/MdxProvider'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { getSlugsFromDb } from 'utils/db'
 
 export default function PostPage({
   source,
@@ -52,8 +53,11 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
 }
 
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const paths = locales?.map((locale) => getSlugs('blog', locale)).flat() || []
+export const getStaticPaths = async ({ locales }: { locales: string[] }) => {
+  const slugs = (await getSlugsFromDb('docs')) || []
+  const paths = locales
+    .map((locale) => slugs.map((slug) => ({ params: { slug }, locale })))
+    .flat()
   return {
     paths,
     fallback: true,

@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next'
 import hydrate from 'next-mdx-remote/hydrate'
 import { MdxRemote } from 'next-mdx-remote/types'
 import PostLayout from 'components/PostLayout'
-import { getSlugs, getMdxContent, getPostsMetadata } from 'utils/mdxUtils'
+import { getMdxContent, getPostsMetadata } from 'utils/mdxUtils'
 import { PostMetadata, PostMetaPath } from 'interfaces/index'
 import { components } from 'components/MdxProvider'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
@@ -13,6 +13,7 @@ import TickerPrice from 'components/TickerPrice'
 import { ProtocolTvl } from 'interfaces/data-types'
 import { Coin } from 'interfaces/data-types'
 import { connectToDatabase } from 'utils/mongodb'
+import { getSlugsFromDb } from 'utils/db'
 
 export default function PostPage({
   source,
@@ -107,47 +108,13 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 }
 
 export const getStaticPaths = async ({ locales }: { locales: string[] }) => {
-  const paths = locales?.map((locale) => getSlugs('coin', locale)).flat()
+  const slugs = (await getSlugsFromDb('coins')) || []
+  const paths = locales
+    .map((locale) => slugs.map((slug) => ({ params: { slug }, locale })))
+    .flat()
+
   return {
     paths,
     fallback: true,
   }
 }
-
-// import { Coin } from 'interfaces/data-types'
-// import { connectToDatabase } from 'utils/mongodb'
-
-// export default function CoinPage({ coin }: { coin: Coin }) {
-//   return (
-//     <pre>
-//       <code>{JSON.stringify(coin, null, 2)}</code>
-//     </pre>
-//   )
-// }
-
-// export async function getStaticPaths() {
-//   const { db } = await connectToDatabase()
-
-//   const coins: Coin[] = await db.collection('coins').find({}).toArray()
-
-//   const paths = coins.map((coin) => ({
-//     params: { slug: coin.slug },
-//   }))
-
-//   return {
-//     paths,
-//     fallback: true,
-//   }
-// }
-
-// export async function getStaticProps({ params }: { params: any }) {
-//   const { db } = await connectToDatabase()
-
-//   const coin = await db.collection('coins').findOne({ slug: params?.slug })
-
-//   return {
-//     props: {
-//       coin: JSON.parse(JSON.stringify(coin)),
-//     },
-//   }
-// }

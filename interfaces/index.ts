@@ -2,7 +2,7 @@ export type PostMetadata = {
   title: string
   description: string
   author?: string
-  tags: string[]
+  // tags: string[]
   lastModified: string
 }
 
