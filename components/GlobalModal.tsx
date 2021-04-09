@@ -1,6 +1,5 @@
-import { useEffect } from 'react'
-import { useContext } from 'react'
-import { GlobalContext } from '../context/GlobalState'
+import { useEffect, useContext } from 'react'
+import { GlobalContext } from 'context/GlobalState'
 import { State } from 'interfaces/data-types'
 
 export default function ModalBackground({

@@ -17,11 +17,9 @@ const h1 = ({ ...props }) => (
 const h2 = ({ children, ...props }: { children: React.ReactText }) => {
   const slug = slugify(children.toString())
   return (
-    <a href={`#${slug}`}>
-      <h2 id={slug} className="text-2xl font-semibold pt-5 mb-4" {...props}>
-        {children}
-      </h2>
-    </a>
+    <h2 id={slug} className="text-2xl font-semibold pt-5 mb-4" {...props}>
+      <a href={`#${slug}`}>{children}</a>
+    </h2>
   )
 }
 const h3 = ({ ...props }) => (
@@ -48,10 +46,13 @@ const blockquote = ({ ...props }) => (
 const hr = () => <hr className="my-3" />
 const del = ({ ...props }) => <s className="opacity-75" {...props} />
 const a = ({ href, ...props }: { href: string }) => (
-  <Link href={href} >
-    <a {...props} className="underline"
+  <Link href={href}>
+    <a
+      {...props}
+      className="underline"
       target="_blank"
-      rel="noopener noreferrer" />
+      rel="noopener noreferrer"
+    />
   </Link>
 )
 
@@ -104,22 +105,26 @@ const Callout = ({ ...props }) => (
   </mark>
 )
 
-const Photo = ({
+function Photo({
   src,
   alt,
-  width,
-  height,
+  h,
+  w,
 }: {
   src: string
   alt: string
-  width: number
-  height: number
-}) => (
-  <figure className="my-5">
-    <Image src={src} alt={alt} width={width} height={height} />
-    <figcaption className="text-center opacity-75">{alt}</figcaption>
-  </figure>
-)
+  h: number
+  w: number
+}) {
+  return (
+    <figure>
+      <Image src={src} alt={alt} layout="responsive" height={h} width={w} />
+      <figcaption className="text-center opacity-75 mt-2 mb-4">
+        {alt}
+      </figcaption>
+    </figure>
+  )
+}
 
 // prettier-ignore
 export const components = {

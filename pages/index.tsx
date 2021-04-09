@@ -1,24 +1,22 @@
 import { GetStaticProps } from 'next'
 import Layout from 'components/Layout'
-import { getPostsMetadata } from 'utils/mdxUtils'
+import { getAllMdxMeta } from 'utils/mdxUtils'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import ContentSection from 'components/ContentSection'
+import TableOfContents from 'components/TableOfContents'
 import { useTranslation } from 'next-i18next'
+import { PostMetaPath } from 'interfaces'
 
-// TODO: ADD TYPE
-export default function Index({ posts }: { posts: any }) {
+export default function Index({
+  sidebarMeta,
+}: {
+  sidebarMeta: PostMetaPath[]
+}) {
   const { t } = useTranslation('index')
   return (
     <Layout head="DeFi Button">
-      <section className="text-center font-medium mb-4">
-        {t('intro')}
-      </section>
+      <section className="text-center font-medium mb-4">{t('intro')}</section>
       <section className="grid gap-4 mb-5">
-        <ContentSection
-          tags={['fundamentals', 'defi', 'tutorials', 'tips', 'extra']}
-          sidebar={false}
-          posts={posts}
-        />
+        <TableOfContents sidebar={false} posts={sidebarMeta} />
       </section>
       <section className="opacity-80 text-sm text-center mb-5">
         {t('warning')}
@@ -28,12 +26,18 @@ export default function Index({ posts }: { posts: any }) {
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const posts = getPostsMetadata(locale)
+  // Get the metadata of all MDX files. Filtered later to show sidebar.
+  const sidebarMeta = getAllMdxMeta(locale)
+
+  const translations = await serverSideTranslations(locale || 'en', [
+    'index',
+    'tags',
+  ])
 
   return {
     props: {
-      posts,
-      ...(await serverSideTranslations(locale || 'en', ['index'])),
+      sidebarMeta,
+      ...translations,
     },
   }
 }

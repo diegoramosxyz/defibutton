@@ -16,6 +16,13 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/posts/[slug].ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/blog/[slug].ts",
+    "utils/fetcher.js",
+    "utils/mongodb.ts"
+  ],
   "exclude": ["node_modules"]
 }
