@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { getPostsMetadata } from 'utils/mdxUtils'
+import { getAllMdxMeta } from 'utils/mdxUtils'
 import { PostMetaPath } from 'interfaces'
 import Layout from 'components/Layout'
 import React from 'react'
@@ -18,6 +18,7 @@ export default function Tag({
   const {
     query: { tag },
   } = useRouter()
+
   return (
     <Layout head={`${t(`${tag}`)} - DeFi Button`}>
       <header>
@@ -40,24 +41,30 @@ export default function Tag({
 }
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const postsMeta = getPostsMetadata('blog', locale || 'en')
-  const coinsMeta = getPostsMetadata('coin', locale || 'en')
-
-  // Get all the metadata for all MDX files
-  const mdxMeta = [...postsMeta, ...coinsMeta]
+  // Get the metadata of all MDX files. Filtered later to show sidebar.
+  const AllMdxMeta = getAllMdxMeta(locale)
 
   // Get all the objects from all collections that contain the tag from the database
   const dbMeta = await getTagsForAll(params?.tag)
 
   // Filter the MDX metadata based on the data on the database.
   const filteredPosts = dbMeta.map((obj) =>
-    mdxMeta.find(({ slug }) => slug === obj?.slug)
+    AllMdxMeta.find(({ slug }) => slug === obj?.slug)
   )
+
+  // If the mdx file is not found based on the slug from the database, return not found
+  if (filteredPosts.length === 0) {
+    return {
+      notFound: true,
+    }
+  }
+
+  const translations = await serverSideTranslations(locale || 'en', ['tags'])
 
   return {
     props: {
       filteredPosts,
-      ...(await serverSideTranslations(locale || 'en', ['tags'])),
+      ...translations,
     },
   }
 }

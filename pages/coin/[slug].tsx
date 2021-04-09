@@ -3,8 +3,8 @@ import { GetStaticProps } from 'next'
 import hydrate from 'next-mdx-remote/hydrate'
 import { MdxRemote } from 'next-mdx-remote/types'
 import PostLayout from 'components/PostLayout'
-import { getMdxContent, getPostsMetadata } from 'utils/mdxUtils'
-import { PostMetadata, PostMetaPath } from 'interfaces/index'
+import { getAllMdxMeta, getMdxContent } from 'utils/mdxUtils'
+import { SlugMetadata, PostMetaPath } from 'interfaces/index'
 import { components } from 'components/MdxProvider'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Image from 'next/image'
@@ -16,87 +16,98 @@ import { getMetadataBySlug, getSlugsFromDb } from 'utils/db'
 
 export default function PostPage({
   source,
-  metadata,
-  posts,
-  // protocolTvl,
-  dbMeta,
+  slugMeta,
+  sidebarMeta,
+  slugDbMeta,
 }: {
   source: MdxRemote.Source
-  metadata: PostMetadata
-  posts: PostMetaPath[]
-  // protocolTvl: ProtocolTvl
-  dbMeta: Coin
+  slugMeta: SlugMetadata
+  sidebarMeta: PostMetaPath[]
+  slugDbMeta: Coin
 }) {
-  if (source) {
-    const initialTickerData = {
-      usd: 0,
-      usd_24h_change: 0.0,
-      symbol: '---',
-    }
-    const [tickerData, setTickerData] = useState(initialTickerData)
-    const [loading, setLoading] = useState(true)
-    const { title } = metadata
-    const { geckoId, symbol, slug, tags } = dbMeta
-
-    useEffect(() => {
-      setLoading(true)
-      async function loadData() {
-        const data = await getPriceAnd24hr(geckoId)
-        setTickerData({ ...data, symbol })
-      }
-      loadData()
-      setLoading(false)
-    }, [geckoId])
-
-    const content = hydrate(source, { components })
-
-    return (
-      <PostLayout posts={posts} meta={{ ...metadata, tags }}>
-        <header className="my-3">
-          <h1 className="flex items-center text-4xl pb-3 pt-2 lg:pt-5 font-bold">
-            <Image
-              width={35}
-              height={35}
-              src={`/logo/${slug?.toLocaleLowerCase()}.svg`}
-              alt={title}
-            />
-            <p className="ml-2">{title}</p>
-          </h1>
-          {geckoId && (
-            <TickerPrice price={loading ? initialTickerData : tickerData} />
-          )}
-        </header>
-        {content}
-      </PostLayout>
-    )
+  const initialTickerData = {
+    usd: 0,
+    usd_24h_change: 0.0,
+    symbol: '---',
   }
-  return <div>404 Not Found</div>
+
+  const [tickerData, setTickerData] = useState(initialTickerData)
+  const [loading, setLoading] = useState(true)
+
+  const { title } = slugMeta
+  const { geckoId, symbol, slug } = slugDbMeta
+
+  useEffect(() => {
+    setLoading(true)
+    async function loadData() {
+      const data = await getPriceAnd24hr(geckoId)
+      setTickerData({ ...data, symbol })
+    }
+    loadData()
+    setLoading(false)
+  }, [geckoId])
+
+  const content = hydrate(source, { components })
+
+  return (
+    <PostLayout sidebarMeta={sidebarMeta} slugMeta={slugMeta}>
+      <header className="my-3">
+        <h1 className="flex items-center text-4xl pb-3 pt-2 lg:pt-5 font-bold">
+          <Image
+            width={35}
+            height={35}
+            src={`/logo/${slug?.toLocaleLowerCase()}.svg`}
+            alt={title}
+          />
+          <p className="ml-2">{title}</p>
+        </h1>
+        {geckoId && (
+          <TickerPrice price={loading ? initialTickerData : tickerData} />
+        )}
+      </header>
+      {content}
+    </PostLayout>
+  )
 }
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  // Get the content for the post
-  const MdxContext = await getMdxContent(params?.slug, 'coin', locale || 'en')
+  // Get the content for the current post, including its metadata
+  const mdxContext = await getMdxContent(params?.slug, 'coin', locale || 'en')
 
-  // Get the metadata for the sidebar
-  const meta1 = getPostsMetadata('blog', locale || 'en')
-  const meta2 = getPostsMetadata('coin', locale || 'en')
-  const posts = [...meta1, ...meta2]
+  // If the mdx file is not found based on the slug from the database, return not found
+  if (typeof mdxContext === 'undefined') {
+    return {
+      notFound: true,
+    }
+  }
 
-  // Get the metadata for the slug
-  const dbMeta = await getMetadataBySlug('coins', params?.slug)
+  // Get the metadata of all MDX files. Filtered later to show sidebar.
+  // TODO: Only return sidebar items
+  const sidebarMeta = getAllMdxMeta(locale)
+
+  // Get additional metadata about the current post from the database
+  const slugDbMeta = await getMetadataBySlug('coins', params?.slug)
 
   // const res = await fetch(
   //   `https://api.defillama.com/protocol/${MdxContext?.metadata.llama_id}`
   // )
   // const protocolTvl: ProtocolTvl = await res.json()
 
+  const translations = await serverSideTranslations(locale || 'en', [
+    'index',
+    'tags',
+  ])
+
   return {
     props: {
-      posts,
-      ...MdxContext,
-      ...(await serverSideTranslations(locale || 'en', ['index', 'tags'])),
-      // protocolTvl,
-      dbMeta: JSON.parse(JSON.stringify(dbMeta)),
+      source: mdxContext.source,
+      slugMeta: {
+        ...mdxContext.metadata,
+        tags: slugDbMeta.tags,
+      },
+      ...translations,
+      sidebarMeta,
+      slugDbMeta,
     },
   }
 }
@@ -112,6 +123,6 @@ export const getStaticPaths = async ({ locales }: { locales: string[] }) => {
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   }
 }

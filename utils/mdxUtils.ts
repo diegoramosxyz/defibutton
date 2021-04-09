@@ -105,6 +105,15 @@ export async function getMdxContent(
   }
 }
 
+// Get an array of mdx metadata objects from all mdx files
+export function getAllMdxMeta(locale: string | undefined) {
+  const postsMeta = getPostsMetadata('blog', locale || 'en')
+  const coinsMeta = getPostsMetadata('coin', locale || 'en')
+
+  // The metadata is used to populate the sidebar
+  return [...postsMeta, ...coinsMeta]
+}
+
 // Get the slugs for all the files in a directory (no recursion)
 export function getSlugs(folder: folders, locale: string) {
   // return paths in the right form to obey Next.js rules

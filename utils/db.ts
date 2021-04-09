@@ -51,7 +51,8 @@ export async function getMetadataBySlug(
 
     const query = { slug }
 
-    return await Db?.db.collection(folder).findOne(query)
+    const res = await Db?.db.collection(folder).findOne(query)
+    return JSON.parse(JSON.stringify(res))
   }
   return []
 }
