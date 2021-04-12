@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 import React from 'react'
 import { PostMetaPath } from 'interfaces'
-import tableOfContents from 'tableOfContents'
 import MdxCard from './MdxCard'
 
 export default function TableOfContents({
@@ -78,3 +77,11 @@ export default function TableOfContents({
     </>
   )
 }
+
+const tableOfContents: { [key: string]: string[] }[] = [
+  { fundamental: ['/blog/banks', '/coin/bitcoin', '/coin/ethereum'] },
+  { defi: ['/blog/defi', '/blog/dex', '/blog/smart-contract'] },
+  { tutorial: ['/blog/cefi-to-defi', '/blog/metamask'] },
+  { tip: ['/blog/safety'] },
+  { extra: ['/blog/glossary', '/blog/faq', '/blog/trust'] },
+]
