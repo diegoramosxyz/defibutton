@@ -1,4 +1,4 @@
-import { ProtocolTvl } from 'interfaces/data-types'
+import { ProtocolTvl } from 'interfaces'
 import React from 'react'
 import { Line } from 'react-chartjs-2'
 import { RoundBigNumber, RoundBigNumberNoLetter } from 'utils/numbers'
@@ -8,7 +8,9 @@ export default function LineChart({ tvl }: { tvl: ProtocolTvl['tvl'] }) {
   const dates = tvl.map(({ date }) => +`${date}000`)
 
   // Round TVL to Billions
-  const apiTvls = tvl.map(({ totalLiquidityUSD }) => RoundBigNumberNoLetter(totalLiquidityUSD))
+  const apiTvls = tvl.map(({ totalLiquidityUSD }) =>
+    RoundBigNumberNoLetter(totalLiquidityUSD)
+  )
 
   // Get the last value of the array
   const TVL = apiTvls.pop() || 0
@@ -29,8 +31,7 @@ export default function LineChart({ tvl }: { tvl: ProtocolTvl['tvl'] }) {
   return (
     <section className="mx-auto max-w-screen-md mb-4">
       <h1 className="text-center">
-        Total Value Locked in DeFi (USD){' '}
-        {RoundBigNumber(TVL)}B
+        Total Value Locked in DeFi (USD) {RoundBigNumber(TVL)}B
       </h1>
       <Line
         data={data}

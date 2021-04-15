@@ -14,6 +14,25 @@ module.exports = {
       },
     ]
   },
+  async redirects() {
+    return [
+      {
+        source: '/tag',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/coin',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/blog',
+        destination: '/',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 // https://github.com/leerob/leerob.io/pull/310
