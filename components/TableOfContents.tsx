@@ -4,6 +4,33 @@ import React from 'react'
 import { PostMetaPath } from 'interfaces'
 import MdxCard from './MdxCard'
 
+const tableOfContents: { [key: string]: string[] }[] = [
+  { cefi: ['/blog/banks'] },
+  {
+    defi: [
+      '/coin/bitcoin',
+      '/coin/ethereum',
+      '/blog/defi',
+      '/blog/smart-contract',
+      '/blog/dex',
+    ],
+  },
+  {
+    coins: [
+      '/coin/aave',
+      '/coin/uniswap',
+      '/coin/binance-coin',
+      '/coin/chainlink',
+      '/coin/compound',
+      '/coin/dai',
+      '/coin/sushiswap',
+    ],
+  },
+  { tutorial: ['/blog/cefi-to-defi', '/blog/metamask'] },
+  { safety: ['/blog/safety'] },
+  { extra: ['/blog/glossary', '/blog/faq', '/blog/trust'] },
+]
+
 export default function TableOfContents({
   posts,
   sidebar,
@@ -77,11 +104,3 @@ export default function TableOfContents({
     </>
   )
 }
-
-const tableOfContents: { [key: string]: string[] }[] = [
-  { fundamental: ['/blog/banks', '/coin/bitcoin', '/coin/ethereum'] },
-  { defi: ['/blog/defi', '/blog/dex', '/blog/smart-contract'] },
-  { tutorial: ['/blog/cefi-to-defi', '/blog/metamask'] },
-  { tip: ['/blog/safety'] },
-  { extra: ['/blog/glossary', '/blog/faq', '/blog/trust'] },
-]
