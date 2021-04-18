@@ -5,24 +5,21 @@ import { PostMetaPath } from 'interfaces'
 import MdxCard from './MdxCard'
 
 const tableOfContents: { [key: string]: string[] }[] = [
-  { cefi: ['/blog/banks'] },
   {
     defi: [
-      '/coin/bitcoin',
-      '/coin/ethereum',
+      '/blog/common-beginner-questions',
       '/blog/defi',
       '/blog/smart-contract',
       '/blog/dex',
     ],
   },
+  { cefi: ['/blog/banks'] },
   {
     coins: [
-      '/coin/aave',
+      '/coin/bitcoin',
+      '/coin/ethereum',
       '/coin/uniswap',
       '/coin/binance-coin',
-      '/coin/chainlink',
-      '/coin/compound',
-      '/coin/dai',
       '/coin/sushiswap',
     ],
   },
