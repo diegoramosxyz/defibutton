@@ -99,7 +99,7 @@ const pre = ({ ...props }) => (
 
 // Custom components
 const Callout = ({ ...props }) => (
-  <mark className="grid grid-flow-col gap-2 p-2 my-6 rounded-md bg-yellow-100">
+  <mark className="grid grid-flow-col gap-2 p-2 my-6 rounded-md bg-yellow-100 shadow">
     <p className="text-2xl">💡</p>
     <p className="self-center" {...props} />
   </mark>
@@ -118,8 +118,10 @@ function Photo({
 }) {
   return (
     <figure>
-      <Image src={src} alt={alt} layout="responsive" height={h} width={w} />
-      <figcaption className="text-center opacity-75 mt-2 mb-4">
+      <div className="rounded-md overflow-hidden shadow">
+        <Image src={src} alt={alt} layout="responsive" height={h} width={w} />
+      </div>
+      <figcaption className="text-sm text-center opacity-75 mt-2 mb-4">
         {alt}
       </figcaption>
     </figure>

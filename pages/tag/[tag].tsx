@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { getAllMdxMeta } from 'utils/mdxUtils'
-import { PostMetaPath } from 'interfaces'
+import { postMetadata, PostMetaPath } from 'interfaces'
 import Layout from 'components/Layout'
 import React from 'react'
 import MdxCard from 'components/MdxCard'
@@ -41,6 +41,13 @@ export default function Tag({
 }
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
+  // If params.tag is a string array or undefined, do not render page
+  if (typeof params?.tag !== 'string') {
+    return {
+      notFound: true,
+    }
+  }
+
   // Get the metadata of all MDX files. Filtered later to show sidebar.
   const AllMdxMeta = getAllMdxMeta(locale)
 
@@ -48,16 +55,10 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const dbMeta = await getTagsForAll(params?.tag)
 
   // Filter the MDX metadata based on the data on the database.
-  const filteredPosts = dbMeta.map((obj) =>
-    AllMdxMeta.find(({ slug }) => slug === obj?.slug)
-  )
-
-  // If the mdx file is not found based on the slug from the database, return not found
-  if (filteredPosts.length === 0) {
-    return {
-      notFound: true,
-    }
-  }
+  const filteredPosts = dbMeta
+    .map((obj) => AllMdxMeta.find(({ slug }) => slug === obj?.slug))
+    // remove undefined value from results
+    .filter((item): item is postMetadata => !!item)
 
   const translations = await serverSideTranslations(locale || 'en', ['tags'])
 

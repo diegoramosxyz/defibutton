@@ -2,8 +2,31 @@ import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
 import React from 'react'
 import { PostMetaPath } from 'interfaces'
-import tableOfContents from 'tableOfContents'
 import MdxCard from './MdxCard'
+
+const tableOfContents: { [key: string]: string[] }[] = [
+  {
+    defi: [
+      '/blog/common-beginner-questions',
+      '/blog/defi',
+      '/blog/smart-contract',
+      '/blog/dex',
+    ],
+  },
+  { cefi: ['/blog/banks'] },
+  {
+    coins: [
+      '/coin/bitcoin',
+      '/coin/ethereum',
+      '/coin/uniswap',
+      '/coin/binance-coin',
+      '/coin/sushiswap',
+    ],
+  },
+  { tutorial: ['/blog/cefi-to-defi', '/blog/metamask'] },
+  { safety: ['/blog/safety'] },
+  { extra: ['/blog/glossary', '/blog/faq', '/blog/trust'] },
+]
 
 export default function TableOfContents({
   posts,

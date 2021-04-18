@@ -4,7 +4,7 @@ import hydrate from 'next-mdx-remote/hydrate'
 import { MdxRemote } from 'next-mdx-remote/types'
 import PostLayout from 'components/PostLayout'
 import { getAllMdxMeta, getMdxContent } from 'utils/mdxUtils'
-import { SlugMetadata, PostMetaPath } from 'interfaces/index'
+import { SlugMetadata, PostMetaPath } from 'interfaces'
 import { components } from 'components/MdxProvider'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { getMetadataBySlug, getSlugsFromDb } from 'utils/db'
@@ -35,6 +35,13 @@ export default function PostPage({
 }
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
+  // If params.slug is an array of strings or undefined, do not render the page
+  if (typeof params?.slug !== 'string') {
+    return {
+      notFound: true,
+    }
+  }
+
   // Get the content for the current post, including its metadata
   const mdxContext = await getMdxContent(params?.slug, 'blog', locale || 'en')
 

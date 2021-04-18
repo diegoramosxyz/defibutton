@@ -1,4 +1,4 @@
-import { ProtocolTvl } from 'interfaces/data-types'
+import { ProtocolTvl } from 'interfaces'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
