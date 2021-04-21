@@ -3,32 +3,36 @@
   description: "AAVE is a lending and borrowing platform for cryptocurrencies."
 ---
 
-The AAVE protocol lets you borrow and lend cryptocurrencies in a decentralized manner. The protocol works on a peer-to-contract basis. 
+The AAVE protocol lets you borrow and lend cryptocurrencies in a decentralized manner.
+
+## Lending
 
 Lending in AAVE is straightforward. You can deposit an asset and earn interest.
 
+## Borrowing
+
 Borrowing on the other hand is a little different. When you borrow from a bank, you receive the loan with the expectation that you will pay back with interest. This is called uncollateralized loan. However, AAVE loans are overcollateralized. You must deposit more collateral than you borrow. You can't just borrow money that you don't already have.
 
-Borrowing must work this way because there is no way of enforcing repaiments. You are not actually taking a loan, instead you are leveraging you money by getting exposure to another asset without making any exchanges.
+Borrowing must work this way because there is no way of enforcing repayments. You are not actually taking a loan, instead you are leveraging you money by getting exposure to another asset without making any exchanges.
 
 If you have 1 ETH and you want to get 1 UNI, you could exchange some ETH for some UNI, but you will have less ETH. If instead you provide ETH as collateral and borrow a stable coin, like DAI, you can exchange it for any other cryptocurrency and still have the same amount of ETH.
 
-Let say you provided 1 ETH and collateral and borrowed 100 DAI. You then exchanged that 100 DAI for 1 UNI
+Let say you provided 1 ETH as collateral and borrowed 100 DAI. You then exchanged that 100 DAI for UNI
 
-Now we have a few scenarios:
+Now we have four posible scenarios:
 
-- ETH goes up and UNI goes up
+- ETH goes up 📈 and UNI goes up 📈 
 
 This is the best that can happen. You have more collateral and your UNI is worth more. You exchange your UNI for DAI and repay the loan. You now have 100% of your ETH and DAI as profit.
 
-- ETH goes down and UNI goes up
+- ETH goes down 📉 and UNI goes up 📈
 
-This is dangerous because you are running the risk of getting liquidated. You loan must be overcollateralized. You can exchange UNI for DAI and repay the loan to avoid getting liquidated. You may still have profit at this point.
+You have less collateral available and you are running the risk of getting liquidated. You can exchange UNI for DAI and repay the loan to avoid getting liquidated. You may still have profit at this point.
 
-- ETH goes up and UNI down
+- ETH goes up 📈 and UNI down 📉
 
 You have more collateral available, but your UNI isn't enough to repay the loan. You will need to exchange your UNI for DAI and find some more DAI to repay the loan. 
 
-- ETH goes down and UNI down
+- ETH goes down 📉 and UNI down 📉
 
 You have less collateral available and your UNI isn't enough to repay the loan. You will need to exchange your UNI for DAI and find some more DAI to repay the loan. On top of this your account may get liquidated if the price of ETH goes down too much.
