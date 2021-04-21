@@ -1,4 +1,4 @@
-export default function Custom404() {
+export default function Custom500() {
   return (
     <main className="min-h-screen grid items-center justify-center text-center">
       <section className="space-y-4">

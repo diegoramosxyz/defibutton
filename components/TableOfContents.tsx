@@ -19,6 +19,7 @@ const tableOfContents: { [key: string]: string[] }[] = [
       '/coin/bitcoin',
       '/coin/ethereum',
       '/coin/uniswap',
+      '/coin/aave',
       '/coin/binance-coin',
       '/coin/sushiswap',
     ],

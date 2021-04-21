@@ -11,7 +11,7 @@ export default function Index({
 }: {
   sidebarMeta: PostMetaPath[]
 }) {
-  const { t } = useTranslation('index')
+  const { t } = useTranslation('common')
   return (
     <Layout head="DeFi Button">
       <section className="text-center font-medium mb-4">{t('intro')}</section>
@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const sidebarMeta = getAllMdxMeta(locale)
 
   const translations = await serverSideTranslations(locale || 'en', [
-    'index',
+    'common',
     'tags',
   ])
 

@@ -48,7 +48,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     }
   }
 
-  // Get the metadata of all MDX files. Filtered later to show sidebar.
+  // Get the metadata of all MDX files.
   const AllMdxMeta = getAllMdxMeta(locale)
 
   // Get all the objects from all collections that contain the tag from the database
