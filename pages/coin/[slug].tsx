@@ -18,12 +18,10 @@ export default function PostPage({
   source,
   slugMeta,
   slugDbMeta,
-  tags,
 }: {
   source: MdxRemote.Source
   slugMeta: SlugMetadata
   slugDbMeta: Coin
-  tags: string[] | undefined
 }) {
   const initialTickerData = {
     usd: 0,
@@ -35,7 +33,7 @@ export default function PostPage({
   const [loading, setLoading] = useState(true)
 
   const { title } = slugMeta
-  const { geckoId, symbol, slug, website } = slugDbMeta
+  const { geckoId, symbol, slug, website, tags } = slugDbMeta
 
   useEffect(() => {
     setLoading(true)
@@ -51,16 +49,16 @@ export default function PostPage({
 
   return (
     <PostLayout tags={tags} metadata={slugMeta}>
-      <header className='my-3'>
-        <div className='grid gap-2 sm:gap-0 sm:grid-cols-2 items-start justify-between lg:pt-5 '>
-          <h1 className='flex items-center text-4xl font-bold'>
+      <header className="my-3">
+        <div className="grid gap-2 sm:gap-0 sm:grid-cols-2 items-start justify-between lg:pt-5 ">
+          <h1 className="flex items-center text-4xl font-bold">
             <Image
               width={35}
               height={35}
               src={`/logo/${slug?.toLocaleLowerCase()}.svg`}
               alt={title}
             />
-            <p className='ml-2'>{title}</p>
+            <p className="ml-2">{title}</p>
           </h1>
 
           {geckoId && (
@@ -70,16 +68,16 @@ export default function PostPage({
             />
           )}
           <a
-            className='font-mono'
-            target='_blank'
-            rel='noopener noreferrer'
+            className="font-mono"
+            target="_blank"
+            rel="noopener noreferrer"
             href={`https://${website}`}
           >
             🌐 {website}
           </a>
         </div>
       </header>
-      <hr className='mb-2 border-trueGray-200 dark:border-trueGray-800' />
+      <hr className="mb-2 border-trueGray-200 dark:border-trueGray-800" />
       {content}
     </PostLayout>
   )
@@ -121,7 +119,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       source: mdxContext.source,
       slugMeta: {
         ...mdxContext.metadata,
-        tags: slugDbMeta.tags,
+        tags: !!slugDbMeta ? slugDbMeta.tags : [],
       },
       ...translations,
       slugDbMeta,

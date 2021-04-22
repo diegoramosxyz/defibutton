@@ -24,8 +24,8 @@ export default function PostPage({
 
   return (
     <PostLayout tags={tags} metadata={metadata}>
-      <header className='my-3'>
-        <h1 className='flex items-center text-4xl pb-3 pt-2 lg:pt-5 font-bold'>
+      <header className="my-3">
+        <h1 className="flex items-center text-4xl pb-3 pt-2 lg:pt-5 font-bold">
           {title}
         </h1>
       </header>
@@ -63,7 +63,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   return {
     props: {
       ...mdxContext,
-      tags: slugDbMeta.tags,
+      tags: !!slugDbMeta ? slugDbMeta.tags : [],
       ...translations,
     },
   }

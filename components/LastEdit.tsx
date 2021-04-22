@@ -11,16 +11,18 @@ export default function LastEdit({
   translation: string
 }) {
   const { locale } = useRouter()
+  if (!!lastModified) {
+    const date = new Date(lastModified).toLocaleDateString(locale, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
 
-  const date = new Date(lastModified).toLocaleDateString(locale, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
-
-  return (
-    <time>
-      {translation}: {date}
-    </time>
-  )
+    return (
+      <time>
+        {translation}: {date}
+      </time>
+    )
+  }
+  return <></>
 }
