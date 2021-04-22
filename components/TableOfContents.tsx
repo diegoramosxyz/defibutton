@@ -29,13 +29,7 @@ const tableOfContents: { [key: string]: string[] }[] = [
   { extra: ['/blog/glossary', '/blog/faq', '/blog/trust'] },
 ]
 
-export default function TableOfContents({
-  posts,
-  sidebar,
-}: {
-  posts: PostMetaPath[]
-  sidebar: boolean
-}) {
+export default function TableOfContents({ posts }: { posts: PostMetaPath[] }) {
   const { t } = useTranslation('tags')
 
   // Input an arrays with the metadata for each post and return
@@ -59,20 +53,12 @@ export default function TableOfContents({
                 <React.Fragment key={section}>
                   <div>
                     <Link href={`/tag/${section}`}>
-                      <a
-                        className={`text-xl font-bold hover:underline ${
-                          sidebar ? 'mb-1 mt-2' : 'uppercase'
-                        }`}
-                      >
+                      <a className='text-xl font-bold hover:underline uppercase'>
                         {t(section)}
                       </a>
                     </Link>
                   </div>
-                  <section
-                    className={`grid ${
-                      !sidebar && 'gap-2 sm:gap-3 sm:grid-cols-2 lg:grid-cols-3'
-                    }`}
-                  >
+                  <section className='grid gap-2 sm:gap-3 sm:grid-cols-2 lg:grid-cols-3'>
                     {/* Map through the array of urls for each section */}
                     {obj[section].map((url) => {
                       const {
@@ -88,7 +74,6 @@ export default function TableOfContents({
                           description={description}
                           folder={folder}
                           slug={fileSlug}
-                          sidebar={sidebar}
                         ></MdxCard>
                       )
                     })}

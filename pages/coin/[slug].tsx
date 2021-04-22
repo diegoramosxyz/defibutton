@@ -51,32 +51,35 @@ export default function PostPage({
 
   return (
     <PostLayout tags={tags} metadata={slugMeta}>
-      <header className="my-3">
-        <div className="grid gap-2 sm:gap-0 sm:grid-cols-2 items-start justify-between lg:pt-5 ">
-          <h1 className="flex items-center text-4xl font-bold">
+      <header className='my-3'>
+        <div className='grid gap-2 sm:gap-0 sm:grid-cols-2 items-start justify-between lg:pt-5 '>
+          <h1 className='flex items-center text-4xl font-bold'>
             <Image
               width={35}
               height={35}
               src={`/logo/${slug?.toLocaleLowerCase()}.svg`}
               alt={title}
             />
-            <p className="ml-2">{title}</p>
+            <p className='ml-2'>{title}</p>
           </h1>
 
           {geckoId && (
-            <TickerPrice price={loading ? initialTickerData : tickerData} />
+            <TickerPrice
+              geckoId={geckoId}
+              price={loading ? initialTickerData : tickerData}
+            />
           )}
           <a
-            className="font-mono"
-            target="_blank"
-            rel="noopener noreferrer"
-            href={website}
+            className='font-mono'
+            target='_blank'
+            rel='noopener noreferrer'
+            href={`https://${website}`}
           >
-            {website}
+            🌐 {website}
           </a>
         </div>
       </header>
-      <hr className="mb-2" />
+      <hr className='mb-2 border-trueGray-200 dark:border-trueGray-800' />
       {content}
     </PostLayout>
   )

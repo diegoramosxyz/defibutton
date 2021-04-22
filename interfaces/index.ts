@@ -99,6 +99,7 @@ export type postMetadata = {
 }
 
 export type SlugMetadata = {
+  slug?: string
   title: string
   description: string
   author?: string
