@@ -2,30 +2,54 @@ import { useTranslation } from 'next-i18next'
 import React from 'react'
 import { PostMetaPath } from 'interfaces'
 import MdxCard from './MdxCard'
+import Link from 'next/link'
 
-const tableOfContents: { [key: string]: string[] }[] = [
+const tableOfContents: {
+  [key: string]: { items: string[]; more?: string }
+}[] = [
   {
-    'start-here': [
-      '/blog/common-beginner-questions',
-      '/blog/defi',
-      '/blog/smart-contract',
-      '/blog/dex',
-    ],
+    'start-here': {
+      items: [
+        '/blog/common-beginner-questions',
+        '/blog/defi',
+        '/blog/smart-contract',
+        '/blog/dex',
+      ],
+      more: '/blog',
+    },
   },
   {
-    'defi-projects': [
-      '/coin/bitcoin',
-      '/coin/ethereum',
-      '/coin/uniswap',
-      '/coin/aave',
-      '/coin/binance-coin',
-      '/coin/sushiswap',
-    ],
+    'defi-projects': {
+      items: [
+        '/coin/bitcoin',
+        '/coin/ethereum',
+        '/coin/uniswap',
+        '/coin/aave',
+        '/coin/binance-coin',
+        '/coin/sushiswap',
+      ],
+      more: '/coin',
+    },
   },
-  { 'the-old-financial-system': ['/blog/banks'] },
-  { tutorials: ['/blog/cefi-to-defi', '/blog/metamask'] },
-  { safety: ['/blog/safety'] },
-  { others: ['/blog/glossary', '/blog/faq', '/blog/trust'] },
+  {
+    'the-old-financial-system': {
+      items: ['/blog/banks'],
+      more: '/tag/cefi',
+    },
+  },
+  {
+    tutorials: {
+      items: ['/blog/cefi-to-defi', '/blog/metamask'],
+      more: '/tag/tutorial',
+    },
+  },
+  { safety: { items: ['/blog/safety'], more: '/tag/safety' } },
+  {
+    others: {
+      items: ['/blog/glossary', '/blog/faq', '/blog/trust'],
+      more: '/tag/extra',
+    },
+  },
 ]
 
 export default function TableOfContents({ posts }: { posts: PostMetaPath[] }) {
@@ -50,10 +74,16 @@ export default function TableOfContents({ posts }: { posts: PostMetaPath[] }) {
               // Map through all the sections and use the section key string as title
               return (
                 <React.Fragment key={section}>
-                  <h2 className="text-xl font-bold uppercase">{t(section)}</h2>
-                  <section className="grid gap-2 sm:gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  <section className="flex justify-end md:justify-start">
+                    <Link href={`${obj[section].more}`}>
+                      <a className="mb-2 text-right md:text-left text-xl font-bold uppercase hover:underline">
+                        {t(section)}
+                      </a>
+                    </Link>
+                  </section>
+                  <section className="mb-6 md:mb-12 grid gap-2 sm:gap-3 sm:grid-cols-2 lg:grid-cols-3">
                     {/* Map through the array of urls for each section */}
-                    {obj[section].map((url) => {
+                    {obj[section].items.map((url) => {
                       const {
                         description,
                         title,

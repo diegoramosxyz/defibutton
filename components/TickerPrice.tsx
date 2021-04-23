@@ -12,12 +12,12 @@ export default function TickerPrice({
   const { usd, usd_24h_change, symbol } = price
 
   return (
-    <article className='font-bold font-mono sm:text-right'>
+    <article className="font-bold font-mono sm:text-right">
       <section>
         <a
-          className='underline'
-          target='_blank'
-          rel='noopener noreferrer'
+          className="underline"
+          target="_blank"
+          rel="noopener noreferrer"
           href={`https://coingecko.com/coins/${geckoId}`}
         >
           {symbol.toUpperCase()}
@@ -30,11 +30,11 @@ export default function TickerPrice({
       </section>
       <section>
         {usd_24h_change > 0 ? (
-          <span className='text-green-500 dark:text-green-400'>
+          <span className="text-green-500 dark:text-green-400">
             +{usd_24h_change.toFixed(2)}%
           </span>
         ) : (
-          <span className='text-red-500 dark:text-red-400'>
+          <span className="text-red-500 dark:text-red-400">
             {usd_24h_change.toFixed(2)}%
           </span>
         )}{' '}

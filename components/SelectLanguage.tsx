@@ -23,7 +23,7 @@ export default function SelectLanguage() {
             >
               <Menu.Items
                 static
-                className="bg-trueGray-50 right-0 dark:bg-trueGray-900 z-10 absolute mt-2 divide-y-2 divide-trueGray-200 dark:divide-trueGray-800 origin-top-right rounded-md overflow-hidden shadow-lg outline-none ring-2 ring-trueGray-200 dark:ring-trueGray-800"
+                className="bg-trueGray-50 bottom-11 md:bottom-auto right-0 dark:bg-trueGray-900 z-10 absolute mt-2 divide-y-2 divide-trueGray-200 dark:divide-trueGray-800 origin-top-right rounded-md overflow-hidden shadow-lg outline-none ring-2 ring-trueGray-200 dark:ring-trueGray-800"
               >
                 <LanguageOptions />
               </Menu.Items>
@@ -47,9 +47,9 @@ function LanguageOptions() {
         <button
           key={locale}
           disabled={router.locale === locale}
-          className={`w-full text-lg  md:text-base py-3 md:py-1.5 px-4 md:px-3 hover:bg-trueGray-100 hover:underline dark:hover:bg-trueGray-700 focus:outline-none transition ${
-            router.locale === locale &&
-            'hover:no-underline font-bold cursor-not-allowed'
+          className={`w-full text-lg py-3 px-4 cursor-not-allowed font-bold ${
+            router.locale !== locale &&
+            'hover:bg-trueGray-100 hover:underline dark:hover:bg-trueGray-700 focus:outline-none transition cursor-pointer'
           }`}
           onClick={() => router.push(router.asPath, router.asPath, { locale })}
         >

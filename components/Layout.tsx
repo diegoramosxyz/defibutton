@@ -16,8 +16,8 @@ export default function Layout({
         <title>{head}</title>
       </Head>
       <Navbar />
-      <div className='min-h-screen mt-4 px-2 sm:px-4 lg:px-0 pb-14'>
-        <main className='px-2 xl:px-0 mb-7 max-w-screen-lg mx-auto'>
+      <div className="min-h-screen mt-4 px-2 sm:px-4 lg:px-0 pb-14">
+        <main className="px-2 xl:px-0 mb-7 max-w-screen-lg mx-auto">
           {children}
         </main>
         <Footer />

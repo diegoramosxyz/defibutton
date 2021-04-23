@@ -19,8 +19,9 @@ export default function LastEdit({
     })
 
     return (
-      <time>
-        {translation}: {date}
+      <time className="grid space-y-1 sm:space-y-0 sm:flex sm:space-x-1">
+        <section>{translation}:</section>
+        <section>{date}</section>
       </time>
     )
   }

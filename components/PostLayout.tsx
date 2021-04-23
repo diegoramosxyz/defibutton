@@ -23,12 +23,12 @@ export default function PostLayout({
         <title>{title} - DeFi Button</title>
       </Head>
       <Nav />
-      <div className="min-h-screen text-lg px-2 sm:px-4 pb-14">
+      <div className="text-lg px-2 sm:px-4 pb-14">
         <main className="px-2 max-w-screen-md mx-auto">
           {children}
-          <section className="flex justify-between items-center text-sm align-center opacity-75 my-5">
+          <section className="flex justify-between items-center text-sm align-center opacity-75 my-5 gap-2">
             <LastEdit translation={t('lastEdit')} lastModified={lastModified} />
-            <div className="flex space-x-3">
+            <div className="grid sm:flex space-y-2 sm:space-y-0 sm:space-x-3">
               {tags?.map((tag) => (
                 <Link key={tag} href={`/tag/${tag}`}>
                   <a>#{t(tag)}</a>

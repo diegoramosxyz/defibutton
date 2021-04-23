@@ -10,8 +10,10 @@ export default function Index({ metadata }: { metadata: PostMetaPath[] }) {
   const { t } = useTranslation('common')
   return (
     <Layout head="DeFi Button">
-      <section className="text-center font-medium mb-4">{t('intro')}</section>
-      <section className="grid gap-4 mb-5">
+      <section className="text-center font-medium mb-4 md:mb-10">
+        {t('intro')}
+      </section>
+      <section className="grid mb-5">
         <TableOfContents posts={metadata} />
       </section>
       <section className="opacity-80 text-sm text-center">
