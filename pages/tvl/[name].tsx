@@ -1,9 +1,9 @@
 import { ProtocolTvl } from 'interfaces'
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import fetcher from 'utils/fetcher'
 import Chart from 'components/tvl/Chart2'
+import Layout from 'components/Layout'
 
 export default function Symbol({ protocol }: { protocol: ProtocolTvl }) {
   const router = useRouter()
@@ -11,23 +11,18 @@ export default function Symbol({ protocol }: { protocol: ProtocolTvl }) {
   const { data } = useSWR(link, fetcher, { initialData: protocol })
 
   return (
-    <>
-      {data ? (
-        <>
-          <Head>
-            <title>{data.symbol}</title>
-          </Head>
-          <section className="max-w-screen-md mx-auto px-3 my-4">
-            <header className="flex items-center space-x-2 mb-4">
-              {data.logo && <img src={data.logo} width="50px"></img>}
-              <h1 className="text-center text-2xl bold my-3">
-                {data.name}
-                <span className="text-sm font-mono ml-3">{data.symbol}</span>
-              </h1>
-            </header>
-            <article className="grid space-y-3">
-              <section>Description: {data.description}</section>
-              {/* <section>
+    <Layout head={`${data.symbol} DeFi Button`}>
+      <section className="max-w-screen-md mx-auto px-3 my-4">
+        <header className="flex items-center space-x-2 mb-4">
+          {data.logo && <img src={data.logo} width="50px"></img>}
+          <h1 className="text-center text-2xl bold my-3">
+            {data.name}
+            <span className="text-sm font-mono ml-3">{data.symbol}</span>
+          </h1>
+        </header>
+        <article className="grid space-y-3">
+          <section>Description: {data.description}</section>
+          {/* <section>
                 {data.address && (
                   <div className="overflow-ellipsis overflow-hidden">
                     <span>Address: </span>
@@ -35,16 +30,12 @@ export default function Symbol({ protocol }: { protocol: ProtocolTvl }) {
                   </div>
                 )}
               </section> */}
-              <section>{data.url}</section>
-              <section>Category: {data.category}</section>
-            </article>
-          </section>
-          <Chart tvl={data.tvl} />
-        </>
-      ) : (
-        <div>No Data</div>
-      )}
-    </>
+          <section>{data.url}</section>
+          <section>Category: {data.category}</section>
+        </article>
+      </section>
+      <Chart tvl={data.tvl} />
+    </Layout>
   )
 }
 
