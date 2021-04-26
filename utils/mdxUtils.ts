@@ -133,10 +133,11 @@ export function getSlugs(folder: folders, locale: string) {
   }))
 }
 
-function postFileSlugs(folder: folders, locale: string) {
+export function postFileSlugs(folder: folders, locale: string) {
   // return string[] of filenames from a directory posts/en or coins/es, etc.
   return fs
     .readdirSync(path.join(process.cwd(), `${folder}/${locale}`))
     .filter((path) => /\.mdx?$/.test(path))
     .map((path) => path.replace(/\.mdx?$/, ''))
+  // output: ['slug', 'another-slug'] 
 }

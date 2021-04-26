@@ -1,6 +1,6 @@
 import { RoundBigNumber } from 'utils/numbers'
 import Link from 'next/link'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { GlobalContext } from 'context/GlobalState'
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa'
 
@@ -10,7 +10,7 @@ export default function Leaderboard() {
   // LOAD INITIAL DATA
   useEffect(() => {
     async function data() {
-      const res = await fetch('https://api.defillama.com/protocols')
+      const res = await fetch('https://api.llama.fi/protocols')
       const data = await res.json()
       dispatch({ type: 'LOAD_DATA', payload: data })
     }
@@ -56,7 +56,7 @@ export default function Leaderboard() {
                 <div></div>
               )}
               <div className="px-2 py-4 table-cell">
-                <Link href={`/tvl/${name}`}>
+                <Link href={`/tvl/${name.toLowerCase().replace(' ', '-')}`}>
                   <a className="truncate text-left lg:text-base">{name}</a>
                 </Link>
               </div>

@@ -19,7 +19,11 @@ export async function getAllDistinctTags() {
   const coinTags = await coins?.distinct(field)
   const docTags = await docs?.distinct(field)
 
-  return [coinTags, docTags].flat().filter((tag) => tag !== '')
+  // Combine all tags, flatten array, remove empty strings and create a Set
+  const theSet = new Set([coinTags, docTags].flat().filter((tag) => /.*\S.*/.test(tag)))
+
+  // Return an array of unique strings
+  return Array.from(theSet)
 }
 
 // Get all the documents that contain the tag in all collections

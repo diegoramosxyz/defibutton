@@ -7,23 +7,17 @@ export default function MdxCard({
   slug,
   title,
   description,
-  sidebar,
 }: {
   folder: PostMetaPath['folder']
   slug: PostMetaPath['slug']
   title: PostMetaPath['title']
   description: PostMetaPath['description']
-  sidebar: boolean
 }) {
   return (
     <Link href={`/${folder}/${slug}`}>
-      <a
-        className={`block transition h-full rounded-sm border-trueGray-200 dark:border-trueGray-800 focus:ring focus:ring-lightBlue-300 dark:focus:ring-lightBlue-800 focus:outline-none focus:border-lightBlue-300 dark:focus:border-lightBlue-800 hover:border-lightBlue-300 dark:hover:border-lightBlue-800 ${
-          sidebar ? 'border-b px-2 py-3 lg:py-2' : 'border px-4 py-3'
-        }`}
-      >
+      <a className="block transition h-full rounded-sm border-trueGray-200 dark:border-trueGray-800 focus:ring focus:ring-lightBlue-300 dark:focus:ring-lightBlue-800 focus:outline-none focus:border-lightBlue-300 dark:focus:border-lightBlue-800 hover:border-lightBlue-300 dark:hover:border-lightBlue-800 border px-4 py-3">
         {folder === 'coin' ? (
-          <header className="flex gap-1 items-center font-semibold">
+          <header className="flex gap-1 items-center font-semibold mb-1">
             <Image
               width={20}
               height={20}
@@ -33,9 +27,9 @@ export default function MdxCard({
             <span className="ml-1">{title}</span>
           </header>
         ) : (
-          <header className="font-semibold">{title}</header>
+          <header className="font-semibold mb-1">{title}</header>
         )}
-        {!sidebar && <p className="opacity-70 text-sm">{description}</p>}
+        <p className="opacity-70 text-sm">{description}</p>
       </a>
     </Link>
   )

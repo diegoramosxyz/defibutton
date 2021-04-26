@@ -1,6 +1,52 @@
 ---
   title: "AAVE"
-  description: "AAVE is a lending and borrowing platform for cryptocurrencies."
+  description: "An open source and non-custodial liquidity protocol for earning interest on deposits and borrowing assets."
 ---
 
-To do.
+AAVE is a decentralized non-custodial liquidity protocol. In other words, users can deposit funds to become liquidity providers and earn interest or borrow funds and pay interest.
+
+## Lending
+
+Lending in AAVE is straightforward. You can deposit an asset and earn interest. In other words, you are getting rewarded for providing liquidity.
+
+## Borrowing
+
+There are overcollateralized and undercollateralized loans in AAVE. Undercollateralized loans, or flash loans are an advanced topic intended for developers, so we are not going to discuss it.
+
+### Overcollateralized loans
+
+Overcollateralized loans require you to deposit more than you borrow. This may sound strange if you have taken loans in traditional finance. Banks can provide uncollateralized loans, meaning the bank lends you money without you making a deposit. This is possible because a bank can take legal action against you if don’t pay back with interest. A DeFi protocol does not have this power.
+
+## What is the point of borrowing in AAVE if I have to deposit more than I borrow?
+
+AAVE’s overcollateralized loans can be used to gain exposure to another asset while preserving all your collateral. This effectively becomes a form of leverage.
+
+The risk that this strategy involves is losing your collateral. In AAVE you can only borrow up to 80% of your collateral. If your debt exceeds this amount at any time, you are running the risk of getting liquidated. If you get liquidated that means that someone paid your debt and and earned a reward for doing so. You can lose up to 50% of your collateral, plus the reward for the liquidator.
+
+Let’s now illustrate taking an overcollateralized loan in AAVE to leverage our money with an example:
+
+You expect both ETH and UNI to go up in price. You deposit ETH as collateral to borrow DAI, and then exchange the DAI for UNI.
+
+Now we have four possible scenarios:
+
+- ETH goes up 📈 and UNI goes up 📈
+
+This is the best that can happen. You have more collateral available and your UNI is worth more. You exchange your UNI back to DAI and repay the loan with interest. You now have 100% of your ETH and DAI as profit.
+
+- ETH goes down 📉 and UNI goes up 📈
+
+In this case, you have less collateral available and you are running the risk of getting liquidated. You can exchange UNI back to DAI and repay the loan to avoid getting liquidated. You may still have profit at this point.
+
+- ETH goes up 📈 and UNI down 📉
+
+You have more collateral available, but your UNI isn't enough to repay the loan with interest. You will need to exchange your UNI back to DAI and find some more DAI to repay the loan. You can also use your collateral to repay the loan.
+
+- ETH goes down 📉 and UNI down 📉
+
+You have less collateral available and your UNI isn't enough to repay the loan. You will need to exchange your UNI for DAI and find some more DAI or use your collateral to repay the loan. On top of this your account may get liquidated if the price of ETH goes down too much.
+
+## Comparison
+
+If you had exchanged ETH for UNI instead of taking an overcollateralized loan, you would have lowered you exposure to ETH. In the best scenario UNI would have gone up while ETH went down. In the worst scenario, ETH would have gone up while UNI went down.
+
+On the other hand with an overcollateralized loan you will have exposure to both assests with the same collateral and posibly pay no interest. If the interest you collect from your deposit is greater than the interest you pay on your loan your loan is _"free"_. This is not garanteed and you need keep an eye on both interest rates.

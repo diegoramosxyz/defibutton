@@ -6,19 +6,17 @@ import TableOfContents from 'components/TableOfContents'
 import { useTranslation } from 'next-i18next'
 import { PostMetaPath } from 'interfaces'
 
-export default function Index({
-  sidebarMeta,
-}: {
-  sidebarMeta: PostMetaPath[]
-}) {
-  const { t } = useTranslation('index')
+export default function Index({ metadata }: { metadata: PostMetaPath[] }) {
+  const { t } = useTranslation('common')
   return (
     <Layout head="DeFi Button">
-      <section className="text-center font-medium mb-4">{t('intro')}</section>
-      <section className="grid gap-4 mb-5">
-        <TableOfContents sidebar={false} posts={sidebarMeta} />
+      <section className="text-center font-medium mb-4 md:mb-10">
+        {t('intro')}
       </section>
-      <section className="opacity-80 text-sm text-center mb-5">
+      <section className="grid mb-5">
+        <TableOfContents posts={metadata} />
+      </section>
+      <section className="opacity-80 text-sm text-center">
         {t('warning')}
       </section>
     </Layout>
@@ -27,16 +25,16 @@ export default function Index({
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   // Get the metadata of all MDX files. Filtered later to show sidebar.
-  const sidebarMeta = getAllMdxMeta(locale)
+  const metadata = getAllMdxMeta(locale)
 
   const translations = await serverSideTranslations(locale || 'en', [
-    'index',
-    'tags',
+    'common',
+    'tableOfContents',
   ])
 
   return {
     props: {
-      sidebarMeta,
+      metadata,
       ...translations,
     },
   }

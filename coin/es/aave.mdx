@@ -1,5 +1,52 @@
 ---
   title: "AAVE"
-  description:
-    "AAVE es una plataforma para tomar prestado y prestar cripto monedas"
+  description: "Un protocolo de liquidez de código abierto y sin custodia para ganar intereses en depósitos y tomar prestado activos."
 ---
+
+AAVE es un protocolo de liquidez descentralizado sin custodia. En otras palabras, los usuarios pueden depositar fondos para convertirse en proveedores de liquidez y ganar intereses o tomar fondos prestados y pagar intereses.
+
+## Depósitos
+
+Puedes depositar activos en AAVE y ganar intereses. En otras palabras, se te recompensa por proporcionar liquidez.
+
+## Tomando prestado
+
+Hay préstamos sobre-garantizados y sub-garantizados en AAVE. Los préstamos con sub-garantizados o _flash-loans_ son un tema avanzado destinado a desarrolladores, por lo que no lo vamos a discutir.
+
+### Préstamos sobre-garantizados
+
+Los préstamos sobre-garantizados requieren que deposites más de lo que tomas prestado. Esto puede sonar extraño si has tomado préstamos en finanzas tradicionales. Los bancos pueden proporcionar préstamos sin garantia, lo que significa que el banco te presta dinero sin que hagas un depósito. Esto es posible porque un banco puede tomar acciones legales en tu contra si no pagas con intereses. Un protocolo DeFi no tiene este poder.
+
+## ¿Qué sentido tiene pedir prestado en AAVE si tengo que depositar más de lo que pido prestado?
+
+Los préstamos sobre-garantizados de AAVE se pueden utilizar para obtener exposición a otro activo y preservar todo tu deposito. Esto se convierte efectivamente en una forma de apalancamiento.
+
+El riesgo que implica esta estrategia es perder tu deposito. En AAVE solo puedes pedir prestado hasta el 80% de tu garantía. Si tu deuda excede esta cantidad en cualquier momento, corres el riesgo de ser liquidado. Ser liquidado significa que alguien pagó tu deuda y ganó una recompensa por hacerlo. Puedes perder hasta el 50% de tu depósito, más la recompensa para el liquidador.
+
+Ilustremos ahora cómo tomar un préstamo con sobre-garantizado en AAVE para apalancar nuestro dinero con un ejemplo:
+
+Tu esperas que tanto ETH como UNI aumenten de precio. Depositas ETH como garantía y tomas DAI prestado, luego cambias el DAI por UNI.
+
+Ahora tenemos cuatro escenarios posibles:
+
+- ETH sube 📈 y UNI sube 📈
+
+Esto es lo mejor que puede pasar. Tienes más garantía disponible y tu UNI vale más. Cambias tu UNI de nuevo a DAI y pagas el préstamo con intereses. Ahora tienes el 100% de tu ETH y DAI como ganancia.
+
+- ETH baja 📉 y UNI sube 📈
+
+En este caso, tienes menos garantía disponible y corres el riesgo de ser liquidado. Puedes cambiar UNI de nuevo a DAI y pagar el préstamo para evitar ser liquidado. Es posible que todavía tengas ganancias en este momento.
+
+- ETH sube 📈 y UNI baja 📉
+
+Tienes más garantía disponible, pero tu UNI no es suficiente para pagar el préstamo con intereses. Deberás cambiar tu UNI de nuevo a DAI y encontrar más DAI para pagar el préstamo. También puedes utilizar tu deposito para pagar el préstamo.
+
+- ETH baja 📉 y UNI baja 📉
+
+Tienes menos garantía disponible y tu UNI no es suficiente para pagar el préstamo. Deberás cambiar tu UNI por DAI y encontrar más DAI o utilizar su garantía para pagar el préstamo. Además de esto, tu cuenta puede ser liquidada si el precio de ETH baja demasiado.
+
+## Comparación
+
+Si hubieras cambiado ETH por UNI en lugar de tomar un préstamo sobre-garantizado, habrías reducido tu exposición a ETH. En el mejor de los casos, UNI habría subido mientras que ETH bajó. En el peor de los casos, ETH habría subido mientras que UNI bajó.
+
+Por otro lado, con un préstamo sobre-garantizado, estarás expuesto a ambos activos con el mismo depósito y posiblemente sin pagar intereses. Si el interés que cobras por tu depósito es mayor que el interés que pagas por el préstamo, tu préstamo es _"gratis"_. Esto no está garantizado y debes vigilar ambas tasas de interés.

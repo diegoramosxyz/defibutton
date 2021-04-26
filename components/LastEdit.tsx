@@ -11,16 +11,19 @@ export default function LastEdit({
   translation: string
 }) {
   const { locale } = useRouter()
+  if (!!lastModified) {
+    const date = new Date(lastModified).toLocaleDateString(locale, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
 
-  const date = new Date(lastModified).toLocaleDateString(locale, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
-
-  return (
-    <time>
-      {translation}: {date}
-    </time>
-  )
+    return (
+      <time className="grid space-y-1 sm:space-y-0 sm:flex sm:space-x-1">
+        <section>{translation}:</section>
+        <section>{date}</section>
+      </time>
+    )
+  }
+  return <></>
 }

@@ -72,7 +72,7 @@ export type Coin = {
   slug: string
   name: string
   geckoId: string
-  llamaId?: string
+  llamaId: string | null
   category: string // Category within DeFi
   symbol: string
   blockchain: string
@@ -99,6 +99,7 @@ export type postMetadata = {
 }
 
 export type SlugMetadata = {
+  slug?: string
   title: string
   description: string
   author?: string
@@ -115,6 +116,7 @@ export interface PostMetaPath extends SlugMetadata {
 
 export type CoingeckoPrice = {
   usd: number
+  tvl: [] | null
   usd_24h_change: number
   ticker: string
 }

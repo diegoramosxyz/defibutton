@@ -22,9 +22,9 @@ export default function Tag({
   return (
     <Layout head={`${t(`${tag}`)} - DeFi Button`}>
       <header>
-        <h1 className="text-xl font-semibold mb-3 capitalize">{t(`${tag}`)}</h1>
+        <h1 className='text-xl font-semibold mb-3 capitalize'>{t(`${tag}`)}</h1>
       </header>
-      <section className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 mb-5">
+      <section className='grid gap-3 sm:grid-cols-2 md:grid-cols-3 mb-5'>
         {filteredPosts.map(({ folder, title, description, slug }) => (
           <MdxCard
             key={title}
@@ -32,7 +32,6 @@ export default function Tag({
             description={description}
             folder={folder}
             slug={slug}
-            sidebar={false}
           ></MdxCard>
         ))}
       </section>
@@ -48,7 +47,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     }
   }
 
-  // Get the metadata of all MDX files. Filtered later to show sidebar.
+  // Get the metadata of all MDX files.
   const AllMdxMeta = getAllMdxMeta(locale)
 
   // Get all the objects from all collections that contain the tag from the database

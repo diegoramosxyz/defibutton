@@ -1,9 +1,28 @@
 {
-  "fundamental": "Fundamento",
+  "amm": "AMM",
+  "bitcoin": "Bitcoin",
+  "blockchain": "Cadena de Bloques",
+  "borrow": "Tomar prestado",
+  "cefi": "CeFi",
+  "dao": "DAO",
   "defi": "DeFi",
+  "derivative": "Derivado",
+  "dex": "DEX",
+  "ethereum": "Ethereum",
+  "extra": "Extra",
+  "fundamental": "Fundamental",
+  "layer2": "Capa 2",
+  "lend": "Prestar",
+  "lending": "Prestando",
+  "oracle": "Oráculo",
+  "privacy": "Privacidad",
   "protocol": "Protocolo",
+  "safety": "Seguridad",
+  "smart-contract": "Contrato Inteligente",
+  "stable-coin": "Moneda Estable",
   "strategy": "Estrategia",
-  "tutorial": "Tutorial",
   "tip": "Recomendación",
-  "extra": "Otros"
-}
+  "tutorial": "Tutorial",
+  "wallet": "Cartera",
+  "yield": "Producción"
+  }

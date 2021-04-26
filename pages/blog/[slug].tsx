@@ -3,27 +3,27 @@ import { GetStaticProps } from 'next'
 import hydrate from 'next-mdx-remote/hydrate'
 import { MdxRemote } from 'next-mdx-remote/types'
 import PostLayout from 'components/PostLayout'
-import { getAllMdxMeta, getMdxContent } from 'utils/mdxUtils'
-import { SlugMetadata, PostMetaPath } from 'interfaces'
+import { getMdxContent, getSlugs } from 'utils/mdxUtils'
+import { SlugMetadata } from 'interfaces'
 import { components } from 'components/MdxProvider'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { getMetadataBySlug, getSlugsFromDb } from 'utils/db'
+import { getMetadataBySlug } from 'utils/db'
 
 export default function PostPage({
   source,
-  slugMeta,
-  sidebarMeta,
+  metadata,
+  tags,
 }: {
   source: MdxRemote.Source
-  slugMeta: SlugMetadata
-  sidebarMeta: PostMetaPath[]
+  metadata: SlugMetadata
+  tags: string[] | undefined
 }) {
-  const { title } = slugMeta
+  const { title } = metadata
 
   const content = hydrate(source, { components })
 
   return (
-    <PostLayout sidebarMeta={sidebarMeta} slugMeta={slugMeta}>
+    <PostLayout tags={tags} metadata={metadata}>
       <header className="my-3">
         <h1 className="flex items-center text-4xl pb-3 pt-2 lg:pt-5 font-bold">
           {title}
@@ -52,40 +52,25 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     }
   }
 
-  // Get the metadata of all MDX files. Filtered later to show sidebar.
-  // TODO: Only return sidebar items
-  const sidebarMeta = getAllMdxMeta(locale)
-
   // Get additional metadata about the current post from the database
   const slugDbMeta = await getMetadataBySlug('docs', params?.slug)
 
   const translations = await serverSideTranslations(locale || 'en', [
-    'index',
+    'common',
     'tags',
   ])
 
   return {
     props: {
-      source: mdxContext.source,
-      slugMeta: {
-        ...mdxContext.metadata,
-        tags: slugDbMeta.tags,
-      },
+      ...mdxContext,
+      tags: !!slugDbMeta ? slugDbMeta.tags : [],
       ...translations,
-      sidebarMeta,
     },
   }
 }
 
 export const getStaticPaths = async ({ locales }: { locales: string[] }) => {
-  // Get an array of slugs (strings) from the database
-  const slugs = (await getSlugsFromDb('docs')) || []
-
-  // Format the paths array to satisfy Next.js requirements
-  const paths = locales
-    .map((locale) => slugs.map((slug) => ({ params: { slug }, locale })))
-    .flat()
-
+  const paths = locales.map((locale) => getSlugs('blog', locale)).flat()
   return {
     paths,
     fallback: false,
