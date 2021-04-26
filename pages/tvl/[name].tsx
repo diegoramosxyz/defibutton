@@ -17,17 +17,29 @@ export default function Symbol({ protocol }: { protocol: ProtocolTvl }) {
           <Head>
             <title>{data.symbol}</title>
           </Head>
-          <p className="text-center text-2xl bold my-3">{data.name}</p>
+          <section className="max-w-screen-md mx-auto px-3 my-4">
+            <header className="flex items-center space-x-2 mb-4">
+              {data.logo && <img src={data.logo} width="50px"></img>}
+              <h1 className="text-center text-2xl bold my-3">
+                {data.name}
+                <span className="text-sm font-mono ml-3">{data.symbol}</span>
+              </h1>
+            </header>
+            <article className="grid space-y-3">
+              <section>Description: {data.description}</section>
+              {/* <section>
+                {data.address && (
+                  <div className="overflow-ellipsis overflow-hidden">
+                    <span>Address: </span>
+                    <span className="font-mono">{data.address}</span>
+                  </div>
+                )}
+              </section> */}
+              <section>{data.url}</section>
+              <section>Category: {data.category}</section>
+            </article>
+          </section>
           <Chart tvl={data.tvl} />
-          <article className="grid">
-            <section>Address: {data.address}</section>
-            <section>Ticker: {data.symbol}</section>
-            <section>URL: {data.url}</section>
-            <section>Description: {data.description}</section>
-            <section>Chain: {data.chain}</section>
-            <section>Category: {data.category}</section>
-            {data.logo && <img src={data.logo} width="50px"></img>}
-          </article>
         </>
       ) : (
         <div>No Data</div>
@@ -45,11 +57,11 @@ export async function getStaticProps({ params }: { params: { name: string } }) {
   const res = await fetch(`https://api.llama.fi/protocol/${name}`)
   const protocol = await res.json()
 
-  // if (!protocol) {
-  //   return {
-  //     notFound: true,
-  //   }
-  // }
+  if (!protocol.name) {
+    return {
+      notFound: true,
+    }
+  }
 
   return {
     props: { protocol },
@@ -61,8 +73,8 @@ export async function getStaticPaths() {
   // const protocols = await res.json()
 
   // const paths = protocols.map(({ name }: { name: string }) => ({
-  //   params: { name },
+  //   params: { name: name.toLowerCase().replace(' ', '-') },
   // }))
 
-  return { paths: [{ params: { name: 'WBTC' } }], fallback: false }
+  return { paths: [{ params: { name: 'wbtc' } }], fallback: 'blocking' }
 }

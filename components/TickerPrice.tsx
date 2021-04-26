@@ -1,18 +1,24 @@
+import Link from 'next/link'
+
 export default function TickerPrice({
   price,
   geckoId,
+  llamaId,
 }: {
   price: {
     usd: number
+    tvl: any[]
     usd_24h_change: number
     symbol: string
   }
   geckoId: string
+  llamaId: string | null
 }) {
-  const { usd, usd_24h_change, symbol } = price
+  const { usd, tvl, usd_24h_change, symbol } = price
 
   return (
     <article className="font-bold font-mono sm:text-right">
+      {/* Current value */}
       <section>
         <a
           className="underline"
@@ -28,6 +34,8 @@ export default function TickerPrice({
         })}{' '}
         USD
       </section>
+
+      {/* 24 hour change */}
       <section>
         {usd_24h_change > 0 ? (
           <span className="text-green-500 dark:text-green-400">
@@ -40,6 +48,26 @@ export default function TickerPrice({
         )}{' '}
         24h
       </section>
+
+      {/* TVL */}
+      {tvl.length > 0 ? (
+        <section>
+          <span>
+            <Link href={`/tvl/${llamaId}`}>
+              <a className="underline" rel="noopener noreferrer">
+                TVL
+              </a>
+            </Link>
+            : $
+          </span>
+          <span>
+            {/* TODO: adjust conversion for other than billions */}
+            {(+tvl[tvl.length - 1].totalLiquidityUSD / 1.0e9).toFixed(2)}B USD
+          </span>
+        </section>
+      ) : (
+        <section>TVL: N/A</section>
+      )}
     </article>
   )
 }

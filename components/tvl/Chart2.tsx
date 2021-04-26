@@ -1,7 +1,7 @@
 import { ProtocolTvl } from 'interfaces'
 import React from 'react'
 import { Line } from 'react-chartjs-2'
-import { RoundBigNumber, RoundBigNumberNoLetter } from 'utils/numbers'
+import { RoundBigNumber } from 'utils/numbers'
 
 export default function LineChart({ tvl }: { tvl: ProtocolTvl['tvl'] }) {
   // Format dates because the API doesn't provide a good format.
@@ -9,7 +9,7 @@ export default function LineChart({ tvl }: { tvl: ProtocolTvl['tvl'] }) {
 
   // Round TVL to Billions
   const apiTvls = tvl.map(({ totalLiquidityUSD }) =>
-    RoundBigNumberNoLetter(totalLiquidityUSD)
+    (+totalLiquidityUSD / 1.0e9).toFixed(2)
   )
 
   // Get the last value of the array

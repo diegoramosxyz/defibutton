@@ -10,7 +10,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Image from 'next/image'
 import { getPriceAnd24hr } from 'utils/coins'
 import TickerPrice from 'components/TickerPrice'
-import { ProtocolTvl } from 'interfaces'
+// import { ProtocolTvl } from 'interfaces'
 import { Coin } from 'interfaces'
 import { getMetadataBySlug } from 'utils/db'
 
@@ -23,8 +23,15 @@ export default function PostPage({
   slugMeta: SlugMetadata
   slugDbMeta: Coin
 }) {
-  const initialTickerData = {
+  const initialTickerData: {
+    // TODO: IMPROVE TYPES
+    usd: number
+    tvl: [{ totalLiquidityUSD: number }]
+    usd_24h_change: number
+    symbol: string
+  } = {
     usd: 0,
+    tvl: [{ totalLiquidityUSD: 0 }],
     usd_24h_change: 0.0,
     symbol: '---',
   }
@@ -33,12 +40,12 @@ export default function PostPage({
   const [loading, setLoading] = useState(true)
 
   const { title } = slugMeta
-  const { geckoId, symbol, slug, website, tags } = slugDbMeta
+  const { geckoId, llamaId, symbol, slug, website, tags } = slugDbMeta
 
   useEffect(() => {
     setLoading(true)
     async function loadData() {
-      const data = await getPriceAnd24hr(geckoId)
+      const data = await getPriceAnd24hr(geckoId, llamaId)
       setTickerData({ ...data, symbol })
     }
     loadData()
@@ -64,6 +71,7 @@ export default function PostPage({
           {geckoId && (
             <TickerPrice
               geckoId={geckoId}
+              llamaId={llamaId}
               price={loading ? initialTickerData : tickerData}
             />
           )}
@@ -103,11 +111,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
   // Get additional metadata about the current post from the database
   const slugDbMeta = await getMetadataBySlug('coins', params?.slug)
-
-  // const res = await fetch(
-  //   `https://api.llama.fi/protocol/${MdxContext?.metadata.llama_id}`
-  // )
-  // const protocolTvl: ProtocolTvl = await res.json()
 
   const translations = await serverSideTranslations(locale || 'en', [
     'common',
