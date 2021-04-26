@@ -105,7 +105,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const slugDbMeta = await getMetadataBySlug('coins', params?.slug)
 
   // const res = await fetch(
-  //   `https://api.defillama.com/protocol/${MdxContext?.metadata.llama_id}`
+  //   `https://api.llama.fi/protocol/${MdxContext?.metadata.llama_id}`
   // )
   // const protocolTvl: ProtocolTvl = await res.json()
 

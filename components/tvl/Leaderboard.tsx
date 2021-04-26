@@ -10,7 +10,7 @@ export default function Leaderboard() {
   // LOAD INITIAL DATA
   useEffect(() => {
     async function data() {
-      const res = await fetch('https://api.defillama.com/protocols')
+      const res = await fetch('https://api.llama.fi/protocols')
       const data = await res.json()
       dispatch({ type: 'LOAD_DATA', payload: data })
     }

@@ -7,7 +7,7 @@ import Chart from 'components/tvl/Chart2'
 
 export default function Symbol({ protocol }: { protocol: ProtocolTvl }) {
   const router = useRouter()
-  const link = `https://api.defillama.com/protocol/${router.query.name}`
+  const link = `https://api.llama.fi/protocol/${router.query.name}`
   const { data } = useSWR(link, fetcher, { initialData: protocol })
 
   return (
@@ -37,7 +37,12 @@ export default function Symbol({ protocol }: { protocol: ProtocolTvl }) {
 }
 
 export async function getStaticProps({ params }: { params: { name: string } }) {
-  const res = await fetch(`https://api.defillama.com/protocol/${params.name}`)
+  // The DeFiLlama API recognizes the name of the protocols all lowercase and
+  // dashes instead of spaces
+  // https://github.com/DefiLlama/defillama-server/blob/master/src/getProtocol.ts
+  const name = params.name.toLowerCase().replace(' ', '-')
+
+  const res = await fetch(`https://api.llama.fi/protocol/${name}`)
   const protocol = await res.json()
 
   // if (!protocol) {
@@ -52,7 +57,7 @@ export async function getStaticProps({ params }: { params: { name: string } }) {
 }
 
 export async function getStaticPaths() {
-  // const res = await fetch('https://api.defillama.com/protocols')
+  // const res = await fetch('https://api.llama.fi/protocols')
   // const protocols = await res.json()
 
   // const paths = protocols.map(({ name }: { name: string }) => ({

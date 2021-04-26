@@ -8,7 +8,7 @@ export default function LineChart() {
 
   useEffect(() => {
     async function getData() {
-      const res = await fetch('https://api.defillama.com/charts')
+      const res = await fetch('https://api.llama.fi/charts')
       const results = await res.json()
 
       // results.pop()
