@@ -22,9 +22,9 @@ export default function Tag({
   return (
     <Layout head={`${t(`${tag}`)} - DeFi Button`}>
       <header>
-        <h1 className='text-xl font-semibold mb-3 capitalize'>{t(`${tag}`)}</h1>
+        <h1 className="text-xl font-semibold mb-3 capitalize">{t(`${tag}`)}</h1>
       </header>
-      <section className='grid gap-3 sm:grid-cols-2 md:grid-cols-3 mb-5'>
+      <section className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 mb-5">
         {filteredPosts.map(({ folder, title, description, slug }) => (
           <MdxCard
             key={title}
@@ -71,15 +71,15 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
 export const getStaticPaths = async ({ locales }: { locales: string[] }) => {
   // Get all the distinct tags from all the collections
-  const tags = (await getAllDistinctTags()) || []
+  // const tags = (await getAllDistinctTags()) || []
 
   // Format the paths array to satisfy Next.js requirements
-  const paths = locales
-    .map((locale) => tags.map((tag) => ({ params: { tag }, locale })))
-    .flat()
+  // const paths = locales
+  //   .map((locale) => tags.map((tag) => ({ params: { tag }, locale })))
+  //   .flat()
 
   return {
-    paths,
+    paths: [{ params: { tag: 'dex' } }],
     // No fallback because all possible tags are generated at build time.
     fallback: false,
   }
