@@ -8,8 +8,8 @@ import MdxCard from 'components/MdxCard'
 
 export default function index({ metadata }: { metadata: SlugMetadata[] }) {
   return (
-    <Layout head="Coins">
-      <h1 className="text-xl font-semibold mb-3">Coins</h1>
+    <Layout head="Projects">
+      <h1 className="text-xl font-semibold mb-3">DeFi Projects</h1>
       <div className="grid gap-2 sm:gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {metadata
           .map(({ title, description, slug }) => {
@@ -19,7 +19,7 @@ export default function index({ metadata }: { metadata: SlugMetadata[] }) {
                   key={title}
                   title={title}
                   description={description}
-                  folder="coin"
+                  folder="projects"
                   slug={slug || ''}
                 ></MdxCard>
               )
@@ -36,12 +36,12 @@ export default function index({ metadata }: { metadata: SlugMetadata[] }) {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   // Only the paths from the default locale are needed
   // returns: ['slug', 'another-slug']
-  const slugs = postFileSlugs('coin', locale || 'en')
+  const slugs = postFileSlugs('projects', locale || 'en')
 
   const metadata = await Promise.all(
     slugs
       .map(async (slug) => {
-        const content = await getMdxContent(slug, 'coin', locale || 'en')
+        const content = await getMdxContent(slug, 'projects', locale || 'en')
         return {
           slug,
           ...content?.metadata,

@@ -10,7 +10,10 @@ import { folders, postMetadata } from 'interfaces'
 function readFile(folder: folders, locale: string, slug: string) {
   try {
     return fs.readFileSync(
-      path.join(path.join(process.cwd(), `${folder}/${locale}`), `${slug}.mdx`)
+      path.join(
+        path.join(process.cwd(), `posts/${folder}/${locale}`),
+        `${slug}.mdx`
+      )
     )
   } catch (error) {
     return null
@@ -91,7 +94,7 @@ export async function getMdxContent(
 
     const { stdout } = exec(
       // get the last modified date of the documents using git logs. printf removes new lines
-      `printf $(git log -1 --date=iso8601-strict --format="%ad" -- "$(pwd)/${folder}/${locale}/${slug}.mdx")`,
+      `printf $(git log -1 --date=iso8601-strict --format="%ad" -- "$(pwd)/posts/${folder}/${locale}/${slug}.mdx")`,
       (error) => {
         if (error) {
           console.error(`exec error: ${error}`)
@@ -113,7 +116,7 @@ export async function getMdxContent(
 // Get an array of mdx metadata objects from all mdx files
 export function getAllMdxMeta(locale: string | undefined) {
   const postsMeta = getPostsMetadata('blog', locale || 'en')
-  const coinsMeta = getPostsMetadata('coin', locale || 'en')
+  const coinsMeta = getPostsMetadata('projects', locale || 'en')
 
   // The metadata is used to populate the sidebar
   return [...postsMeta, ...coinsMeta]
@@ -136,8 +139,8 @@ export function getSlugs(folder: folders, locale: string) {
 export function postFileSlugs(folder: folders, locale: string) {
   // return string[] of filenames from a directory posts/en or coins/es, etc.
   return fs
-    .readdirSync(path.join(process.cwd(), `${folder}/${locale}`))
+    .readdirSync(path.join(process.cwd(), `posts/${folder}/${locale}`))
     .filter((path) => /\.mdx?$/.test(path))
     .map((path) => path.replace(/\.mdx?$/, ''))
-  // output: ['slug', 'another-slug'] 
+  // output: ['slug', 'another-slug']
 }

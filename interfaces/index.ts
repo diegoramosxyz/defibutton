@@ -8,6 +8,7 @@ export type GlobalContextType = {
 export interface Protocol {
   id: string
   name: string
+  slug: string
   address: string
   symbol: string
   url: string
@@ -90,7 +91,7 @@ export type Doc = {
   tags: string[]
 }
 
-export type folders = 'blog' | 'coin'
+export type folders = 'blog' | 'projects'
 
 export type postMetadata = {
   [key: string]: any
@@ -110,7 +111,7 @@ export type SlugMetadata = {
 
 export interface PostMetaPath extends SlugMetadata {
   slug: string
-  folder: 'blog' | 'coin'
+  folder: folders
   tags: string[]
 }
 

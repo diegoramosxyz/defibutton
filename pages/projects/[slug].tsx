@@ -100,7 +100,11 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
 
   // Get the content for the current post, including its metadata
-  const mdxContext = await getMdxContent(params?.slug, 'coin', locale || 'en')
+  const mdxContext = await getMdxContent(
+    params?.slug,
+    'projects',
+    locale || 'en'
+  )
 
   // If the mdx file is not found based on the slug from the database, return not found
   if (typeof mdxContext === 'undefined') {
@@ -131,7 +135,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 }
 
 export const getStaticPaths = async ({ locales }: { locales: string[] }) => {
-  const paths = locales.map((locale) => getSlugs('coin', locale)).flat()
+  const paths = locales.map((locale) => getSlugs('projects', locale)).flat()
   return {
     paths,
     fallback: false,

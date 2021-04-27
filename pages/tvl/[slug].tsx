@@ -7,7 +7,7 @@ import Layout from 'components/Layout'
 
 export default function Symbol({ protocol }: { protocol: ProtocolTvl }) {
   const router = useRouter()
-  const link = `https://api.llama.fi/protocol/${router.query.name}`
+  const link = `https://api.llama.fi/protocol/${router.query.slug}`
   const { data } = useSWR(link, fetcher, { initialData: protocol })
 
   return (
@@ -39,13 +39,8 @@ export default function Symbol({ protocol }: { protocol: ProtocolTvl }) {
   )
 }
 
-export async function getStaticProps({ params }: { params: { name: string } }) {
-  // The DeFiLlama API recognizes the name of the protocols all lowercase and
-  // dashes instead of spaces
-  // https://github.com/DefiLlama/defillama-server/blob/master/src/getProtocol.ts
-  const name = params.name.toLowerCase().replace(' ', '-')
-
-  const res = await fetch(`https://api.llama.fi/protocol/${name}`)
+export async function getStaticProps({ params }: { params: { slug: string } }) {
+  const res = await fetch(`https://api.llama.fi/protocol/${params.slug}`)
   const protocol = await res.json()
 
   if (!protocol.name) {
@@ -63,9 +58,9 @@ export async function getStaticPaths() {
   // const res = await fetch('https://api.llama.fi/protocols')
   // const protocols = await res.json()
 
-  // const paths = protocols.map(({ name }: { name: string }) => ({
-  //   params: { name: name.toLowerCase().replace(' ', '-') },
+  // const paths = protocols.map(({ slug }: { slug: string }) => ({
+  //   params: { slug },
   // }))
 
-  return { paths: [{ params: { name: 'wbtc' } }], fallback: 'blocking' }
+  return { paths: [{ params: { slug: 'wbtc' } }], fallback: 'blocking' }
 }

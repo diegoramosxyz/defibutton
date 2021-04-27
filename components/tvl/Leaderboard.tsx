@@ -42,7 +42,10 @@ export default function Leaderboard() {
       </header>
       <section className="table-row-group">
         {state.displayProtocols.map(
-          ({ name, symbol, chain, tvl, change_1d, category, logo }, idx) => (
+          (
+            { name, slug, symbol, chain, tvl, change_1d, category, logo },
+            idx
+          ) => (
             <article key={idx} className="table-row rounded-md md:rounded-none">
               <div className="px-2 py-4 table-cell">{idx + 1}</div>
               {logo ? (
@@ -56,7 +59,7 @@ export default function Leaderboard() {
                 <div></div>
               )}
               <div className="px-2 py-4 table-cell">
-                <Link href={`/tvl/${name.toLowerCase().replace(' ', '-')}`}>
+                <Link href={`/tvl/${slug}`}>
                   <a className="truncate text-left lg:text-base">{name}</a>
                 </Link>
               </div>

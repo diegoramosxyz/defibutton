@@ -16,8 +16,8 @@ export default function Nav() {
           <a className="text-xl font-bold">DeFi Button</a>
         </Link>
         <section className="flex items-center space-x-5">
-          <Link href="/coin">
-            <a className="hover:underline">Coins</a>
+          <Link href="/projects">
+            <a className="hover:underline">Projects</a>
           </Link>
           <Link href="/blog">
             <a className="hover:underline">Posts</a>
