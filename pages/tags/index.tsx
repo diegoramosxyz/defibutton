@@ -16,7 +16,7 @@ export default function Tag({ tags }: { tags: string[] }) {
       </header>
       <section className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 mb-5">
         {tags.map((tag) => (
-          <Link key={tag} href={`/tag/${tag}`}>
+          <Link key={tag} href={`/tags/${tag}`}>
             <a>{t(tag)}</a>
           </Link>
         ))}

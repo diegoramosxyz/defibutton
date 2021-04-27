@@ -21,12 +21,12 @@ export default function TickerPrice({
       {/* Current value */}
       <section>
         <a
-          className="underline"
+          className="underline uppercase"
           target="_blank"
           rel="noopener noreferrer"
           href={`https://coingecko.com/coins/${geckoId}`}
         >
-          {symbol.toUpperCase()}
+          {symbol}
         </a>
         : $
         {usd.toLocaleString('en-US', {

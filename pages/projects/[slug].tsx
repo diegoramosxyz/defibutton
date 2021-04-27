@@ -62,7 +62,7 @@ export default function PostPage({
             <Image
               width={35}
               height={35}
-              src={`/logo/${slug?.toLocaleLowerCase()}.svg`}
+              src={`/logo/${slug}.svg`}
               alt={title}
             />
             <p className="ml-2">{title}</p>

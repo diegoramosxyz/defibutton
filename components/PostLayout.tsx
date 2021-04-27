@@ -30,7 +30,7 @@ export default function PostLayout({
             <LastEdit translation={t('lastEdit')} lastModified={lastModified} />
             <div className="grid sm:flex space-y-2 sm:space-y-0 sm:space-x-3">
               {tags?.map((tag) => (
-                <Link key={tag} href={`/tag/${tag}`}>
+                <Link key={tag} href={`/tags/${tag}`}>
                   <a>#{t(tag)}</a>
                 </Link>
               ))}
