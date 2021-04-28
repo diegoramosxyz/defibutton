@@ -71,15 +71,15 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
 export const getStaticPaths = async ({ locales }: { locales: string[] }) => {
   // Get all the distinct tags from all the collections
-  // const tags = (await getAllDistinctTags()) || []
+  const tags = (await getAllDistinctTags()) || []
 
   // Format the paths array to satisfy Next.js requirements
-  // const paths = locales
-  //   .map((locale) => tags.map((tag) => ({ params: { tag }, locale })))
-  //   .flat()
+  const paths = locales
+    .map((locale) => tags.map((tag) => ({ params: { tag }, locale })))
+    .flat()
 
   return {
-    paths: [{ params: { tag: 'dex' } }],
+    paths,
     // No fallback because all possible tags are generated at build time.
     fallback: false,
   }
