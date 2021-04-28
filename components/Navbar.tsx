@@ -13,7 +13,7 @@ export default function Nav() {
           className="rounded-md font-semibold px-3 py-1 bg-transparent transition ring-1 ring-current focus:outline-none focus:ring-1 focus:ring-blue-700 dark:focus:ring-blue-400"
         /> */}
         <Link href="/">
-          <a className="text-xl font-bold">DeFi Button</a>
+          <a className="md:text-xl font-bold">DeFi Button</a>
         </Link>
         <section className="flex items-center space-x-5">
           <Link href="/projects">

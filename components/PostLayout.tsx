@@ -28,7 +28,7 @@ export default function PostLayout({
           {children}
           <section className="flex justify-between items-center text-sm align-center opacity-75 my-5 gap-2">
             <LastEdit translation={t('lastEdit')} lastModified={lastModified} />
-            <div className="grid sm:flex space-y-2 sm:space-y-0 sm:space-x-3">
+            <div className="grid sm:flex space-y-4 sm:space-y-0 sm:space-x-3">
               {tags?.map((tag) => (
                 <Link key={tag} href={`/tags/${tag}`}>
                   <a>#{t(tag)}</a>
