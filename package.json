@@ -1,6 +1,7 @@
 {
   "name": "defi-button",
   "version": "1.0.0",
+  "license": "",
   "scripts": {
     "dev": "next",
     "build": "next build",
