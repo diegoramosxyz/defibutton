@@ -1,6 +1,13 @@
 const { i18n } = require('./next-i18next.config')
+const withPWA = require('next-pwa')
 
-module.exports = {
+const isProd = process.env.NODE_ENV === "production";
+
+module.exports = withPWA({
+  pwa: {
+    disable: !isProd,
+    dest: "public"
+  },
   i18n,
   async headers() {
     return [
@@ -14,7 +21,7 @@ module.exports = {
       },
     ]
   },
-}
+})
 
 // https://github.com/leerob/leerob.io/pull/310
 // https://securityheaders.com
