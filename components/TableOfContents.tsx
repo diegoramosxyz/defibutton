@@ -19,14 +19,22 @@ const tableOfContents: {
     },
   },
   {
-    'defi-projects': {
+    'networks': {
       items: [
         '/projects/bitcoin',
         '/projects/ethereum',
+      ],
+      more: '/projects',
+    },
+  },
+  {
+    'projects': {
+      items: [
         '/projects/uniswap',
         '/projects/aave',
-        '/projects/binance-coin',
         '/projects/sushiswap',
+        '/projects/dai',
+        '/projects/compound'
       ],
       more: '/projects',
     },
