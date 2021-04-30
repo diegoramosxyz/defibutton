@@ -4,7 +4,7 @@
   "description": "DeFi Button provides simple explanations of complex topics in decentralized finance (DeFi).",
   "categories": ["education", "finance"],
   "lang": "en",
-  "theme_color": "#ffffff",
+  "theme_color": "#fafafa",
   "background_color": "#171717",
   "display": "standalone",
   "orientation": "portrait",
