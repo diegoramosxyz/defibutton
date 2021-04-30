@@ -67,8 +67,8 @@ class MyDocument extends Document {
         {/* The optimal size is 1200 x 630 (1.91:1 ratio). */}
         <meta property="og:image" content="https://defibutton.com/og.png" />
         <meta property="og:image:type" content="image/png" />
-        {/* <meta property="og:image:width" content="1200" /> */}
-        {/* <meta property="og:image:height" content="630" /> */}
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta
           property="og:image:alt"
           content="A turtle above the text DeFi Button"
