@@ -4,19 +4,17 @@ import Document, {
   Main,
   NextScript,
   DocumentContext,
-} from "next/document";
+} from 'next/document'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
-    const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
+    const initialProps = await Document.getInitialProps(ctx)
+    return { ...initialProps }
   }
 
   render() {
-    // SOURCE: https://github.com/gokulkrishh/awesome-meta-and-manifest
     return (
       <Html className="bg-trueGray-50 text-trueGray-800 dark:bg-trueGray-900 dark:text-trueGray-200">
-        {/* prettier-ignore */}
         <Head />
         {/* Must  */}
         <meta charSet="utf-8" />
@@ -31,125 +29,199 @@ class MyDocument extends Document {
           content="bitcoin, btc, ethereum, eth, price, finance, defi, education, free, decentralization"
         />
 
-        {/* Android   */}
-        <meta name="theme-color" content="#171717" />
-        <meta name="mobile-web-app-capable" content="yes" />
-
-        {/* iOS  */}
-        <meta name="apple-mobile-web-app-title" content="DeFi Button" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-
-        {/* Windows   */}
-        <meta name="msapplication-navbutton-color" content="#171717" />
-        <meta name="msapplication-TileColor" content="#171717" />
-        {/* <meta name="msapplication-TileImage" content="ms-icon-144x144.png"/> */}
-        {/* <meta name="msapplication-config" content="browserconfig.xml"/> */}
-
-        {/* Pinned Sites   */}
-        <meta name="application-name" content="DeFi Button" />
-        {/* <meta name="msapplication-tooltip" content="Tooltip Text"/> */}
-        <meta name="msapplication-starturl" content="/" />
-
-        {/* Tap highlighting   */}
-        <meta name="msapplication-tap-highlight" content="no" />
-
-        {/* UC Mobile Browser   */}
-        <meta name="full-screen" content="yes" />
-        <meta name="browsermode" content="application" />
-
-        {/* Layout mode  */}
-        <meta name="layoutmode" content="fitscreen" />
-
-        {/* Orientation   */}
-        <meta name="screen-orientation" content="portrait" />
-
-        {/* Main Link Tags   */}
-        <link href="/favicon-16.png" rel="icon" type="image/png" sizes="16x16" />
-        <link href="/favicon-32.png" rel="icon" type="image/png" sizes="32x32" />
-        {/* <link href="/favicon-48.png" rel="icon" type="image/png" sizes="48x48"/> */}
-
-        {/* iOS   */}
-        {/* <link href="/touch-icon-iphone.png" rel="apple-touch-icon"/>
-          <link href="/touch-icon-ipad.png" rel="apple-touch-icon" sizes="76x76"/>
-          <link href="/touch-icon-iphone-retina.png" rel="apple-touch-icon" sizes="120x120"/>
-          <link href="/touch-icon-ipad-retina.png" rel="apple-touch-icon" sizes="152x152"/> */}
-
-        {/* Startup Image   */}
-        {/* <link href="/touch-icon-start-up-320x480.png" rel="apple-touch-startup-image"/> */}
-
-        {/* Pinned Tab   */}
-        {/* <link
-          href="path/to/icon.svg"
-          rel="mask-icon"
-          sizes="any"
-          color="#171717"
-        /> */}
-
-        {/* Android   */}
-        <link href="/icon-192x192.png" rel="icon" sizes="192x192" />
-        <link href="/icon-128x128.png" rel="icon" sizes="128x128" />
-
-        {/* Others  */}
-        <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
-        {/* UC Browser   */}
-        {/* <link
-          href="/images/icon-52x52.png"
-          rel="apple-touch-icon-precomposed"
-          sizes="57x57"
-        />
-        <link
-          href="/images/icon-72x72.png"
-          rel="apple-touch-icon"
-          sizes="72x72"
-        /> */}
-
-        {/* Manifest.json   */}
-        <link href="/manifest.json" rel="manifest" />
-
-        {/* DELETE THESE */}
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/apple-icon-180x180.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="192x192"
-          href="/android-icon-192x192.png"
-        />
-
         {/* Twitter */}
+        {/* The optimal size is 1200 x 630 (1.91:1 ratio). */}
         <meta name="twitter:image" content="https://defibutton.com/og.png" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site:domain" content="defibutton.com" />
         <meta name="twitter:url" content="https://defibutton.com" />
-        <meta name="twitter:title" content="DeFi Button" />
+        {/* should be between 30-60 characters, with a maximum of 70 */}
+        <meta
+          name="twitter:title"
+          content="DeFi Button: Learn about decentralized finance!"
+        />
+        {/* should be between 55 and 200 characters long */}
         <meta
           name="twitter:description"
-          content="DeFi Button provides simple explanations of complex topics in decentralized finance (DeFi). It also provides insight into cryptocurrencies and blockchains like Bitcoin and Ethereum and DeFi tools and platforms like Aave, Uniswap, Sushiswap and Yearn."
+          content="DeFi Button provides simple explanations of complex topics in decentralized finance (DeFi). Get insight into blockchains like Bitcoin and Ethereum and DeFi projects, such as, Aave, Uniswap, and Yearn."
         />
-        <meta name="twitter:creator" content="@DeFiButton" />
+        <meta name="twitter:site" content="@DeFiButton" />
 
-        {/* OG */}
-        <meta name="og:title" content="DeFi Button: Learn about DeFi." />
+        {/* OG - https://ogp.me/ */}
+        {/* should be between 30-60 characters, with a maximum of 90 */}
+        <meta
+          name="og:title"
+          content="DeFi Button: Learn about decentralized finance!"
+        />
         <meta property="og:type" content="website" />
+        <meta property="og:determiner" content="the" />
+        <meta property="og:locale" content="en" />
+        <meta property="og:locale:alternate" content="es" />
+        {/* Make sure the important part of your description is within the first 110 characters, so it doesn't get cut off on mobile. */}
         <meta
           property="og:description"
           content="DeFi Button provides simple explanations of complex topics in decentralized finance (DeFi). It also provides insight into cryptocurrencies and blockchains like Bitcoin and Ethereum and DeFi tools and platforms like Aave, Uniswap, Sushiswap and Yearn."
         />
         <meta property="og:site_name" content="DeFi Button" />
         <meta property="og:url" content="https://defibutton.com" />
+        {/* The optimal size is 1200 x 630 (1.91:1 ratio). */}
         <meta property="og:image" content="https://defibutton.com/og.png" />
+        <meta property="og:image:type" content="image/png" />
+        {/* <meta property="og:image:width" content="1200" /> */}
+        {/* <meta property="og:image:height" content="630" /> */}
+        <meta
+          property="og:image:alt"
+          content="A turtle above the text DeFi Button"
+        />
 
+        {/* PWA   */}
+        <link href="/manifest.json" rel="manifest" />
+        <meta name="theme-color" content="#fafafa"/>
+
+        {/* https://github.com/onderceylan/pwa-asset-generator */}
+        <link rel="icon" type="image/png" sizes="196x196" href="pwa/favicon-196.png"/>
+
+        <link rel="apple-touch-icon" href="pwa/apple-icon-180.png" />
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-2048-2732.jpg"
+          media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-2732-2048.jpg"
+          media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-1668-2388.jpg"
+          media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-2388-1668.jpg"
+          media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-1536-2048.jpg"
+          media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-2048-1536.jpg"
+          media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-1668-2224.jpg"
+          media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-2224-1668.jpg"
+          media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-1620-2160.jpg"
+          media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-2160-1620.jpg"
+          media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-1284-2778.jpg"
+          media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-2778-1284.jpg"
+          media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-1170-2532.jpg"
+          media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-2532-1170.jpg"
+          media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-1125-2436.jpg"
+          media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-2436-1125.jpg"
+          media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-1242-2688.jpg"
+          media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-2688-1242.jpg"
+          media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-828-1792.jpg"
+          media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-1792-828.jpg"
+          media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-1242-2208.jpg"
+          media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-2208-1242.jpg"
+          media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-750-1334.jpg"
+          media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-1334-750.jpg"
+          media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-640-1136.jpg"
+          media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+        />
+        <link
+          rel="apple-touch-startup-image"
+          href="pwa/apple-splash-1136-640.jpg"
+          media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+        />
         <body>
           <Main />
           <NextScript />
         </body>
       </Html>
-    );
+    )
   }
 }
 
-export default MyDocument;
+export default MyDocument
