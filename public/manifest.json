@@ -5,7 +5,7 @@
   "categories": ["education", "finance"],
   "lang": "en",
   "theme_color": "#fafafa",
-  "background_color": "#171717",
+  "background_color": "#fafafa",
   "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
