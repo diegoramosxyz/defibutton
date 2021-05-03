@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import SelectLanguage from './SelectLanguage'
+import { useTranslation } from 'next-i18next'
 
 export default function Nav() {
+  const { t } = useTranslation('common')
   return (
     <nav className="z-10 px-4 py-2.5 fixed md:static bottom-0 w-full bg-trueGray-50 text-trueGray-800 dark:bg-trueGray-900 dark:text-trueGray-200 border-t md:border-t-0 md:border-b border-trueGray-200 dark:border-trueGray-800">
       <section className="flex items-center justify-between">
@@ -17,10 +19,10 @@ export default function Nav() {
         </Link>
         <section className="flex items-center space-x-5">
           <Link href="/projects">
-            <a className="hover:underline">Projects</a>
+            <a className="hover:underline">{t('projects')}</a>
           </Link>
           <Link href="/blog">
-            <a className="hover:underline">Posts</a>
+            <a className="hover:underline">{t('posts')}</a>
           </Link>
           <SelectLanguage />
         </section>
