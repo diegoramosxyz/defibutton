@@ -16,6 +16,9 @@ class MyDocument extends Document {
     return (
       <Html className="bg-trueGray-50 text-trueGray-800 dark:bg-trueGray-900 dark:text-trueGray-200">
         <Head />
+        {/* GOATCOUNTER ANALYTICS */}
+        <script data-goatcounter="https://stats.defibutton.com/count"
+        async src="//stats.defibutton.com/count.js"></script>
         {/* Must  */}
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -79,7 +82,7 @@ class MyDocument extends Document {
         <meta name="theme-color" content="#fafafa"/>
 
         {/* https://github.com/onderceylan/pwa-asset-generator */}
-        <link rel="icon" type="image/png" sizes="196x196" href="pwa/favicon-196.png"/>
+        <link rel="icon" type="image/png" sizes="196x196" href="/pwa/favicon-196.png"/>
 
         <link rel="apple-touch-icon" href="pwa/apple-icon-180.png" />
 
