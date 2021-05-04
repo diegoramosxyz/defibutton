@@ -82,7 +82,7 @@ class MyDocument extends Document {
         <meta name="theme-color" content="#fafafa"/>
 
         {/* https://github.com/onderceylan/pwa-asset-generator */}
-        <link rel="icon" type="image/png" sizes="196x196" href="pwa/favicon-196.png"/>
+        <link rel="icon" type="image/png" sizes="196x196" href="/pwa/favicon-196.png"/>
 
         <link rel="apple-touch-icon" href="pwa/apple-icon-180.png" />
 
