@@ -17,6 +17,7 @@ class MyDocument extends Document {
       <Html className="bg-trueGray-50 text-trueGray-800 dark:bg-trueGray-900 dark:text-trueGray-200">
         <Head />
         {/* GOATCOUNTER ANALYTICS */}
+        <script async src="/test.js"></script>
         <script data-goatcounter="https://stats.defibutton.com/count"
         async src="//stats.defibutton.com/count.js"></script>
         {/* Must  */}
