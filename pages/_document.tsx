@@ -28,7 +28,7 @@ class MyDocument extends Document {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="description"
-          content="DeFi Button provides simple explanations of complex topics in decentralized finance (DeFi). It also provides insight into cryptocurrencies and blockchains like Bitcoin and Ethereum and DeFi tools and platforms like Aave, Uniswap, Sushiswap and Yearn."
+          content="Educate yourself about decentralized finance, DeFi! Become a self-sovereign individual by using Ethereum dApps, AAVE, Uniswap, Dai, Chainlink, Bitcoin and more."
         />
         <meta
           name="keywords"
@@ -49,11 +49,12 @@ class MyDocument extends Document {
         {/* should be between 55 and 200 characters long */}
         <meta
           name="twitter:description"
-          content="DeFi Button provides simple explanations of complex topics in decentralized finance (DeFi). Get insight into blockchains like Bitcoin and Ethereum and DeFi projects, such as, Aave, Uniswap, and Yearn."
+          content="Educate yourself about decentralized finance, DeFi! Become a self-sovereign individual by using Ethereum dApps, AAVE, Uniswap, Dai, Chainlink, Bitcoin and more."
         />
         <meta name="twitter:site" content="@DeFiButton" />
 
         {/* OG - https://ogp.me/ */}
+        {/* https://www.opengraph.xyz/ */}
         {/* should be between 30-60 characters, with a maximum of 90 */}
         <meta
           name="og:title"
@@ -66,7 +67,7 @@ class MyDocument extends Document {
         {/* Make sure the important part of your description is within the first 110 characters, so it doesn't get cut off on mobile. */}
         <meta
           property="og:description"
-          content="DeFi Button provides simple explanations of complex topics in decentralized finance (DeFi). It also provides insight into cryptocurrencies and blockchains like Bitcoin and Ethereum and DeFi tools and platforms like Aave, Uniswap, Sushiswap and Yearn."
+          content="Educate yourself about decentralized finance, DeFi! Become a self-sovereign individual by using Ethereum dApps, AAVE, Uniswap, Dai, Chainlink, Bitcoin and more."
         />
         <meta property="og:site_name" content="DeFi Button" />
         <meta property="og:url" content="https://defibutton.com" />
