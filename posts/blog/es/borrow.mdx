@@ -1,6 +1,90 @@
 ---
   title: "Pedir Prestado"
-  description: ""
+  description: "Puedes pedir prestado en DeFi para apalancar tu riqueza."
 ---
 
->
+En finanzas descentralizadas tenemos protocolos de mercados monetarios como [AAVE](/projects/aave) y [Compound](/projects/compound) donde puedes tomar préstamos sobre-garantizados para generar apalancamiento.
+
+## Uso de préstamos sobre-garantizados para obtener ganancias
+
+Los préstamos sobre-garantizados se pueden utilizar para obtener exposición a otros activos y, al mismo tiempo, preservar tu garantía. Hay ciertos riesgos involucrados con esta estrategia. Se recomienda practicar con pequeñas cantidades de garantía antes de implementar la estrategia.
+
+Aquí hay una lista breve de los pasos:
+
+1 - Conviértete en un proveedor de liquidez (prestamista) depositando un activo volátil soportado
+2 - Utiliza la interfaz gráfica de usuario para convertir tu depósito en garantía
+3 - Toma prestado una moneda estable
+4 - Cambia las monedas estables por el activo deseado.
+5 - Una vez que estés listo, vuelve a cambiar el activo deseado por las monedas estables
+6 - Paga el préstamo, más el interese acumulado
+7 - Retirar tu garantía, más el intereses acumulado
+
+Ahora, veamos en detalle lo que sucede en cada etapa de la estrategia.
+
+### Paso 1
+
+Deposita tu activo en el protocolo y recibe tokens que representen tu depósito. En AAVE se llaman [aTokens] (https://aave.com/atokens) y en Compound, cTokens. Estos tokens se utilizan para reclamar tus fondos y los intereses acumulado. Estos pueden considerarse como un _"recibo"_ proporcionado por el protocolo.
+
+Ten en cuenta que incluso si pides prestado, seguirás ganando intereses sobre tu depósito.
+
+### Paso 2
+
+Tus depósitos en AAVE y Compound no se pueden utilizar automáticamente como garantía. Debe habilitar manualmente tus activos para que se utilicen como garantía mediante la interfaz gráfica de usuario, también conocida como dApp.
+
+### Paso 3
+
+Ahora tienes garantía, por lo que puede tomar un **préstamo sobre-garantizados**. Este tipo de préstamo requiere que mantenga un valor de garantía **mayor** que el valor de su préstamo en todo momento. Debe verificar cuál es este umbral para el protocolo. La interfaz gráfica de usuario debe ilustrar claramente cuánto puede pedir prestado de forma segura.
+
+Ahora pide prestada una moneda estable compatible.
+
+### Paso 4
+
+Las monedas estables prestadas no apreciarán su valor, debe cambiarlas por un activo que crees que ganará valor. Usa un agregador de intercambiadores descentralizados, como [Matcha](https://matcha.xyz), para intercambiar tus monedas estables prestadas por otra criptomoneda que te guste.
+
+### Paso 5
+
+Si todo salió de acuerdo con el plan, use un agregador de intercambiadores descentralizados para intercambiar tu criptomoneda nuevamente a la moneda estable prestada.
+
+### Paso 6
+
+Regresa a la plataforma del mercado monetario que eligiste y paga tu préstamo, más el interes acumulado.
+
+### Paso 7
+
+Para finalizar la estrategia, retira tu garantía de regreso a tu billetera.
+
+En este punto, has mitigado todos los riesgos y no está ganando ni pagando intereses.
+
+## Riesgos
+
+El riesgo que implica esta estrategia es perder tu garantía. En AAVE solo puedes pedir prestado hasta el 80% de tu garantía. Si tu deuda excede esta cantidad en cualquier momento, corres el riesgo de ser liquidado. Si te liquidan, eso significa que alguien pagó tu deuda y ganó una recompensa por hacerlo. Puedes perder parte o toda tu garantía. Esto cambia según el protocolo que utilices. En AAVE puedes perder hasta el 50% de tu garantía, más la recompensa para el liquidador en una sola liquidación.
+
+## Ejemplo
+
+Ilustremos ahora cómo tomar un préstamo sobre-garantizados en AAVE para apalancar dinero con un ejemplo:
+
+Tú esperas que tanto ETH como UNI aumenten de precio. Deposita ETH como garantía para pedir prestado DAI y luego cambias el DAI por UNI.
+
+Ahora tenemos cuatro escenarios posibles:
+
+- ETH sube 📈 y UNI sube 📈
+
+Esto es lo mejor que puede pasar. Tienes más garantías disponibles y tu UNI vale más. Cambias tu UNI de nuevo a DAI y devuelves el préstamo. Ahora tienes el 100% de tu ETH y DAI como beneficio.
+
+- ETH baja 📉 y UNI sube 📈
+
+En este caso, tienes menos garantías disponibles y corre el riesgo de ser liquidado. Puedes cambiar UNI de nuevo a DAI y pagar el préstamo para evitar ser liquidado. Es posible que todavía tengas ganancias en este momento.
+
+- ETH sube 📈 y UNI baja 📉
+
+Tienes más garantías disponibles, pero tu UNI no es suficiente para pagar el préstamo con intereses. Deberás cambiar tu UNI de nuevo a DAI y encontrar más DAI para pagar el préstamo. También puedes utilizar tu garantía para pagar el préstamo.
+
+- ETH baja 📉 y UNI baja 📉
+
+Tienes menos garantías disponibles y tu UNI no es suficiente para pagar el préstamo. Deberás cambiar tu UNI por DAI y encontrar más DAI o utilizar su garantía para pagar el préstamo. Además de esto, tu cuenta puede ser liquidada si el precio de ETH baja demasiado.
+
+## Comparación
+
+Si hubieras cambiado ETH por UNI en lugar de tomar un préstamo sobre-garantizados, habrías reducido tu exposición a ETH. En el mejor de los casos, UNI habría subido mientras que ETH bajó. En el peor de los casos, ETH habría subido mientras que UNI bajó.
+
+Por otro lado, con un préstamo sobre-garantizado, tendrás exposición a ambos activos con la misma garantía y posiblemente no pagues intereses. Si el interés que ganas de tu depósito es mayor que el interés que pagas por tu préstamo, tu préstamo es _"gratuito"_. Esto no está garantizado y debe vigilar ambas tasas de interés.

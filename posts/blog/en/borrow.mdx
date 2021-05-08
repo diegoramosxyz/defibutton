@@ -3,8 +3,88 @@
   description: "You can borrow in DeFi to leverage your wealth."
 ---
 
-In DeFi we have liquidity provider protocols such as a [AAVE](/projects/aave) and [Compound](/projects/compound) where you can take overcollateralized loans to generate leverage.
+In decentralized finance we have Money Market protocols such as a [AAVE](/projects/aave) and [Compound](/projects/compound) where you can take overcollateralized loans to generate leverage.
 
-You deposit any supported asset as collateral and borrow another asset to gain exposure to another asset without reducing your exposure to your collateral. In other words, you deposit cryptocurrency in a smart contract in order to borrow another cryptocurrency. If everything goes well you will be able to pay back the loan with interest and keep both your collateral and the profits.
+## Using overcollateralized loans to earn a profit
 
-Learn more about this strategy in [the AAVE page](/projects/aave).
+Overcollateralized loans can be used to gain exposure to other assets while preserving your collateral. There are certain risks involved with this strategy. It is recommended to practice with small collateral amounts before implementing the strategy.
+
+Here is an overview of the steps:
+
+1 - Become a liquidity provider (lender) by depositing a supported volatile asset
+2 - Use the graphical user interface to turn your deposit into collateral
+3 - Borrow a supported stable coin
+4 - Swap the stable coins into the desired token
+5 - Once ready, swap the desired token back into the stable coins
+6 - Repay your loan, plus the interest accrued
+7 - Withdraw your collateral, plus the interest earned
+
+Now, let's see in detail what is happening on every stage of the strategy.
+
+### Step 1 
+
+Deposit your asset into the protocol and receive tokens representing your deposit. In AAVE they are called [aTokens](https://aave.com/atokens) and in Compound, cTokens. These tokens are used to claim your funds and interest earned. These can be thought of as a _"receipt"_ provided by the protocol.
+
+Do note that even if you borrow, you will still earn interest on your deposit.
+
+### Step 2
+
+Your deposits in AAVE and Compound can't automatically be used as collateral. You must manually enable your assets to be used as collateral using the graphical user interface, also known as dApp.
+
+### Step 3
+
+Now you have collateral, so you can take an **overcollateralized loan**. This type of loan requires you to keep a collateral value **greater** that the value of your loan at all times. You need to check what this threshold is for the protocol. The graphical user interface should clearly illustrate how much you are safely allowed to borrow.
+
+Now borrow a supported stable coin. 
+
+### Step 4
+
+The borrowed stable coins will not appreciate in value, you need to swap them for an asset which you think will gain value. Use a decentralized exchange aggregator, such as [Matcha](https://matcha.xyz), to swap your borrowed stable coins for another cryptocurrency you like.
+
+### Step 5
+
+If everything went according to the plan, use a decentralized exchange aggregator to swap your cryptocurrency back into the borrowed stable coins.
+
+### Step 6
+
+Go back to the money market platform you chose and repay your loan, plus interest.
+
+### Step 7 
+
+To finish the strategy, withdraw your collateral back into your wallet. 
+
+At this point you have mitigated all risks, and you are not gaining or paying interest.
+
+## Risks
+
+The risk that this strategy involves is losing your collateral. In AAVE you can only borrow up to 80% of your collateral. If your debt exceeds this amount at any time, you are running the risk of getting liquidated. If you get liquidated that means that someone paid your debt and earned a reward for doing so. You may lose some or all your collateral. This changes based on the protocol you use. In AAVE you can lose up to 50% of your collateral, plus the reward for the liquidator in one liquidation.
+
+## Example
+
+Let’s now illustrate taking an overcollateralized loan in AAVE to leverage our money with an example:
+
+You expect both ETH and UNI to go up in price. You deposit ETH as collateral to borrow DAI, and then exchange the DAI for UNI.
+
+Now we have four possible scenarios:
+
+- ETH goes up 📈 and UNI goes up 📈
+
+This is the best that can happen. You have more collateral available and your UNI is worth more. You exchange your UNI back to DAI and repay the loan. You now have 100% of your ETH and DAI as profit.
+
+- ETH goes down 📉 and UNI goes up 📈
+
+In this case, you have less collateral available and you are running the risk of getting liquidated. You can exchange UNI back to DAI and repay the loan to avoid getting liquidated. You may still have profit at this point.
+
+- ETH goes up 📈 and UNI down 📉
+
+You have more collateral available, but your UNI isn't enough to repay the loan with interest. You will need to exchange your UNI back to DAI and find some more DAI to repay the loan. You can also use your collateral to repay the loan.
+
+- ETH goes down 📉 and UNI down 📉
+
+You have less collateral available and your UNI isn't enough to repay the loan. You will need to exchange your UNI for DAI and find some more DAI or use your collateral to repay the loan. On top of this your account may get liquidated if the price of ETH goes down too much.
+
+## Comparison
+
+If you had exchanged ETH for UNI instead of taking an overcollateralized loan, you would have lowered you exposure to ETH. In the best scenario UNI would have gone up while ETH went down. In the worst scenario, ETH would have gone up while UNI went down.
+
+On the other hand with an overcollateralized loan you will have exposure to both assests with the same collateral and posibly pay no interest. If the interest you collect from your deposit is greater than the interest you pay on your loan, your loan is _"free"_. This is not garanteed and you need keep an eye on both interest rates.
