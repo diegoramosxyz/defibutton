@@ -10,18 +10,17 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Image from 'next/image'
 import { getPriceAnd24hr } from 'utils/coins'
 import TickerPrice from 'components/TickerPrice'
+import coins, { Protocol } from 'data/coins'
 // import { ProtocolTvl } from 'interfaces'
-import { Coin } from 'interfaces'
-import { getMetadataBySlug } from 'utils/db'
 
 export default function PostPage({
   source,
   slugMeta,
-  slugDbMeta,
+  tokenMeta,
 }: {
   source: MdxRemote.Source
   slugMeta: SlugMetadata
-  slugDbMeta: Coin
+  tokenMeta: Protocol
 }) {
   const initialTickerData: {
     // TODO: IMPROVE TYPES
@@ -40,7 +39,7 @@ export default function PostPage({
   const [loading, setLoading] = useState(true)
 
   const { title } = slugMeta
-  const { geckoId, llamaId, symbol, slug, website, tags } = slugDbMeta
+  const { geckoId, llamaId, symbol, slug, domain, tags } = tokenMeta
 
   useEffect(() => {
     setLoading(true)
@@ -79,9 +78,9 @@ export default function PostPage({
             className="font-mono"
             target="_blank"
             rel="noopener noreferrer"
-            href={`https://${website}`}
+            href={`https://${domain}`}
           >
-            🌐 {website}
+            🌐 {domain}
           </a>
         </div>
       </header>
@@ -114,7 +113,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
 
   // Get additional metadata about the current post from the database
-  const slugDbMeta = await getMetadataBySlug('coins', params?.slug)
+  const tokenMeta = coins.find(coin => coin.slug === params.slug)
 
   const translations = await serverSideTranslations(locale || 'en', [
     'common',
@@ -126,10 +125,10 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       source: mdxContext.source,
       slugMeta: {
         ...mdxContext.metadata,
-        tags: !!slugDbMeta ? slugDbMeta.tags : [],
+        tags: !!tokenMeta ? tokenMeta.tags : [],
       },
       ...translations,
-      slugDbMeta,
+      tokenMeta,
     },
   }
 }

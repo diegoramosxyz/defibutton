@@ -5,9 +5,9 @@ import { MdxRemote } from 'next-mdx-remote/types'
 import PostLayout from 'components/PostLayout'
 import { getMdxContent, getSlugs } from 'utils/mdxUtils'
 import { SlugMetadata } from 'interfaces'
+import docs from 'data/docs'
 import { components } from 'components/MdxProvider'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { getMetadataBySlug } from 'utils/db'
 
 export default function PostPage({
   source,
@@ -16,7 +16,7 @@ export default function PostPage({
 }: {
   source: MdxRemote.Source
   metadata: SlugMetadata
-  tags: string[] | undefined
+  tags: string[]
 }) {
   const { title } = metadata
 
@@ -53,7 +53,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
 
   // Get additional metadata about the current post from the database
-  const slugDbMeta = await getMetadataBySlug('docs', params?.slug)
+  const docMeta = docs.find(doc => doc.slug === params.slug)
 
   const translations = await serverSideTranslations(locale || 'en', [
     'common',
@@ -63,7 +63,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   return {
     props: {
       ...mdxContext,
-      tags: !!slugDbMeta ? slugDbMeta.tags : [],
+      tags: !!docMeta?.tags ? docMeta.tags : [],
       ...translations,
     },
   }

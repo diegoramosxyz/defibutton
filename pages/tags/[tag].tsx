@@ -6,8 +6,10 @@ import Layout from 'components/Layout'
 import React from 'react'
 import MdxCard from 'components/MdxCard'
 import { useTranslation } from 'react-i18next'
-import { getAllDistinctTags, getTagsForAll } from 'utils/db'
 import { useRouter } from 'next/router'
+import { tags } from 'data/tags'
+import docs from 'data/docs'
+import coins from 'data/coins'
 
 export default function Tag({
   filteredPosts,
@@ -51,11 +53,13 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const AllMdxMeta = getAllMdxMeta(locale)
 
   // Get all the objects from all collections that contain the tag from the database
-  const dbMeta = await getTagsForAll(params?.tag)
+  const allMeta = [...docs, ...coins]
+  // @ts-ignore
+  const meta = allMeta.filter(doc => doc.tags.includes(params.tag))
 
   // Filter the MDX metadata based on the data on the database.
-  const filteredPosts = dbMeta
-    .map((obj) => AllMdxMeta.find(({ slug }) => slug === obj?.slug))
+  const filteredPosts = meta
+    .map((doc) => AllMdxMeta.find(({ slug }) => slug === doc?.slug))
     // remove undefined value from results
     .filter((item): item is postMetadata => !!item)
 
@@ -70,9 +74,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 }
 
 export const getStaticPaths = async ({ locales }: { locales: string[] }) => {
-  // Get all the distinct tags from all the collections
-  const tags = (await getAllDistinctTags()) || []
-
   // Format the paths array to satisfy Next.js requirements
   const paths = locales
     .map((locale) => tags.map((tag) => ({ params: { tag }, locale })))

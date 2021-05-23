@@ -12,7 +12,7 @@ export default function TickerPrice({
     symbol: string
   }
   geckoId: string
-  llamaId: string | null
+  llamaId: string | undefined
 }) {
   const { usd, tvl, usd_24h_change, symbol } = price
 

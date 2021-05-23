@@ -1,4 +1,4 @@
-export async function getPriceAnd24hr(geckoId: string, llamaId: string | null) {
+export async function getPriceAnd24hr(geckoId: string, llamaId: string | undefined) {
   const geckoRes = await fetch(
     `https://api.coingecko.com/api/v3/simple/price?ids=${geckoId}&vs_currencies=usd&include_24hr_change=true`
   )

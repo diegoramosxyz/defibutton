@@ -3,10 +3,10 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Layout from 'components/Layout'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { getAllDistinctTags } from 'utils/db'
 import Link from 'next/link'
+import { tags } from 'data/tags'
 
-export default function Tag({ tags }: { tags: string[] }) {
+export default function Tag() {
   const { t } = useTranslation('tags')
 
   return (
@@ -26,21 +26,10 @@ export default function Tag({ tags }: { tags: string[] }) {
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  // Get all the distinct tags from all the collections
-  const tags = (await getAllDistinctTags()) || []
-
-  if (tags.length === 0) {
-    console.log('There was a problem getting tags from the database.')
-    return {
-      notFound: true,
-    }
-  }
-
   const translations = await serverSideTranslations(locale || 'en', ['tags'])
 
   return {
     props: {
-      tags,
       ...translations,
     },
   }

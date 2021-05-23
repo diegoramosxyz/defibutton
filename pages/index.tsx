@@ -5,7 +5,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import TableOfContents from 'components/TableOfContents'
 import { useTranslation } from 'next-i18next'
 import { PostMetaPath } from 'interfaces'
-import Newsletter from 'components/Newsletter'
 
 export default function Index({ metadata }: { metadata: PostMetaPath[] }) {
   const { t } = useTranslation('common')
@@ -17,7 +16,6 @@ export default function Index({ metadata }: { metadata: PostMetaPath[] }) {
       <section className="grid mb-5">
         <TableOfContents posts={metadata} />
       </section>
-      <Newsletter />
       <section className="opacity-80 text-sm text-center">
         {t('warning')}
       </section>
