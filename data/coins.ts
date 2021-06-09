@@ -33,6 +33,15 @@ export interface Protocol {
 const coins: Protocol[] = [
   {
     blockchain: 'ethereum',
+    geckoId: 'reserve',
+    name: 'Reserve',
+    slug: 'reserve',
+    symbol: 'rsv',
+    tags: ['stable-coin'],
+    domain: 'reserve.org',
+  },
+  {
+    blockchain: 'ethereum',
     geckoId: 'aave',
     llamaId: 'aave',
     name: 'AAVE',

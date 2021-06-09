@@ -20,19 +20,7 @@ export default function Symbol({ protocol }: { protocol: ProtocolTvl }) {
             <span className="text-sm font-mono ml-3">{data.symbol}</span>
           </h1>
         </header>
-        <article className="grid space-y-3">
-          <section>Description: {data.description}</section>
-          {/* <section>
-                {data.address && (
-                  <div className="overflow-ellipsis overflow-hidden">
-                    <span>Address: </span>
-                    <span className="font-mono">{data.address}</span>
-                  </div>
-                )}
-              </section> */}
-          <section>{data.url}</section>
-          <section>Category: {data.category}</section>
-        </article>
+        <article className="grid space-y-3"></article>
       </section>
       <Chart tvl={data.tvl} />
     </Layout>
@@ -55,6 +43,7 @@ export async function getStaticProps({ params }: { params: { slug: string } }) {
 }
 
 export async function getStaticPaths() {
+  // Pre-render all pages
   // const res = await fetch('https://api.llama.fi/protocols')
   // const protocols = await res.json()
 
@@ -62,5 +51,6 @@ export async function getStaticPaths() {
   //   params: { slug },
   // }))
 
+  // Only pre-render one page
   return { paths: [{ params: { slug: 'wbtc' } }], fallback: 'blocking' }
 }

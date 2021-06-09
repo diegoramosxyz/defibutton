@@ -13,6 +13,7 @@ export default function index({ metadata }: { metadata: SlugMetadata[] }) {
       <div className="grid gap-2 sm:gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {metadata
           .map(({ title, description, slug }) => {
+            // Only render .mdx files containing a title
             if (!!title) {
               return (
                 <MdxCard
