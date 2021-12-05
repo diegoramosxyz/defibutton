@@ -23,6 +23,6 @@
     "pages/blog/[slug].ts",
     "utils/fetcher.js",
     "utils/mongodb.ts"
-, "public/goatcounter-custom-count.js"  ],
+    ],
   "exclude": ["node_modules"]
 }
