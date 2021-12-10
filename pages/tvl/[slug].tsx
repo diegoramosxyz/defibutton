@@ -8,7 +8,7 @@ import Layout from 'components/Layout'
 export default function Symbol({ protocol }: { protocol: ProtocolTvl }) {
   const router = useRouter()
   const link = `https://api.llama.fi/protocol/${router.query.slug}`
-  const { data } = useSWR(link, fetcher, { initialData: protocol })
+  const { data } = useSWR(link, fetcher, { fallbackData: protocol })
 
   return (
     <Layout head={`${data.symbol} DeFi Button`}>
