@@ -11,17 +11,13 @@ export default function Layout({
   head: string
 }) {
   return (
-    <>
+    <main className="px-2 md:px-4 lg:px-5 my-3 max-w-screen-xl mx-auto">
       <Head>
         <title>{head}</title>
       </Head>
       <Navbar />
-      <div className="mt-4 px-2 sm:px-4 lg:px-0 pb-14">
-        <main className="px-2 xl:px-0 mb-7 max-w-screen-lg mx-auto">
-          {children}
-        </main>
-        <Footer />
-      </div>
-    </>
+      {children}
+      <Footer />
+    </main>
   )
 }

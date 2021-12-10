@@ -14,7 +14,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html className="bg-trueGray-50 text-trueGray-800 dark:bg-trueGray-900 dark:text-trueGray-200">
+      <Html className="bg-neutral-50 text-neutral-800 dark:bg-neutral-900 dark:text-neutral-200">
         <Head />
         {/* Must  */}
         <meta charSet="utf-8" />

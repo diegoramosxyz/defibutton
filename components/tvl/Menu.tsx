@@ -15,7 +15,7 @@ export default function Menu() {
           <SelectTvlCategory />
           {router.query.category && (
             <button
-              className="rounded-sm text-lg md:text-base py-3 md:py-1.5 px-4 md:px-3 hover:bg-trueGray-100 hover:underline dark:hover:bg-trueGray-700 focus:outline-none transition capitalize"
+              className="rounded-sm text-lg md:text-base py-3 md:py-1.5 px-4 md:px-3 hover:bg-neutral-100 hover:underline dark:hover:bg-neutral-700 focus:outline-none transition capitalize"
               onClick={() => {
                 dispatch({
                   type: 'SELECT_TVL_CATEGORY',
@@ -33,7 +33,7 @@ export default function Menu() {
             type="search"
             aria-label="Search"
             placeholder="🔍 Search by name"
-            className="w-full sm:w-auto px-3 py-2 rounded-sm transition bg-transparent focus:outline-none ring-1 ring-trueGray-200 dark:ring-trueGray-800 focus:ring-lightBlue-300 dark:focus:ring-lightBlue-700"
+            className="w-full sm:w-auto px-3 py-2 rounded-sm transition bg-transparent focus:outline-none ring-1 ring-neutral-200 dark:ring-neutral-800 focus:ring-lightBlue-300 dark:focus:ring-lightBlue-700"
             value={query}
             onChange={(e) => {
               setQuery(e.target.value)

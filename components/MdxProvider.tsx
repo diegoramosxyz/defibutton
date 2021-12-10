@@ -62,14 +62,14 @@ const ol = ({ ...props }) => (
 // Tables
 const td = ({ ...props }) => (
   <td
-    className='border-b border-trueGray-200 dark:border-trueGray-800 px-4'
+    className='border-b border-neutral-200 dark:border-neutral-800 px-4'
     {...props}
   />
 )
 const tr = ({ ...props }) => <tr className='h-10' {...props} />
 const th = ({ ...props }) => <th className='h-10 pr-2' {...props} />
 const thead = ({ ...props }) => (
-  <thead className='bg-trueGray-200 dark:bg-trueGray-800' {...props} />
+  <thead className='bg-neutral-200 dark:bg-neutral-800' {...props} />
 )
 const table = ({ ...props }) => (
   <div className='overflow-x-auto'>
@@ -85,7 +85,7 @@ const inlineCode = ({ ...props }) => (
   <code className='px-1.5 ring-1 ring-current mx-1 rounded-md' {...props} />
 )
 const pre = ({ ...props }) => (
-  <div className='overflow-x-auto text-trueGray-200 bg-black p-3 mb-4 rounded-md'>
+  <div className='overflow-x-auto text-neutral-200 bg-black p-3 mb-4 rounded-md'>
     <pre>
       <code className='pr-3' {...props} />
     </pre>

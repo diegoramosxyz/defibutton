@@ -84,7 +84,7 @@ export default function PostPage({
           </a>
         </div>
       </header>
-      <hr className="mb-2 border-trueGray-200 dark:border-trueGray-800" />
+      <hr className="mb-2 border-neutral-200 dark:border-neutral-800" />
       {content}
     </PostLayout>
   )
