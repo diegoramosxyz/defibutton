@@ -16,6 +16,7 @@
     "swr": "^1.1.0"
   },
   "devDependencies": {
+    "trim": ">=0.0.3",
     "@radix-ui/react-dropdown-menu": "^0.1.2",
     "@types/mdx-js__react": "^1.5.5",
     "@types/node": "^16.11.12",
