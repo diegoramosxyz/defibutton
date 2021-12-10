@@ -1,12 +1,10 @@
 import React from 'react'
 import { GetStaticProps } from 'next'
-import hydrate from 'next-mdx-remote/hydrate'
-import { MdxRemote } from 'next-mdx-remote/types'
+import { MDXRemote } from 'next-mdx-remote'
 import PostLayout from 'components/PostLayout'
 import { getMdxContent, getSlugs } from 'utils/mdxUtils'
 import { SlugMetadata } from 'interfaces'
 import docs from 'data/docs'
-import { components } from 'components/MdxProvider'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 export default function PostPage({
@@ -14,13 +12,11 @@ export default function PostPage({
   metadata,
   tags,
 }: {
-  source: MdxRemote.Source
+  source: any
   metadata: SlugMetadata
   tags: string[]
 }) {
   const { title } = metadata
-
-  const content = hydrate(source, { components })
 
   return (
     <PostLayout tags={tags} metadata={metadata}>
@@ -29,9 +25,17 @@ export default function PostPage({
           {title}
         </h1>
       </header>
-      {content}
+      <MDXRemote {...source} />
     </PostLayout>
   )
+}
+
+export const getStaticPaths = async ({ locales }: { locales: string[] }) => {
+  const paths = locales.map((locale) => getSlugs('blog', locale)).flat()
+  return {
+    paths,
+    fallback: false,
+  }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
@@ -53,7 +57,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
 
   // Get additional metadata about the current post from the database
-  const docMeta = docs.find(doc => doc.slug === params.slug)
+  const docMeta = docs.find((doc) => doc.slug === params.slug)
 
   const translations = await serverSideTranslations(locale || 'en', [
     'common',
@@ -66,13 +70,5 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       tags: !!docMeta?.tags ? docMeta.tags : [],
       ...translations,
     },
-  }
-}
-
-export const getStaticPaths = async ({ locales }: { locales: string[] }) => {
-  const paths = locales.map((locale) => getSlugs('blog', locale)).flat()
-  return {
-    paths,
-    fallback: false,
   }
 }

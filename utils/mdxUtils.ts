@@ -1,11 +1,10 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import renderToString from 'next-mdx-remote/render-to-string'
-import { components } from 'components/MdxProvider'
 import { exec } from 'child_process'
 import { Readable } from 'stream'
 import { folders, postMetadata } from 'interfaces'
+import { serialize } from 'next-mdx-remote/serialize'
 
 function readFile(folder: folders, locale: string, slug: string) {
   try {
@@ -87,8 +86,7 @@ export async function getMdxContent(
   if (source !== null) {
     const { content, data: metadata } = matter(source)
     // Use the helper function from next-mdx-remote to return stringified HMTL
-    const mdxSource = await renderToString(content, {
-      components,
+    const mdxSource = await serialize(content, {
       scope: metadata,
     })
 

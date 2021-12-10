@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { GetStaticProps } from 'next'
-import hydrate from 'next-mdx-remote/hydrate'
-import { MdxRemote } from 'next-mdx-remote/types'
+import { MDXRemote } from 'next-mdx-remote'
 import PostLayout from 'components/PostLayout'
 import { getMdxContent, getSlugs } from 'utils/mdxUtils'
 import { SlugMetadata } from 'interfaces'
@@ -18,7 +17,7 @@ export default function PostPage({
   slugMeta,
   tokenMeta,
 }: {
-  source: MdxRemote.Source
+  source: any
   slugMeta: SlugMetadata
   tokenMeta: Protocol
 }) {
@@ -50,8 +49,6 @@ export default function PostPage({
     loadData()
     setLoading(false)
   }, [geckoId])
-
-  const content = hydrate(source, { components })
 
   return (
     <PostLayout tags={tags} metadata={slugMeta}>
@@ -85,7 +82,7 @@ export default function PostPage({
         </div>
       </header>
       <hr className="mb-2 border-neutral-200 dark:border-neutral-800" />
-      {content}
+      <MDXRemote {...source} />
     </PostLayout>
   )
 }
@@ -113,7 +110,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
 
   // Get additional metadata about the current post from the database
-  const tokenMeta = coins.find(coin => coin.slug === params.slug)
+  const tokenMeta = coins.find((coin) => coin.slug === params.slug)
 
   const translations = await serverSideTranslations(locale || 'en', [
     'common',
