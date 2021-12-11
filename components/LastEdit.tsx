@@ -19,7 +19,7 @@ export default function LastEdit({
     })
 
     return (
-      <time className="grid space-y-1 sm:space-y-0 sm:flex sm:space-x-1">
+      <time className="grid space-y-1 sm:space-y-0 sm:flex sm:space-x-1 print:flex">
         <section>{translation}:</section>
         <section>{date}</section>
       </time>

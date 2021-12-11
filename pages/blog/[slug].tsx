@@ -20,11 +20,7 @@ export default function PostPage({
 
   return (
     <PostLayout tags={tags} metadata={metadata}>
-      <header className="my-3">
-        <h1 className="flex items-center text-4xl pb-3 pt-2 lg:pt-5 font-bold">
-          {title}
-        </h1>
-      </header>
+      <h1>{title}</h1>
       <MDXRemote {...source} />
     </PostLayout>
   )

@@ -17,7 +17,7 @@ export default function TickerPrice({
   const { usd, tvl, usd_24h_change, symbol } = price
 
   return (
-    <article className="font-bold font-mono sm:text-right">
+    <article className="sm:text-right">
       {/* Current value */}
       <section>
         <a

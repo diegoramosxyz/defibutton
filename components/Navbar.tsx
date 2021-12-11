@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next'
 export default function Nav() {
   const { t } = useTranslation('common')
   return (
-    <nav className="z-10 px-4 py-2.5 fixed md:static bottom-0 w-full bg-neutral-50 text-neutral-800 dark:bg-neutral-900 dark:text-neutral-200 border-t md:border-t-0 md:border-b border-neutral-200 dark:border-neutral-800">
+    <nav className="md:rounded-b-md text-base print:hidden z-10 px-4 py-2.5 fixed md:static bottom-0 w-full bg-neutral-50 dark:bg-neutral-900 border-t md:border-t-0 md:border-0 border-neutral-200 dark:border-neutral-800">
       <section className="flex items-center justify-between">
         {/* <input 
           type="search"

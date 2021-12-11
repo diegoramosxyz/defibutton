@@ -4,13 +4,11 @@ import { MDXRemote } from 'next-mdx-remote'
 import PostLayout from 'components/PostLayout'
 import { getMdxContent, getSlugs } from 'utils/mdxUtils'
 import { SlugMetadata } from 'interfaces'
-import { components } from 'components/MdxProvider'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Image from 'next/image'
 import { getPriceAnd24hr } from 'utils/coins'
 import TickerPrice from 'components/TickerPrice'
 import coins, { Protocol } from 'data/coins'
-// import { ProtocolTvl } from 'interfaces'
 
 export default function PostPage({
   source,
@@ -21,6 +19,24 @@ export default function PostPage({
   slugMeta: SlugMetadata
   tokenMeta: Protocol
 }) {
+  return (
+    <PostLayout
+      tags={tokenMeta.tags}
+      metadata={slugMeta}
+      customHeader={<CustomHeader slugMeta={slugMeta} tokenMeta={tokenMeta} />}
+    >
+      <MDXRemote {...source} />
+    </PostLayout>
+  )
+}
+
+const CustomHeader = ({
+  slugMeta,
+  tokenMeta,
+}: {
+  slugMeta: SlugMetadata
+  tokenMeta: Protocol
+}) => {
   const initialTickerData: {
     // TODO: IMPROVE TYPES
     usd: number
@@ -51,39 +67,28 @@ export default function PostPage({
   }, [geckoId])
 
   return (
-    <PostLayout tags={tags} metadata={slugMeta}>
-      <header className="my-3">
-        <div className="grid gap-2 sm:gap-0 sm:grid-cols-2 items-start justify-between lg:pt-5 ">
-          <h1 className="flex items-center text-4xl font-bold">
-            <Image
-              width={35}
-              height={35}
-              src={`/logo/${slug}.svg`}
-              alt={title}
-            />
-            <p className="ml-2">{title}</p>
-          </h1>
-
-          {geckoId && (
-            <TickerPrice
-              geckoId={geckoId}
-              llamaId={llamaId}
-              price={loading ? initialTickerData : tickerData}
-            />
-          )}
-          <a
-            className="font-mono"
-            target="_blank"
-            rel="noopener noreferrer"
-            href={`https://${domain}`}
-          >
-            🌐 {domain}
-          </a>
+      <div className="grid gap-2 sm:gap-0 sm:grid-cols-2 items-start justify-between">
+        <div className="flex items-center text-4xl font-semibold">
+          <Image width={35} height={35} src={`/logo/${slug}.svg`} alt={title} />
+          <span className="ml-2">{title}</span>
         </div>
-      </header>
-      <hr className="mb-2 border-neutral-200 dark:border-neutral-800" />
-      <MDXRemote {...source} />
-    </PostLayout>
+
+        {geckoId && (
+          <TickerPrice
+            geckoId={geckoId}
+            llamaId={llamaId}
+            price={loading ? initialTickerData : tickerData}
+          />
+        )}
+        <a
+          className="font-mono"
+          target="_blank"
+          rel="noopener noreferrer"
+          href={`https://${domain}`}
+        >
+          🌐 {domain}
+        </a>
+      </div>
   )
 }
 

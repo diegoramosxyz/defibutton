@@ -14,7 +14,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html className="bg-neutral-50 text-neutral-800 dark:bg-neutral-900 dark:text-neutral-200">
+      <Html className="scroll-smooth bg-neutral-50 text-neutral-800 dark:bg-[#121212] dark:text-neutral-200">
         <Head />
         {/* Must  */}
         <meta charSet="utf-8" />
