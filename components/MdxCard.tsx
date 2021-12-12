@@ -12,8 +12,8 @@ export default function MdxCard({
   description: PostMetaPath['description']
 }) {
   return (
-    <Link href={slug.includes('/index/') ? slug.split('/index/')[1] : slug}>
-      <a className="block hover:-translate-y-1 transition h-full rounded-sm border-neutral-200 dark:border-neutral-800 focus:ring focus:ring-sky-300 dark:focus:ring-sky-800 focus:outline-none focus:border-sky-300 dark:focus:border-sky-800 hover:border-sky-300 dark:hover:border-sky-800 border px-4 py-3">
+    <Link href={slug.includes('/index/') ? slug.split('/index')[1] : slug}>
+      <a className="block hover:-translate-y-1 transition h-full rounded-sm border-neutral-200 dark:border-neutral-800 focus:ring focus:ring-sky-300 dark:focus:ring-sky-800 focus:outline-none focus:border-sky-300 dark:focus:border-sky-800 hover:border-sky-300 dark:hover:border-sky-800 border px-4 py-3 lg:px-6 lg:py-4">
         {slug.includes('/projects/') ? (
           <header className="flex gap-1 items-center font-semibold mb-1">
             <Image

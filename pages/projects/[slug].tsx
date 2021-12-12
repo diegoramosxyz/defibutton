@@ -8,7 +8,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Image from 'next/image'
 import { getPriceAnd24hr } from 'utils/coins'
 import TickerPrice from 'components/TickerPrice'
-import coins, { Protocol } from 'data/coins'
+import projects, { Protocol } from 'data/projects'
 
 export default function PostPage({
   source,
@@ -67,29 +67,37 @@ const CustomHeader = ({
   }, [geckoId])
 
   return (
-      <div className="grid gap-2 sm:gap-0 sm:grid-cols-2 items-start justify-between">
-        <div className="flex items-center text-4xl font-semibold">
-          <Image width={35} height={35} src={`/logo/${slug}.svg`} alt={title} />
-          <span className="ml-2">{title}</span>
-        </div>
-
-        {geckoId && (
-          <TickerPrice
-            geckoId={geckoId}
-            llamaId={llamaId}
-            price={loading ? initialTickerData : tickerData}
-          />
-        )}
-        <a
-          className="font-mono"
-          target="_blank"
-          rel="noopener noreferrer"
-          href={`https://${domain}`}
-        >
-          🌐 {domain}
-        </a>
+    <div className="grid gap-2 sm:gap-0 sm:grid-cols-2 items-start justify-between">
+      <div className="flex items-center text-4xl font-semibold">
+        <Image width={35} height={35} src={`/logo/${slug}.svg`} alt={title} />
+        <span className="ml-2">{title}</span>
       </div>
+
+      {geckoId && (
+        <TickerPrice
+          geckoId={geckoId}
+          llamaId={llamaId}
+          price={loading ? initialTickerData : tickerData}
+        />
+      )}
+      <a
+        className="font-mono"
+        target="_blank"
+        rel="noopener noreferrer"
+        href={`https://${domain}`}
+      >
+        🌐 {domain}
+      </a>
+    </div>
   )
+}
+
+export const getStaticPaths = async ({ locales }: { locales: string[] }) => {
+  const paths = locales.map((locale) => getSlugs(locale, '/projects/')).flat()
+  return {
+    paths,
+    fallback: false,
+  }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
@@ -114,7 +122,9 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
 
   // Get additional metadata about the current post from the database
-  const tokenMeta = coins.find((coin) => coin.slug === params.slug)
+  const tokenMeta = projects.find(
+    (project) => project.slug === `/projects/${params.slug}`
+  )
 
   const translations = await serverSideTranslations(locale || 'en', [
     'common',
@@ -131,13 +141,5 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       ...translations,
       tokenMeta,
     },
-  }
-}
-
-export const getStaticPaths = async ({ locales }: { locales: string[] }) => {
-  const paths = locales.map((locale) => getSlugs(locale, '/projects/')).flat()
-  return {
-    paths,
-    fallback: false,
   }
 }

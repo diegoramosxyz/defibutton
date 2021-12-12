@@ -4,8 +4,8 @@ import { MDXRemote } from 'next-mdx-remote'
 import PostLayout from 'components/PostLayout'
 import { getMdxContent, getSlugs } from 'utils/mdxUtils'
 import { SlugMetadata } from 'interfaces'
-import docs from 'data/docs'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import blog from 'data/blog'
 
 export default function PostPage({
   source,
@@ -54,7 +54,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
 
   // Get additional metadata about the current post from the database
-  const docMeta = docs.find((doc) => doc.slug === params.slug)
+  const docMeta = blog.find((blog) => blog.slug === `/blog/${params.slug}`)
 
   const translations = await serverSideTranslations(locale || 'en', [
     'common',

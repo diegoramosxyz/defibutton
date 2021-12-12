@@ -10,7 +10,7 @@ export default function Index({ metadata }: { metadata: PostMetaPath[] }) {
   const { t } = useTranslation('common')
   return (
     <Layout head="DeFi Button">
-      <section className="text-center font-medium mb-4 md:mb-10 mt-5">
+      <section className="max-w-prose mx-auto text-center font-medium mb-4 md:mb-10 mt-5">
         {t('intro')}
       </section>
       <section className="grid mb-5">

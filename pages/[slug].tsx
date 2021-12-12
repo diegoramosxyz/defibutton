@@ -4,8 +4,8 @@ import { MDXRemote } from 'next-mdx-remote'
 import PostLayout from 'components/PostLayout'
 import { getMdxContent, getSlugs } from 'utils/mdxUtils'
 import { SlugMetadata } from 'interfaces'
-import docs from 'data/docs'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import index from 'data'
 
 export default function PostPage({
   source,
@@ -44,7 +44,10 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
 
   // Get the content for the current post, including its metadata
-  const mdxContext = await getMdxContent(`/index/${params?.slug}`, locale || 'en')
+  const mdxContext = await getMdxContent(
+    `/index/${params?.slug}`,
+    locale || 'en'
+  )
 
   // If the mdx file is not found based on the slug from the database, return not found
   if (typeof mdxContext === 'undefined') {
@@ -54,7 +57,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
 
   // Get additional metadata about the current post from the database
-  const docMeta = docs.find((doc) => doc.slug === params.slug)
+  const docMeta = index.find((index) => index.slug === `/index/${params.slug}`)
 
   const translations = await serverSideTranslations(locale || 'en', [
     'common',

@@ -8,8 +8,9 @@ import MdxCard from 'components/MdxCard'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
 import { tags } from 'data/tags'
-import docs from 'data/docs'
-import coins from 'data/coins'
+import projects from 'data/projects'
+import blog from 'data/blog'
+import index from 'data'
 
 export default function Tag({
   filteredPosts,
@@ -40,6 +41,19 @@ export default function Tag({
   )
 }
 
+export const getStaticPaths = async ({ locales }: { locales: string[] }) => {
+  // Format the paths array to satisfy Next.js requirements
+  const paths = locales
+    .map((locale) => tags.map((tag) => ({ params: { tag }, locale })))
+    .flat()
+
+  return {
+    paths,
+    // No fallback because all possible tags are generated at build time.
+    fallback: false,
+  }
+}
+
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   // If params.tag is a string array or undefined, do not render page
   if (typeof params?.tag !== 'string') {
@@ -52,9 +66,9 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const AllMdxMeta = getPostsMetadata(locale || 'en')
 
   // Get all the objects from all collections that contain the tag from the database
-  const allMeta = [...docs, ...coins]
+  const allMeta = [...blog, ...projects, ...index]
   // @ts-ignore
-  const meta = allMeta.filter(doc => doc.tags.includes(params.tag))
+  const meta = allMeta.filter((doc) => doc.tags.includes(params.tag))
 
   // Filter the MDX metadata based on the data on the database.
   const filteredPosts = meta
@@ -69,18 +83,5 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       filteredPosts,
       ...translations,
     },
-  }
-}
-
-export const getStaticPaths = async ({ locales }: { locales: string[] }) => {
-  // Format the paths array to satisfy Next.js requirements
-  const paths = locales
-    .map((locale) => tags.map((tag) => ({ params: { tag }, locale })))
-    .flat()
-
-  return {
-    paths,
-    // No fallback because all possible tags are generated at build time.
-    fallback: false,
   }
 }

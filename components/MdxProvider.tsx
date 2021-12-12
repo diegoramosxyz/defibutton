@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 import { slugify } from 'utils/slugify'
 
@@ -15,7 +14,7 @@ import { slugify } from 'utils/slugify'
 const h2 = ({ children, ...props }: { children: React.ReactText }) => {
   const slug = slugify(children.toString())
   return (
-    <h2 id={slug} className='scroll-mt-7' {...props}>
+    <h2 id={slug} className="scroll-mt-7" {...props}>
       <a href={`#${slug}`}>{children}</a>
     </h2>
   )
@@ -23,9 +22,9 @@ const h2 = ({ children, ...props }: { children: React.ReactText }) => {
 
 // Custom components
 const Callout = ({ ...props }) => (
-  <mark className="grid grid-flow-col gap-2 p-2 my-6 rounded-md bg-yellow-100 shadow">
-    <p className="text-2xl">💡</p>
-    <p className="self-center" {...props} />
+  <mark className="grid grid-flow-col gap-2 p-2 lg:p-4 my-6 rounded-md bg-yellow-100 shadow">
+    <span className="text-2xl">💡</span>
+    <span className="self-center" {...props} />
   </mark>
 )
 
@@ -52,7 +51,8 @@ function Photo({
   )
 }
 
-// prettier-ignore
 export const components = {
-  h2, Callout, Photo,
+  h2,
+  Callout,
+  Photo,
 }
