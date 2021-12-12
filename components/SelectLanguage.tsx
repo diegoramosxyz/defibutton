@@ -5,7 +5,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 export default function SelectLanguage() {
   return (
     <DropdownMenu.Root>
-      <DropdownMenu.Trigger className="p-1.5 transition ring-2 ring-neutral-200 dark:ring-neutral-800 hover:ring-lightBlue-200 dark:hover:ring-lightBlue-800 focus:ring-lightBlue-200 dark:focus:ring-lightBlue-800 rounded-md focus:outline-none">
+      <DropdownMenu.Trigger className="p-1.5 transition ring-2 ring-neutral-200 dark:ring-neutral-800 hover:ring-sky-200 dark:hover:ring-sky-800 focus:ring-sky-200 dark:focus:ring-sky-800 rounded-md focus:outline-none">
         <HiOutlineTranslate className="w-5 h-5" />
         <span className="sr-only">Select a language</span>
       </DropdownMenu.Trigger>

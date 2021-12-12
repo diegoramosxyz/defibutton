@@ -26,10 +26,10 @@ export default function PostLayout({
       </Head>
       {/* Adjust max-width by changing text size */}
       {/* https://developer.mozilla.org/en-US/docs/Web/CSS/length#units */}
-      <div className="max-w-prose mx-auto lg:text-lg xl:text-xl 2xl:text-2xl ">
+      <div className="max-w-prose mx-auto lg:text-lg xl:text-xl">
         <Nav />
       </div>
-      <main className="px-4 md:px-0 py-10 sm:py-12 lg:py-16 prose dark:prose-invert prose-neutral lg:prose-lg xl:lg:prose-xl 2xl:lg:prose-2xl mx-auto print:bg-white print:text-black">
+      <main className="px-4 md:px-0 py-10 sm:py-12 lg:py-16 prose dark:prose-invert prose-neutral lg:prose-lg xl:prose-xl mx-auto print:bg-white print:text-black">
         {customHeader}
         {children}
         <section className="flex justify-between items-center align-center opacity-75 my-5 lg:my-12 gap-2">

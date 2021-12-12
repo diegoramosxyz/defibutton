@@ -91,7 +91,7 @@ export type Doc = {
   tags: string[]
 }
 
-export type folders = 'blog' | 'projects'
+export type folders = 'blog' | 'projects' | 'en' | 'es'
 
 export type postMetadata = {
   [key: string]: any

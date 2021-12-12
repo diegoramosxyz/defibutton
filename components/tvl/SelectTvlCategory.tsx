@@ -23,7 +23,7 @@ export default function SelectTvlCategory() {
   return (
     <div className="relative">
       <DropdownMenu.Root>
-        <DropdownMenu.Trigger className="flex space-x-2 items-center py-2 pl-2 pr-1 transition ring-2 ring-neutral-200 dark:ring-neutral-800 hover:ring-lightBlue-200 dark:hover:ring-lightBlue-800 focus:ring-lightBlue-200 dark:focus:ring-lightBlue-800 rounded-md focus:outline-none">
+        <DropdownMenu.Trigger className="flex space-x-2 items-center py-2 pl-2 pr-1 transition ring-2 ring-neutral-200 dark:ring-neutral-800 hover:ring-sky-200 dark:hover:ring-sky-800 focus:ring-sky-200 dark:focus:ring-sky-800 rounded-md focus:outline-none">
           <p>{category || 'Category'}</p>
           <HiChevronDown className="w-5 h-5" />
         </DropdownMenu.Trigger>

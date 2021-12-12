@@ -15,7 +15,7 @@ export default function MdxCard({
 }) {
   return (
     <Link href={`/${folder}/${slug}`}>
-      <a className="block transition h-full rounded-sm border-neutral-200 dark:border-neutral-800 focus:ring focus:ring-lightBlue-300 dark:focus:ring-lightBlue-800 focus:outline-none focus:border-lightBlue-300 dark:focus:border-lightBlue-800 hover:border-lightBlue-300 dark:hover:border-lightBlue-800 border px-4 py-3">
+      <a className="block hover:-translate-y-1 transition h-full rounded-sm border-neutral-200 dark:border-neutral-800 focus:ring focus:ring-sky-300 dark:focus:ring-sky-800 focus:outline-none focus:border-sky-300 dark:focus:border-sky-800 hover:border-sky-300 dark:hover:border-sky-800 border px-4 py-3">
         {folder === 'projects' ? (
           <header className="flex gap-1 items-center font-semibold mb-1">
             <Image

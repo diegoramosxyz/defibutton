@@ -18,27 +18,22 @@ const tableOfContents: {
       more: '/blog',
     },
   },
-  {
-    'networks': {
-      items: [
-        '/projects/bitcoin',
-        '/projects/ethereum',
-      ],
-      more: '/projects',
-    },
-  },
-  {
-    'projects': {
-      items: [
-        '/projects/uniswap',
-        '/projects/aave',
-        '/projects/sushiswap',
-        '/projects/dai',
-        '/projects/compound'
-      ],
-      more: '/projects',
-    },
-  },
+  // {
+  //   'core-concepts': {
+  //     items: [
+  //       // '/hold',
+  //       // '/bet',
+  //       '/earn',
+  //       '/borrow',
+  //       '/invest',
+  //       '/lend',
+  //       '/spend',
+  //       '/stake',
+  //       '/trade'
+  //     ],
+  //     more: '/core',
+  //   },
+  // },
   {
     'the-old-financial-system': {
       items: ['/blog/banks'],
@@ -89,7 +84,7 @@ export default function TableOfContents({ posts }: { posts: PostMetaPath[] }) {
                       </a>
                     </Link>
                   </section>
-                  <section className="mb-6 md:mb-12 grid gap-2 sm:gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  <section className="mb-6 md:mb-12 grid gap-2 sm:gap-3 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
                     {/* Map through the array of urls for each section */}
                     {obj[section].items.map((url) => {
                       const {

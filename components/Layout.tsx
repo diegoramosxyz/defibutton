@@ -15,10 +15,10 @@ export default function Layout({
       <Head>
         <title>{head}</title>
       </Head>
-      <div className="max-w-screen-xl mx-auto">
+      <div className="max-w-screen-2xl mx-auto">
         <Navbar />
       </div>
-      <main className="px-2 md:px-4 lg:px-5 max-w-screen-xl mx-auto">
+      <main className="px-3 md:px-6 2xl:px-0 max-w-screen-2xl mx-auto">
         {children}
         <Footer />
       </main>

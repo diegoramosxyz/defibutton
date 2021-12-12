@@ -33,7 +33,7 @@ export default function Menu() {
             type="search"
             aria-label="Search"
             placeholder="🔍 Search by name"
-            className="w-full sm:w-auto px-3 py-2 rounded-sm transition bg-transparent focus:outline-none ring-1 ring-neutral-200 dark:ring-neutral-800 focus:ring-lightBlue-300 dark:focus:ring-lightBlue-700"
+            className="w-full sm:w-auto px-3 py-2 rounded-sm transition bg-transparent focus:outline-none ring-1 ring-neutral-200 dark:ring-neutral-800 focus:ring-sky-300 dark:focus:ring-sky-700"
             value={query}
             onChange={(e) => {
               setQuery(e.target.value)
