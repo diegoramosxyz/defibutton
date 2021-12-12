@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { getAllMdxMeta } from 'utils/mdxUtils'
+import { getPostsMetadata } from 'utils/mdxUtils'
 import { postMetadata, PostMetaPath } from 'interfaces'
 import Layout from 'components/Layout'
 import React from 'react'
@@ -27,12 +27,11 @@ export default function Tag({
         <h1 className="text-xl font-semibold mb-3 capitalize">{t(`${tag}`)}</h1>
       </header>
       <section className="grid gap-3 sm:grid-cols-2 md:grid-cols-3 mb-5">
-        {filteredPosts.map(({ folder, title, description, slug }) => (
+        {filteredPosts.map(({ title, description, slug }) => (
           <MdxCard
             key={title}
             title={title}
             description={description}
-            folder={folder}
             slug={slug}
           ></MdxCard>
         ))}
@@ -50,7 +49,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
 
   // Get the metadata of all MDX files.
-  const AllMdxMeta = getAllMdxMeta(locale)
+  const AllMdxMeta = getPostsMetadata(locale || 'en')
 
   // Get all the objects from all collections that contain the tag from the database
   const allMeta = [...docs, ...coins]

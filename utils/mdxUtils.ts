@@ -3,16 +3,13 @@ import path from 'path'
 import matter from 'gray-matter'
 import { exec } from 'child_process'
 import { Readable } from 'stream'
-import { folders, postMetadata } from 'interfaces'
+import { postMetadata } from 'interfaces'
 import { serialize } from 'next-mdx-remote/serialize'
 
-function readFile(folder: folders, locale: string, slug: string) {
+function readFile(locale: string, slug: string) {
   try {
     return fs.readFileSync(
-      path.join(
-        path.join(process.cwd(), `posts/${folder}/${locale}`),
-        `${slug}.mdx`
-      )
+      path.join(path.join(process.cwd(), `posts/${locale}`), `${slug}.mdx`)
     )
   } catch (error) {
     return null
@@ -20,12 +17,12 @@ function readFile(folder: folders, locale: string, slug: string) {
 }
 
 // return the metadata of the posts to create navigation and file relations using tags
-export function getPostsMetadata(folder: folders, locale: string) {
+export function getPostsMetadata(locale: string) {
   return (
-    postFileSlugs(folder, locale)
+    postFileSlugs(locale)
       .map((slug) => {
-        // read the content of a file coins/en/file1.mdx or posts/es/archivo1.mdx, etc
-        const source = readFile(folder, locale, slug)
+        // read the content of a file /en/file1.mdx or posts/blog/es/archivo1.mdx, etc
+        const source = readFile(locale, slug)
 
         // extract metadata using frontmatter
         if (source !== null) {
@@ -34,7 +31,6 @@ export function getPostsMetadata(folder: folders, locale: string) {
           return {
             ...data, // The type is PostMetaPath
             slug,
-            folder,
           }
         }
       })
@@ -44,13 +40,9 @@ export function getPostsMetadata(folder: folders, locale: string) {
 }
 
 // return the metadata of the posts to create navigation and file relations using tags
-export function getOnePostMetadata(
-  slug: string,
-  folder: folders,
-  locale: string
-) {
+export function getOnePostMetadata(slug: string, locale: string) {
   // read the content of a file coins/en/file1.mdx or posts/es/archivo1.mdx, etc
-  const source = readFile(folder, locale, slug)
+  const source = readFile(locale, slug)
 
   // extract metadata using frontmatter
   if (source !== null) {
@@ -58,17 +50,12 @@ export function getOnePostMetadata(
 
     return {
       ...data, // The type is PostMetaPath
-      folder,
     }
   }
 }
 
 // Get the HTML for an MDX file
-export async function getMdxContent(
-  slug: string,
-  folder: folders,
-  locale: string
-) {
+export async function getMdxContent(slug: string, locale: string) {
   // https://stackoverflow.com/a/49428486
   function streamToString(stream: Readable | null) {
     const chunks: any = []
@@ -80,7 +67,7 @@ export async function getMdxContent(
   }
 
   // read the file and return a Buffer using Node.js
-  const source = readFile(folder, locale, slug)
+  const source = readFile(locale, slug)
 
   // Get metadata from the post
   if (source !== null) {
@@ -92,11 +79,10 @@ export async function getMdxContent(
 
     const { stdout } = exec(
       // get the last modified date of the documents using git logs. printf removes new lines
-      `printf $(git log -1 --date=iso8601-strict --format="%ad" -- "$(pwd)/posts/${folder}/${locale}/${slug}.mdx")`,
+      `printf $(git log -1 --date=iso8601-strict --format="%ad" -- "$(pwd)/posts/${locale}${slug}.mdx")`,
       (error) => {
         if (error) {
-          console.error(`exec error: ${error}`)
-          return
+          console.error(error.message)
         }
       }
     )
@@ -111,34 +97,43 @@ export async function getMdxContent(
   }
 }
 
-// Get an array of mdx metadata objects from all mdx files
-export function getAllMdxMeta(locale: string | undefined) {
-  const postsMeta = getPostsMetadata('blog', locale || 'en')
-  const coinsMeta = getPostsMetadata('projects', locale || 'en')
-
-  // The metadata is used to populate the sidebar
-  return [...postsMeta, ...coinsMeta]
-}
-
 // Get the slugs for all the files in a directory (no recursion)
-export function getSlugs(folder: folders, locale: string) {
+export function getSlugs(locale: string, subPath: string) {
   // return paths in the right form to obey Next.js rules
   // https://nextjs.org/docs/advanced-features/i18n-routing#dynamic-getstaticprops-pages
   // paths: [
   // { params: { slug: 'post-1' }, locale: 'en' },
   // { params: { slug: 'post-1' }, locale: 'es' },
   // ],
-  return postFileSlugs(folder, locale).map((slug) => ({
-    params: { slug },
+  return postFileSlugs(locale, subPath).map((slug) => ({
+    params: { slug: slug.split(subPath)[1] },
     locale,
   }))
 }
 
-export function postFileSlugs(folder: folders, locale: string) {
-  // return string[] of filenames from a directory posts/en or coins/es, etc.
-  return fs
-    .readdirSync(path.join(process.cwd(), `posts/${folder}/${locale}`))
-    .filter((path) => /\.mdx?$/.test(path))
-    .map((path) => path.replace(/\.mdx?$/, ''))
-  // output: ['slug', 'another-slug']
+// WARNING: Recursive function
+export function postFileSlugs(locale: string, subPath?: string) {
+  let paths: string[] = []
+
+  function getPathsRecursively(directory: string) {
+    fs.readdirSync(directory).forEach((file) => {
+      const absolutePath = path.join(directory, file)
+      fs.statSync(absolutePath).isDirectory()
+        ? getPathsRecursively(absolutePath)
+        : paths.push(absolutePath)
+    })
+  }
+
+  getPathsRecursively(
+    path.join(process.cwd(), `posts/${locale}${subPath ? subPath : ''}`)
+  )
+
+  return (
+    paths
+      // filter files with .mdx extension
+      .filter((path) => /\.mdx?$/.test(path))
+      // remove the file's extension and the rest of the path
+      .map((path) => path.replace(/\.mdx?$/, '').split(`/${locale}`)[1])
+  )
+  // output: ['slug', '/sub-directory/another-slug']
 }

@@ -91,12 +91,9 @@ export type Doc = {
   tags: string[]
 }
 
-export type folders = 'blog' | 'projects' | 'en' | 'es'
-
 export type postMetadata = {
   [key: string]: any
   slug: string
-  folder: folders
 }
 
 export type SlugMetadata = {
@@ -111,7 +108,6 @@ export type SlugMetadata = {
 
 export interface PostMetaPath extends SlugMetadata {
   slug: string
-  folder: folders
   tags: string[]
 }
 

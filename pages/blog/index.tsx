@@ -19,7 +19,6 @@ export default function index({ metadata }: { metadata: SlugMetadata[] }) {
                   key={title}
                   title={title}
                   description={description}
-                  folder="blog"
                   slug={slug || ''}
                 ></MdxCard>
               )
@@ -36,12 +35,12 @@ export default function index({ metadata }: { metadata: SlugMetadata[] }) {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   // Only the paths from the default locale are needed
   // returns: ['slug', 'another-slug']
-  const slugs = postFileSlugs('blog', locale || 'en')
+  const slugs = postFileSlugs(locale || 'en', '/blog/')
 
   const metadata = await Promise.all(
     slugs
       .map(async (slug) => {
-        const content = await getMdxContent(slug, 'blog', locale || 'en')
+        const content = await getMdxContent(slug, locale || 'en')
         return {
           slug,
           ...content?.metadata,

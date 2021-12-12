@@ -18,22 +18,22 @@ const tableOfContents: {
       more: '/blog',
     },
   },
-  // {
-  //   'core-concepts': {
-  //     items: [
-  //       // '/hold',
-  //       // '/bet',
-  //       '/earn',
-  //       '/borrow',
-  //       '/invest',
-  //       '/lend',
-  //       '/spend',
-  //       '/stake',
-  //       '/trade'
-  //     ],
-  //     more: '/core',
-  //   },
-  // },
+  {
+    'core-concepts': {
+      items: [
+        // '/hold',
+        // '/bet',
+        '/index/earn',
+        '/index/borrow',
+        '/index/invest',
+        '/index/lend',
+        '/index/spend',
+        '/index/stake',
+        '/index/trade'
+      ],
+      more: '/core',
+    },
+  },
   {
     'the-old-financial-system': {
       items: ['/blog/banks'],
@@ -61,9 +61,7 @@ export default function TableOfContents({ posts }: { posts: PostMetaPath[] }) {
   // Input an arrays with the metadata for each post and return
   // an array of the same type filtered by the selected path
   function getOnePostMetadata(posts: PostMetaPath[], path: string) {
-    return posts.filter(
-      ({ slug: fileSlug, folder }) => `/${folder}/${fileSlug}` === path
-    )[0]
+    return posts.filter(({ slug }) => slug === path)[0]
   }
 
   return (
@@ -90,7 +88,6 @@ export default function TableOfContents({ posts }: { posts: PostMetaPath[] }) {
                       const {
                         description,
                         title,
-                        folder,
                         slug: fileSlug,
                       } = getOnePostMetadata(posts, url)
                       return (
@@ -98,7 +95,6 @@ export default function TableOfContents({ posts }: { posts: PostMetaPath[] }) {
                           key={title}
                           title={title}
                           description={description}
-                          folder={folder}
                           slug={fileSlug}
                         ></MdxCard>
                       )

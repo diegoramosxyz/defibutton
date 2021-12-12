@@ -27,7 +27,7 @@ export default function PostPage({
 }
 
 export const getStaticPaths = async ({ locales }: { locales: string[] }) => {
-  const paths = locales.map((locale) => getSlugs(locale, '/blog/')).flat()
+  const paths = locales.map((locale) => getSlugs(locale, '/index/')).flat()
 
   return {
     paths,
@@ -44,7 +44,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
 
   // Get the content for the current post, including its metadata
-  const mdxContext = await getMdxContent(`/blog/${params?.slug}`, locale || 'en')
+  const mdxContext = await getMdxContent(`/index/${params?.slug}`, locale || 'en')
 
   // If the mdx file is not found based on the slug from the database, return not found
   if (typeof mdxContext === 'undefined') {

@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next'
 import Layout from 'components/Layout'
-import { getAllMdxMeta } from 'utils/mdxUtils'
+import { getPostsMetadata } from 'utils/mdxUtils'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import TableOfContents from 'components/TableOfContents'
 import { useTranslation } from 'next-i18next'
@@ -25,7 +25,7 @@ export default function Index({ metadata }: { metadata: PostMetaPath[] }) {
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   // Get the metadata of all MDX files. Filtered later to show sidebar.
-  const metadata = getAllMdxMeta(locale)
+  const metadata = getPostsMetadata(locale || 'en')
 
   const translations = await serverSideTranslations(locale || 'en', [
     'common',

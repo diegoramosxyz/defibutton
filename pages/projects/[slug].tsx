@@ -102,8 +102,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
   // Get the content for the current post, including its metadata
   const mdxContext = await getMdxContent(
-    params?.slug,
-    'projects',
+    `/projects/${params?.slug}`,
     locale || 'en'
   )
 
@@ -136,7 +135,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 }
 
 export const getStaticPaths = async ({ locales }: { locales: string[] }) => {
-  const paths = locales.map((locale) => getSlugs('projects', locale)).flat()
+  const paths = locales.map((locale) => getSlugs(locale, '/projects/')).flat()
   return {
     paths,
     fallback: false,
