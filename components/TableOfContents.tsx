@@ -21,8 +21,8 @@ const tableOfContents: {
   {
     'core-concepts': {
       items: [
-        // '/hold',
-        // '/bet',
+        // '/index/hold',
+        // '/index/bet',
         '/index/earn',
         '/index/borrow',
         '/index/invest',

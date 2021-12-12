@@ -4,3 +4,6 @@ node_modules
 yarn-error.log
 dist
 .env
+
+/public/sw.js
+/public/workbox-*.js
